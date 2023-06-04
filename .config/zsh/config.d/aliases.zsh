@@ -15,20 +15,20 @@ alias venvunconfig="nvim $VIRTUAL_ENV/bin/postdeactivate"
 alias venvsource="source $VIRTUAL_ENV/bin/postactivate"
 
 alias pwdc="pwd | pbcopy"
-alias clean-node="rm -rf node_modules/ package-lock.json"
+alias clean-node="rm -rf node_modules/ package-lock.json yarn-lock.json"
 alias whatsmyip="dig TXT +short o-o.myaddr.l.google.com @ns1.google.com"
 
-alias rndpwd="shuf -n10 /usr/share/dict/words | tr '\n' _ | sed 's/.$/\n/'"
-alias rndpwdc="shuf -n10 /usr/share/dict/words | tr '\n' _ | sed 's/.$/\n/' | pbcopy"
-
-# PyPy aliases
-alias pypenv="pipenv --python /usr/local/homebrew/bin/pypy3"
+alias rndpwd="shuf -n4 /usr/share/dict/words | tr '\n' _ | sed 's/.$/\n/'"
+alias rndpwdc="shuf -n4 /usr/share/dict/words | tr '\n' _ | sed 's/.$/\n/' | pbcopy"
 
 # QoL Aliases
+# TODO: Update to accept arg for app name
 alias bootstrap:psql="f() { curl -o docker-compose.yml https://gitlab.com/-/snippets/2353106/raw/main/docker-compose.yml && sed -i 's/'$1'/something_creative/' docker-compose.yml };f"
+alias ll="exa -lg --icons"
+alias tree="exa --tree --icons"
+
+alias bkup:nvim="cp -r $XDG_CONFIG_HOME/nvim $XDG_CONFIG_HOME/dotfiles/nvim"
 
 # System-related aliases
 alias damagecheck:off="sudo spctl --master-disable"
 alias damagecheck:on="sudo spctl --master-enable"
-# Intel-apps homebrew
-# alias intelbrew="arch -x86_64 /usr/local/homebrew/bin/brew"
