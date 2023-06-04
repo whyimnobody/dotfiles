@@ -5,13 +5,14 @@
 #
 # ALIASES
 # ------------------------------------------------------------------------------
-alias zshconfig="code ~/.zshrc"
-alias ohmyzsh="code ~/.oh-my-zsh"
-alias refresh="source ~/.zshrc"
+alias zshconfig="nvim $XDG_CONFIG_HOME/zsh/zshrc"
+alias refresh="source $XDG_CONFIG_HOME/zsh/zshrc"
+alias resource="source $XDG_CONFIG_HOME/zsh/zshrc"
+alias zshupdate=""
 
-alias envconfig="code $VIRTUAL_ENV/bin/postactivate"
-alias envunconfig="code $VIRTUAL_ENV/bin/postdeactivate"
-alias envsource="source $VIRTUAL_ENV/bin/postactivate"
+alias venvconfig="nvim $VIRTUAL_ENV/bin/postactivate"
+alias venvunconfig="nvim $VIRTUAL_ENV/bin/postdeactivate"
+alias venvsource="source $VIRTUAL_ENV/bin/postactivate"
 
 alias pwdc="pwd | pbcopy"
 alias clean-node="rm -rf node_modules/ package-lock.json"

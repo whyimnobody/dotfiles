@@ -28,7 +28,6 @@ if test ! $(which brew); then
   brew tap homebrew/cask-fonts
   brew tap homebrew/services
   brew tap aws/tap
-  # brew tap heroku/brew
 fi
 
 echo "Updating homebrew..."
@@ -47,14 +46,9 @@ beginDeploy "############# Shell Stuff #############"
 # Install zsh
 brew install zsh
 # Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+ZSH="$HOME/.config/oh-my-zsh" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 # Install zplug
 brew install zplug
-# Add aliases, application settings and zplug extensions to the config folder
-cp -r zsh $HOME/.config/zsh/
-# Load the separate config files into the shell
-cat zsh_loader.sh >> $HOME/.zshrc
-
 
 beginDeploy "############# General Tools #############"
 
@@ -170,16 +164,6 @@ brew install ${DatabaseToolList[@]}
 brew install --cask ${CaskDatabaseToolList[@]}
 
 
-beginDeploy "############# IDEs #############"
-
-CaskIDEsList=(
-    visual-studio-code  # https://formulae.brew.sh/cask/visual-studio-code
-    pycharm-ce  # https://formulae.brew.sh/cask/pycharm-ce
-    android-studio  # https://formulae.brew.sh/cask/android-studio
-)
-brew install --cask ${CaskIDEsList[@]}
-
-
 beginDeploy "############# DevOps #############"
 
 DevOpsToolList=(
@@ -244,6 +228,14 @@ defaults write com.apple.screencapture type -string "png"
 beginDeploy "############# Cleaning Up #############"
 brew cleanup
 
+# Add asdf plugins
+asdf plugin add python
+asdf plugin add nodejs
+asdf plugin add erlang
+asdf plugin add elixir
+asdf plugin add postgres
+asdf plugin add direnv
+
 beginDeploy "############# Global git config #############"
 
 git config --global user.name $GitName
@@ -255,42 +247,17 @@ git config --global color.interactive auto
 git config --global color.status auto
 git config --global --add --bool push.autoSetupRemote true
 
+
+runtime=$((($(date +%s)-$start)/60))
+beginDeploy "############# Total Setup Time ############# $runtime Minutes"
+
 beginDeploy "############# Copy over preferences and config #############"
-# zsh profile
-cp zsh/.zshrc $HOME
-# direnv preferences
-cp preferences/direnv.toml $HOME/.config/direnv/direnv.toml
-# iTerm2 Shell Integration & Utilities script
-curl -L https://iterm2.com/shell_integration/zsh -o ~/.config/iterm2/iterm2_shell_integration.zsh
-# tmux config
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-cp tmux/tmux.conf ~/.config/tmux/tmux.conf
-~/.config/tmux/plugins/tpm/scripts/install_plugins.sh
+
 # Preferences managed through defaults
 defaults import -app Maccy ./preferences/Maccy
 defaults import -app iTerm ./preferences/iTerm
 defaults import -app Rectangle ./preferences/Rectangle
-# Add asdf plugins
-asdf plugin add python
-asdf plugin add nodejs
-asdf plugin add erlang
-asdf plugin add elixir
-asdf plugin add postgres
-# Add Alacritty preferences and config
-mkdir -p ~/.config/alacritty/themes
-git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
-cp alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 
-# # Add LunarVim, setup and preferences
-# LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
-# # mkdir -p ~/.config/lvim/lua/whyimnobody
-# mkdir -p ~/.config/nvim/lua/whyimnobody
-# cp nvim/config.lua ~/.config/nvim/config.lua
-# cp -r nvim/lua ~/.config/nvim/lua
+./config.sh
 
-# TODO: Decide on starting services
-# yabai --install-service
-# skhd --install-service
-
-runtime=$((($(date +%s)-$start)/60))
-beginDeploy "############# Total Setup Time ############# $runtime Minutes"
+echo "Remember to open nvim and tmux, with prefix + I, to install plugins"

@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.config/oh-my-zsh"
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
@@ -23,7 +23,7 @@ export LANG=en_GB.UTF-8
 
 # src: https://koenwoortman.com/zsh-split-zshrc-into-multiple-files/
 # Load seperated config files
-for conf in "$HOME/.config/zsh/config.d/"*.zsh; do
+for conf in "$XDG_CONFIG_HOME/zsh/config.d/"*.zsh; do
   source "${conf}"
 done
 unset conf
