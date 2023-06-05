@@ -62,6 +62,10 @@ eval $(thefuck --alias)
 # ------------------------------------------------------------------------------
 export ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"  # For the zplug plugin
 
+# ZOXIDE
+# ------------------------------------------------------------------------------
+eval "$(zoxide init zsh)"
+
 # OHYMYZSH
 # ------------------------------------------------------------------------------
 source $ZSH/oh-my-zsh.sh
