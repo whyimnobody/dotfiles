@@ -7,7 +7,6 @@
 
 # ASDF
 # ------------------------------------------------------------------------------
-export ASDF_DIR="$XDG_CONFIG_HOME/asdf"
 export ASDF_CONFIG_FILE="$ASDF_DIR/asdfrc"
 export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 
@@ -40,6 +39,14 @@ export GOBIN="$GOPATH/bin"
 # iTerm2 Shell Integration & Utilities script
 source $HOME/.config/iterm2/iterm2_shell_integration.zsh
 
+# MCFLY
+# ------------------------------------------------------------------------------
+eval "$(mcfly init zsh)"
+export MCFLY_KEY_SCHEME=vim
+export MCFLY_FUZZY=2
+export MCFLY_RESULTS=20
+export MCFLY_PROMPT=""
+
 # POSTGRES
 # ------------------------------------------------------------------------------
 # Add Postgres to the Path
@@ -50,8 +57,10 @@ export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 export CARGO_HOME="$HOME/dev/cargo"  # For cargo binaries
 # export PATH="$PATH:$XDG_BIN_HOME/bin"  # For cargo binaries
 
-# STARSHIP
+# OHMYZSH + STARSHIP
 # ------------------------------------------------------------------------------
+source $ZSH/oh-my-zsh.sh
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 eval "$(starship init zsh)"
 
 # THEFUCK
@@ -66,6 +75,3 @@ export ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"  # For the zplug plugin
 # ------------------------------------------------------------------------------
 eval "$(zoxide init zsh)"
 
-# OHYMYZSH
-# ------------------------------------------------------------------------------
-source $ZSH/oh-my-zsh.sh
