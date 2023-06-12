@@ -5,9 +5,9 @@
 #
 # ALIASES
 # ------------------------------------------------------------------------------
-alias zshconfig="nvim $XDG_CONFIG_HOME/zsh/zshrc"
-alias refresh="source $XDG_CONFIG_HOME/zsh/zshrc"
-alias resource="source $XDG_CONFIG_HOME/zsh/zshrc"
+alias zshconfig="nvim $XDG_CONFIG_HOME/zsh/.zshrc"
+alias refresh="source $XDG_CONFIG_HOME/zsh/.zshrc"
+alias resource="source $XDG_CONFIG_HOME/zsh/.zshrc"
 alias zshupdate=""
 
 alias venvconfig="nvim $VIRTUAL_ENV/bin/postactivate"
@@ -27,7 +27,12 @@ alias bootstrap:psql="f() { curl -o docker-compose.yml https://gitlab.com/-/snip
 alias ll="exa -lg --icons"
 alias tree="exa --tree --icons"
 
-alias bkup:nvim="cp -r $XDG_CONFIG_HOME/nvim $XDG_CONFIG_HOME/dotfiles/nvim"
+alias bkup:nvim="rsync -av --delete --progress $XDG_CONFIG_HOME/nvim $XDG_CONFIG_HOME/dotfiles/.config/"
+alias bkup:kitty="rsync -av --delete --progress $XDG_CONFIG_HOME/kitty $XDG_CONFIG_HOME/dotfiles/.config/"
+alias bkup:starship="rsync -av --delete --progress $XDG_CONFIG_HOME/starship/starship.toml $XDG_CONFIG_HOME/dotfiles/.config/"
+alias bkup:zsh="rsync -av --exclude .zsh_history --exclude '.zcomp*' --delete --progress $XDG_CONFIG_HOME/zsh $XDG_CONFIG_HOME/dotfiles/.config/"
+
+alias sync:dotfiles="rsync -auv --progress $XDG_CONFIG_HOME/dotfiles/.config/ $XDG_CONFIG_HOME/.config/"
 
 # System-related aliases
 alias damagecheck:off="sudo spctl --master-disable"
