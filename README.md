@@ -66,6 +66,8 @@ sudo dscl . -create /Users/$USER UserShell $(which zsh)
   - Rectangle
   - iTerm
   - 1Password
+- Setup 1Password SSH Agent
+  - [](https://developer.1password.com/docs/ssh/get-started#step-3-turn-on-the-1password-ssh-agent)
 
 #### **Original Script Resources**
 
