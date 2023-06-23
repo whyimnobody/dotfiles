@@ -118,6 +118,7 @@ DeveloperUtilitiesList=(
 	poetry                        # https://formulae.brew.sh/formula/poetry
 	pre-commit                    # https://formulae.brew.sh/formula/pre-commit
 	ripgrep                       # https://formulae.brew.sh/formula/ripgrep
+	rm-improved                   # https://formulae.brew.sh/formula/rm-improved
 	rust                          # https://formulae.brew.sh/formula/rust
 	starship                      # https://formulae.brew.sh/formula/starship
 	thefuck                       # https://formulae.brew.sh/formula/thefuck
