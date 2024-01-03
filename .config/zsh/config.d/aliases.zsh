@@ -21,6 +21,8 @@ alias whatsmyip="dig TXT +short o-o.myaddr.l.google.com @ns1.google.com"
 alias rndpwd="shuf -n4 /usr/share/dict/words | tr '\n' _ | sed 's/.$/\n/'"
 alias rndpwdc="shuf -n4 /usr/share/dict/words | tr '\n' _ | sed 's/.$/\n/' | pbcopy"
 
+alias lvim="NVIM_APPNAME='lazyvim' nvim"
+
 # QoL Aliases
 # TODO: Update to accept arg for app name
 alias bootstrap:psql="f() { curl -o docker-compose.yml https://gitlab.com/-/snippets/2353106/raw/main/docker-compose.yml && sed -i 's/'$1'/something_creative/' docker-compose.yml };f"

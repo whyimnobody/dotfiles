@@ -27,7 +27,7 @@ if test ! $(which brew); then
 	brew tap homebrew/cask-drivers
 	brew tap homebrew/cask-fonts
 	brew tap homebrew/services
-	brew tap aws/tap
+	brew tap oven-sh/bun
 fi
 
 echo "Updating homebrew..."
@@ -55,12 +55,13 @@ GeneralToolList=(
 	youtube-dl # https://formulae.brew.sh/formula/youtube-dl
 )
 CaskGeneralToolList=(
+	arc         # https://formulae.brew.sh/cask/arc
 	backblaze   # https://formulae.brew.sh/cask/backblaze
 	deluge      # https://formulae.brew.sh/cask/deluge
 	discord     # https://formulae.brew.sh/cask/discord
 	firefox     # https://formulae.brew.sh/cask/firefox
 	protonvpn   # https://formulae.brew.sh/cask/protonvpn
-	qlcolorcode # QuickLook "extras"  # https://formulae.brew.sh/cask/qlcolorcode
+	qlcolorcode # https://formulae.brew.sh/cask/qlcolorcode # QuickLook "extras"
 	signal      # https://formulae.brew.sh/cask/signal
 	spotify     # https://formulae.brew.sh/cask/spotify
 	steam       # https://formulae.brew.sh/cask/steam
@@ -85,28 +86,35 @@ brew install --cask ${CaskMediaToolList[@]}
 beginDeploy "############# Developer Utilities #############"
 
 DeveloperUtilitiesList=(
+	age                           # https://formulae.brew.sh/formula/age
 	act                           # https://formulae.brew.sh/formula/act
 	asdf                          # https://formulae.brew.sh/formula/asdf
 	bat                           # https://formulae.brew.sh/formula/bat
 	bottom                        # https://formulae.brew.sh/formula/bottom
+	bun                           # https://formulae.brew.sh/formula/bun
 	commitizen                    # https://formulae.brew.sh/formula/commitizen
 	ctop                          # https://formulae.brew.sh/formula/ctop
 	diff-so-fancy                 # https://formulae.brew.sh/formula/diff-so-fancy
 	direnv                        # https://formulae.brew.sh/formula/direnv
 	elixir                        # https://formulae.brew.sh/formula/elixir
 	entr                          # https://formulae.brew.sh/formula/entr
-	exa                           # https://formulae.brew.sh/formula/exa
 	fd                            # https://formulae.brew.sh/formula/fd
+	font-commit-mono-nerd-font    # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-commit-mono-nerd-font.rb
 	font-hack-nerd-font           # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-hack-nerd-font.rb
+	font-iosevka-nerd-font        # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-iosevka-nerd-font.rb
 	font-jetbrains-mono-nerd-font # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-jetbrains-mono-nerd-font.rb
+	font-lilex-nerd-font          # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-lilex-nerd-font.rb
+	font-space-mono-nerd-font     # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-space-mono-nerd-font.rb
 	fzf                           # https://formulae.brew.shh/formula/fzf
-	httpie                        # https://formulae.brew.sh/formula/httpie
 	ipython                       # https://formulae.brew.sh/formula/ipython
 	jq                            # https://formulae.brew.sh/formula/jq
 	gh                            # https://formulae.brew.sh/formula/gh
 	glow                          # https://formulae.brew.sh/formula/glow
 	go                            # https://formulae.brew.sh/formula/go
+	gnu-sed                       # https://formulae.brew.sh/formula/gnu-sed
+	just                          # https://formulae.brew.sh/formula/just
 	lazygit                       # https://formulae.brew.sh/formula/lazygit
+	lsd                           # https://formulae.brew.sh/formula/lsd
 	magic-wormhole                # https://formulae.brew.sh/formula/magic-wormhole
 	mackup                        # https://formulae.brew.sh/formula/mackup
 	mcfly                         # https://formulae.brew.sh/formula/mcfly
@@ -119,7 +127,7 @@ DeveloperUtilitiesList=(
 	pre-commit                    # https://formulae.brew.sh/formula/pre-commit
 	ripgrep                       # https://formulae.brew.sh/formula/ripgrep
 	rm-improved                   # https://formulae.brew.sh/formula/rm-improved
-	rust                          # https://formulae.brew.sh/formula/rust
+	rustup-init                   # https://formulae.brew.sh/formula/rustup-init
 	starship                      # https://formulae.brew.sh/formula/starship
 	thefuck                       # https://formulae.brew.sh/formula/thefuck
 	tmux                          # https://formulae.brew.sh/formula/tmux
@@ -127,6 +135,7 @@ DeveloperUtilitiesList=(
 	wget                          # https://formulae.brew.sh/formula/wget
 	yarn                          # https://formulae.brew.sh/formula/yarn
 	yarn-completion               # https://formulae.brew.sh/formula/yarn-completion
+	yq                            # https://formulae.brew.sh/formula/yq
 	zoxide                        # https://formulae.brew.sh/formula/zoxide
 )
 CaskDeveloperUtilitiesList=(
@@ -137,9 +146,9 @@ CaskDeveloperUtilitiesList=(
 	firefox-developer-edition # https://formulae.brew.sh/cask/firefox-developer-edition
 	flutter                   # https://formulae.brew.sh/cask/flutter
 	fork                      # https://formulae.brew.sh/cask/fork
-	httpie                    # https://formulae.brew.sh/cask/httpie
 	iterm2                    # https://formulae.brew.sh/cask/iterm2
 	kitty                     # https://formulae.brew.sh/cask/kitty
+	macfuse                   # https://formulae.brew.sh/cask/macfuse
 	postman                   # https://formulae.brew.sh/cask/postman
 	visual-studio-code        # https://formulae.brew.sh/cask/visual-studio-code
 	wireshark                 # https://formulae.brew.sh/cask/wireshark
@@ -169,7 +178,7 @@ DevOpsToolList=(
 	flyctl     # https://formulae.brew.sh/formula/flyctl
 	localstack # https://formulae.brew.sh/formula/localstack
 	railway    # https://formulae.brew.sh/formula/railway
-	terraform  # https://formulae.brew.sh/formula/terraform
+	opentofu   # https://formulae.brew.sh/formula/opentofu
 	vault      # https://formulae.brew.sh/formula/vault
 	vercel-cli # https://formulae.brew.sh/formula/vercel-cli
 )
@@ -184,6 +193,7 @@ beginDeploy "############# Productivity Tools #############"
 
 ProductivityToolList=(
 	logi-options-plus      # https://github.com/Homebrew/homebrew-cask-drivers/blob/master/Casks/logi-options-plus.rb
+	syncthing              # https://formulae.brew.sh/formula/syncthing
 	yubico-yubikey-manager # https://github.com/Homebrew/homebrew-cask-drivers/blob/master/Casks/yubico-yubikey-manager.rb
 )
 CaskProductivityToolList=(
@@ -195,7 +205,7 @@ CaskProductivityToolList=(
 	keka          # https://formulae.brew.sh/cask/keka
 	linear-linear # https://formulae.brew.sh/cask/linear-linear
 	maccy         # https://formulae.brew.sh/cask/maccy
-	notion        # https://formulae.brew.sh/cask/notion
+	obsidian      # https://formulae.brew.sh/cask/obsidian
 	raycast       # https://formulae.brew.sh/cask/raycast
 	rectangle     # https://formulae.brew.sh/cask/rectangle
 	slack         # https://formulae.brew.sh/cask/slack
@@ -208,10 +218,12 @@ brew install --cask ${CaskProductivityToolList[@]}
 beginDeploy "############# macOS Applications #############"
 
 MacApplicationToolList=(
+	1549557075 # HacKit
+	409183694  # Keynote
+	409203825  # Numbers
+	409201541  # Pages
+	# 1503446680 # PastePal
 	497799835 # Xcode
-	409201541 # Pages
-	409203825 # Numbers
-	409183694 # Keynote
 )
 brew install mas
 mas install ${MacApplicationToolList[@]}
@@ -262,4 +274,6 @@ defaults import -app Rectangle ./preferences/Rectangle
 
 ./config.sh
 
+echo "Remember to install TPM (https://github.com/tmux-plugins/tpm) before opening tmux"
+echo "Remember to also install SSHFS because life is hard for some reason (https://osxfuse.github.io/)."
 echo "Remember to open nvim and tmux, with prefix + I, to install plugins"

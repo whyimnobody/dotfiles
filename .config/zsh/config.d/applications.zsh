@@ -5,6 +5,10 @@
 # export PATH="$PATH:$ANDROID_HOME/platform-tools"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# ANSIBLE
+# ------------------------------------------------------------------------------
+export ANSIBLE_CONFIG="$XDG_CONFIG_HOME/ansible/ansible.cfg"
+
 # ASDF
 # ------------------------------------------------------------------------------
 export ASDF_CONFIG_FILE="$ASDF_DIR/asdfrc"
@@ -74,4 +78,3 @@ export ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"  # For the zplug plugin
 # ZOXIDE
 # ------------------------------------------------------------------------------
 eval "$(zoxide init zsh)"
-
