@@ -7,11 +7,6 @@ red=$(tput setaf 1)
 green=$(tput setaf 2)
 reset=$(tput sgr0)
 
-echo "What's your git name?"
-read GitName
-echo "What's your git email address?"
-read GitEmail
-
 if test ! $(which gcc); then
 	echo "Installing command line developer tools..."
 	xcode-select --install
@@ -34,21 +29,23 @@ echo "Updating homebrew..."
 brew update
 brew upgrade
 
-beginDeploy() {
+display_message() {
 	echo
 	echo "${bold}${green}$1${normal}"
 }
 
-beginDeploy "############# Shell Stuff #############"
+display_message "############# Shell Stuff #############"
 
 # Install zsh
 brew install zsh
-# Install Oh My Zsh
-ZSH="$HOME/.config/oh-my-zsh" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 # Install zplug
 brew install zplug
+# Install Oh My Zsh
+if test ! $(which omz); then
+	ZSH="$HOME/.config/oh-my-zsh" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
 
-beginDeploy "############# General Tools #############"
+display_message "############# General Tools #############"
 
 GeneralToolList=(
 	gallery-dl # https://formulae.brew.sh/formula/gallery-dl
@@ -66,13 +63,12 @@ CaskGeneralToolList=(
 	spotify     # https://formulae.brew.sh/cask/spotify
 	steam       # https://formulae.brew.sh/cask/steam
 	telegram    # https://formulae.brew.sh/cask/telegram
-	vivaldi     # https://formulae.brew.sh/cask/vivaldi
 	vlc         # https://formulae.brew.sh/cask/vlc
 )
 brew install ${GeneralToolList[@]}
 brew install --cask ${CaskGeneralToolList[@]}
 
-beginDeploy "############# Media Tools and Players #############"
+display_message "############# Media Tools and Players #############"
 
 CaskMediaToolList=(
 	audacity # https://formulae.brew.sh/cask/audacity
@@ -83,11 +79,11 @@ CaskMediaToolList=(
 )
 brew install --cask ${CaskMediaToolList[@]}
 
-beginDeploy "############# Developer Utilities #############"
+display_message "############# Developer Utilities #############"
 
 DeveloperUtilitiesList=(
-	age                           # https://formulae.brew.sh/formula/age
 	act                           # https://formulae.brew.sh/formula/act
+	age                           # https://formulae.brew.sh/formula/age
 	asdf                          # https://formulae.brew.sh/formula/asdf
 	bat                           # https://formulae.brew.sh/formula/bat
 	bottom                        # https://formulae.brew.sh/formula/bottom
@@ -106,17 +102,17 @@ DeveloperUtilitiesList=(
 	font-lilex-nerd-font          # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-lilex-nerd-font.rb
 	font-space-mono-nerd-font     # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-space-mono-nerd-font.rb
 	fzf                           # https://formulae.brew.shh/formula/fzf
-	ipython                       # https://formulae.brew.sh/formula/ipython
-	jq                            # https://formulae.brew.sh/formula/jq
 	gh                            # https://formulae.brew.sh/formula/gh
 	glow                          # https://formulae.brew.sh/formula/glow
-	go                            # https://formulae.brew.sh/formula/go
 	gnu-sed                       # https://formulae.brew.sh/formula/gnu-sed
+	go                            # https://formulae.brew.sh/formula/go
+	ipython                       # https://formulae.brew.sh/formula/ipython
+	jq                            # https://formulae.brew.sh/formula/jq
 	just                          # https://formulae.brew.sh/formula/just
 	lazygit                       # https://formulae.brew.sh/formula/lazygit
 	lsd                           # https://formulae.brew.sh/formula/lsd
-	magic-wormhole                # https://formulae.brew.sh/formula/magic-wormhole
 	mackup                        # https://formulae.brew.sh/formula/mackup
+	magic-wormhole                # https://formulae.brew.sh/formula/magic-wormhole
 	mcfly                         # https://formulae.brew.sh/formula/mcfly
 	neovim                        # https://formulae.brew.sh/formula/neovim
 	netcat                        # https://formulae.brew.sh/formula/netcat
@@ -156,7 +152,7 @@ CaskDeveloperUtilitiesList=(
 brew install ${DeveloperUtilitiesList[@]}
 brew install --cask ${CaskDeveloperUtilitiesList[@]}
 
-beginDeploy "############# Database Tools #############"
+display_message "############# Database Tools #############"
 
 DatabaseToolList=(
 	postgis # https://formulae.brew.sh/formula/postgis
@@ -171,14 +167,15 @@ CaskDatabaseToolList=(
 brew install ${DatabaseToolList[@]}
 brew install --cask ${CaskDatabaseToolList[@]}
 
-beginDeploy "############# DevOps #############"
+display_message "############# DevOps #############"
 
 DevOpsToolList=(
 	awscli     # https://formulae.brew.sh/formula/awscli
 	flyctl     # https://formulae.brew.sh/formula/flyctl
 	localstack # https://formulae.brew.sh/formula/localstack
-	railway    # https://formulae.brew.sh/formula/railway
 	opentofu   # https://formulae.brew.sh/formula/opentofu
+	railway    # https://formulae.brew.sh/formula/railway
+	terraform  # https://formulae.brew.sh/formula/terraform
 	vault      # https://formulae.brew.sh/formula/vault
 	vercel-cli # https://formulae.brew.sh/formula/vercel-cli
 )
@@ -189,7 +186,7 @@ CaskDevOpsToolList=(
 brew install ${DevOpsToolList[@]}
 brew install --cask ${CaskDevOpsToolList[@]}
 
-beginDeploy "############# Productivity Tools #############"
+display_message "############# Productivity Tools #############"
 
 ProductivityToolList=(
 	logi-options-plus      # https://github.com/Homebrew/homebrew-cask-drivers/blob/master/Casks/logi-options-plus.rb
@@ -201,7 +198,6 @@ CaskProductivityToolList=(
 	1password-cli # https://formulae.brew.sh/cask/1password-cli
 	anydo         # https://formulae.brew.sh/cask/anydo
 	authy         # https://formulae.brew.sh/cask/authy
-	gpg-suite     # https://formulae.brew.sh/cask/gpg-suite
 	keka          # https://formulae.brew.sh/cask/keka
 	linear-linear # https://formulae.brew.sh/cask/linear-linear
 	maccy         # https://formulae.brew.sh/cask/maccy
@@ -215,7 +211,7 @@ brew install ${ProductivityToolList[@]}
 brew install --cask ${CaskProductivityToolList[@]}
 
 ############# Mac Application #############
-beginDeploy "############# macOS Applications #############"
+display_message "############# macOS Applications #############"
 
 MacApplicationToolList=(
 	1549557075 # HacKit
@@ -228,12 +224,7 @@ MacApplicationToolList=(
 brew install mas
 mas install ${MacApplicationToolList[@]}
 
-echo "######### Save screenshots to ${HOME}/Downloads/Screenshots"
-defaults write com.apple.screencapture location -string "${HOME}/Downloads/Screenshots"
-echo "######### Save screenshots in PNG format (other options: bmp, gif, jpg, pdf, tiff"
-defaults write com.apple.screencapture type -string "png"
-
-beginDeploy "############# Cleaning Up #############"
+display_message "############# Cleaning Up #############"
 brew cleanup
 
 # Add asdf plugins
@@ -244,33 +235,11 @@ asdf plugin add elixir
 asdf plugin add postgres
 asdf plugin add direnv
 
-# Add fzf key bindings and fuzzy completion
-$(brew --prefix)/opt/fzf/install --xdg --no-bash --no-fish --key-bindings --completion --no-update-rc
-
-beginDeploy "############# Global git config #############"
-
-git config --global user.name $GitName
-git config --global user.email $GitEmail
-git config --global init.defaultBranch master
-git config --global color.branch auto
-git config --global color.diff auto
-git config --global color.interactive auto
-git config --global color.status auto
-git config --global --add --bool push.autoSetupRemote true
-
-# TODO: Introduce mackup for backups
 runtime=$((($(date +%s) - $start) / 60))
 
-beginDeploy "############# Total Setup Time ############# $runtime Minutes"
+display_message "############# Total Setup Time ############# $runtime Minutes"
 
-beginDeploy "############# Copy over preferences and config #############"
-
-# TODO: Introduce mackup for backups
-
-# Preferences managed through defaults
-defaults import -app Maccy ./preferences/Maccy
-defaults import -app iTerm ./preferences/iTerm
-defaults import -app Rectangle ./preferences/Rectangle
+display_message "############# Copy over preferences and config #############"
 
 ./config.sh
 

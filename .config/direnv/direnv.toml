@@ -2,4 +2,4 @@
 load_dotenv = true
 
 [whitelist]
-prefix = ["HOME_FOLDER_PATH/repos/"]
+prefix = ["~/repos/"]
