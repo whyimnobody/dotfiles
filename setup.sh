@@ -48,6 +48,7 @@ fi
 display_message "############# General Tools #############"
 
 GeneralToolList=(
+	chezmoi    # https://formulae.brew.sh/formula/chezmoi
 	gallery-dl # https://formulae.brew.sh/formula/gallery-dl
 	youtube-dl # https://formulae.brew.sh/formula/youtube-dl
 )
