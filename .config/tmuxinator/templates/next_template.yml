@@ -1,0 +1,13 @@
+# Invoke with
+#   mux project
+# Then hit 'Ctrl-a d' to detach
+# Then run 'tmux -CC attach'
+name: my_project
+pre_window: cd ~/repos/my_project
+root: ~/my_project
+windows:
+  main:
+    layout: main-vertical
+    panes:
+      - lvim .
+      - npm run dev

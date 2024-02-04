@@ -71,3 +71,7 @@ sudo dscl . -create /Users/$USER UserShell $(which zsh)
 
 - [MAC OSX BASH PROFILE](https://natelandau.com/my-mac-osx-bash_profile/)
 - [New MacBook Setup for Developers by Dan Vega](https://dev.to/therealdanvega/new-macbook-setup-for-developers-2nma)
+
+# Stow TODOs
+
+- [ ] Figure out encryption?
