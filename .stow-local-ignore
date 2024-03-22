@@ -21,6 +21,7 @@ _darcs
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
+\.DS_Store
 
 # Custom additions for myself
 ^/scripts
