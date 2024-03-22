@@ -22,6 +22,7 @@ if test ! $(which brew); then
 	brew tap homebrew/cask-drivers
 	brew tap homebrew/cask-fonts
 	brew tap homebrew/services
+	brew tap libsql/sqld
 	brew tap oven-sh/bun
 fi
 
@@ -133,6 +134,7 @@ DeveloperUtilitiesList=(
 	ripgrep         # https://formulae.brew.sh/formula/ripgrep
 	rm-improved     # https://formulae.brew.sh/formula/rm-improved
 	rustup-init     # https://formulae.brew.sh/formula/rustup-init
+	silicon         # https://formulae.brew.sh/formula/silicon
 	starship        # https://formulae.brew.sh/formula/starship
 	thefuck         # https://formulae.brew.sh/formula/thefuck
 	tmux            # https://formulae.brew.sh/formula/tmux
@@ -168,6 +170,7 @@ DatabaseToolList=(
 	libspatialite # https://formulae.brew.sh/formula/libspatialite
 )
 CaskDatabaseToolList=(
+	beekeeper-studio    # https://formulae.brew.sh/cask/beekeeper-studio
 	dbeaver-community   # https://formulae.brew.sh/cask/dbeaver-community
 	postgres-unofficial # https://formulae.brew.sh/cask/postgres-unofficial
 	postico             # https://formulae.brew.sh/cask/postico
