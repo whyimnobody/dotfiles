@@ -110,8 +110,13 @@ vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle, { desc = "[U]ndotree" }
 
 -- Whichkey group registrations
 local wk = require("which-key")
-wk.register({ ["<leader>"] = {
-  h = {
-    name = "harpoon",
+wk.register({
+  ["<leader>"] = {
+    h = {
+      name = "harpoon",
+    },
+    n = {
+      name = "+noice",
+    },
   },
-} })
+})
