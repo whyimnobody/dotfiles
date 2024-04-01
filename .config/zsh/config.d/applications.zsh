@@ -55,6 +55,15 @@ export PATH="$(brew --prefix gsed)/libexec/gnubin:$PATH"
 # iTerm2 Shell Integration & Utilities script
 source $HOME/.config/iterm2/iterm2_shell_integration.zsh
 
+# LAZYGIT
+# ------------------------------------------------------------------------------
+export LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml,$XDG_CONFIG_HOME/lazygit/themes/mocha/teal.yml"
+
+# LESS
+# ------------------------------------------------------------------------------
+# Add syntax highlighting to less
+export LESSOPEN="| bat --paging=never --color=always %s"
+
 # MCFLY
 # ------------------------------------------------------------------------------
 eval "$(mcfly init zsh)"
