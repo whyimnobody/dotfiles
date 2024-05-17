@@ -45,6 +45,9 @@ return {
   -- Indentation detection
   { "Darazaki/indent-o-matic", config = true },
 
+  -- -- justfile syntax highlighting
+  { "NoahTheDuke/vim-just" },
+
   -- Lualine
   {
     "nvim-lualine/lualine.nvim",
@@ -62,7 +65,9 @@ return {
 
   -- Navigation
   {
+    -- TODO: Switch to harpoon2
     "ThePrimeagen/harpoon",
+    -- branch = "harpoon2",
     lazy = false,
     config = true,
     keys = {
