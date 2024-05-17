@@ -113,9 +113,11 @@ DeveloperUtilitiesList=(
 	fd              # https://formulae.brew.sh/formula/fd
 	fzf             # https://formulae.brew.shh/formula/fzf
 	gh              # https://formulae.brew.sh/formula/gh
+	gibo            # https://formulae.brew.sh/formula/gibo
 	glow            # https://formulae.brew.sh/formula/glow
 	gnu-sed         # https://formulae.brew.sh/formula/gnu-sed
 	go              # https://formulae.brew.sh/formula/go
+	hugo            # https://formulae.brew.sh/formula/hugo
 	ipython         # https://formulae.brew.sh/formula/ipython
 	jq              # https://formulae.brew.sh/formula/jq
 	just            # https://formulae.brew.sh/formula/just
@@ -136,6 +138,7 @@ DeveloperUtilitiesList=(
 	rustup-init     # https://formulae.brew.sh/formula/rustup-init
 	silicon         # https://formulae.brew.sh/formula/silicon
 	starship        # https://formulae.brew.sh/formula/starship
+	tailwindcss     # https://formulae.brew.sh/formula/tailwindcss
 	thefuck         # https://formulae.brew.sh/formula/thefuck
 	tmux            # https://formulae.brew.sh/formula/tmux
 	tree            # https://formulae.brew.sh/formula/tree
