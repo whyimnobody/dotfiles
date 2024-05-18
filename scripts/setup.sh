@@ -113,7 +113,7 @@ DeveloperUtilitiesList=(
 	fd              # https://formulae.brew.sh/formula/fd
 	fzf             # https://formulae.brew.shh/formula/fzf
 	gh              # https://formulae.brew.sh/formula/gh
-	gibo            # https://formulae.brew.sh/formula/gibo
+	git-delta       # https://formulae.brew.sh/formula/git-delta
 	glow            # https://formulae.brew.sh/formula/glow
 	gnu-sed         # https://formulae.brew.sh/formula/gnu-sed
 	go              # https://formulae.brew.sh/formula/go
