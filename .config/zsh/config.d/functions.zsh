@@ -1,6 +1,4 @@
 # FUNCTIONS
-# ------------------------------------------------------------------------------
-
 function refresh
 {
   if [ -n "$(jobs)" ]; then
@@ -9,7 +7,6 @@ function refresh
     exec zsh
   fi
 }
-
 function bootstrap.psql {
 	curl -o docker-compose.yml https://gitlab.com/-/snippets/2353106/raw/main/docker-compose.yml && sed -i 's/'$1'/something_creative/' docker-compose.yml
 }
