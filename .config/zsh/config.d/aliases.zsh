@@ -15,6 +15,7 @@ alias random.key="openssl rand -base64 32 | tr -d '\n' | pbcopy"
 # QoL Aliases
 alias notes="nvim $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/whyimnobody/"
 alias cvim="NVIM_APPNAME='cvim' nvim"
+alias lvim="nvim"
 # TODO: Update to accept arg for app name
 # from oh-my-zsh
 alias md='mkdir -p'

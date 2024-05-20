@@ -2,9 +2,6 @@
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
-# Uncomment the following line to automatically update without prompting.
-DISABLE_UPDATE_PROMPT="true"
-# Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
 # HIST_STAMPS="mm/dd/yyyy"
@@ -36,6 +33,7 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Plugins
+# TODO: Turbo mode below for that last speed squeeze
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-history-substring-search
