@@ -1,4 +1,5 @@
 .config/gnupg
 .config/yarn
+.gitconfig
 
 node_modules

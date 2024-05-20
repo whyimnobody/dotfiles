@@ -53,6 +53,7 @@ sudo dscl . -create /Users/$USER UserShell $(which zsh)
 - Open `lvim`. This will allow it to install LSPs, formatters and anything else required
 - Setup `1password` and login to:
   - Firefox
+  - Arc
   - Backblaze
   - Raycast
   - Logi Options+
@@ -72,6 +73,7 @@ sudo dscl . -create /Users/$USER UserShell $(which zsh)
 - [MAC OSX BASH PROFILE](https://natelandau.com/my-mac-osx-bash_profile/)
 - [New MacBook Setup for Developers by Dan Vega](https://dev.to/therealdanvega/new-macbook-setup-for-developers-2nma)
 
-# Stow TODOs
+## Stow TODOs
 
+- [ ] Split gitconfig file into multiple files
 - [ ] Figure out encryption?
