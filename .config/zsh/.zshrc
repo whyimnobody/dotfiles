@@ -31,24 +31,40 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
+zinit ice atload'unalias zi'
 
 # Plugins
 # TODO: Turbo mode below for that last speed squeeze
+zinit ice wait"1" # load after 2 seconds
 zinit light zsh-users/zsh-autosuggestions
+zinit ice wait"1" # load after 2 seconds
 zinit light zsh-users/zsh-completions
+zinit ice wait"1" # load after 2 seconds
 zinit light zsh-users/zsh-history-substring-search
+zinit ice wait"1" # load after 2 seconds
 zinit light zsh-users/zsh-syntax-highlighting
+zinit ice wait"1" # load after 2 seconds
 zinit light Aloxaf/fzf-tab
+# TODO: Check out to see if worthwhile
+# https://github.com/Freed-Wu/fzf-tab-source
+
 # zinit light djui/alias-tips
 # zinit light darvid/zsh-poetry
 # zinit light g-plane/zsh-yarn-autocompletions
 
+zinit ice wait"1" # load after 2 seconds
 zinit snippet OMZP::asdf
+zinit ice wait"1" # load after 2 seconds
 zinit snippet OMZP::colored-man-pages
+zinit ice wait"1" # load after 2 seconds
 zinit snippet OMZP::gitignore
+zinit ice wait"1" # load after 2 seconds
 zinit snippet OMZP::golang
+zinit ice wait"1" # load after 2 seconds
 zinit snippet OMZP::npm
+zinit ice wait"1" # load after 2 seconds
 zinit snippet OMZP::pip
+zinit ice wait"1" # load after 2 seconds
 zinit snippet OMZP::tmux
 
 # Completion config

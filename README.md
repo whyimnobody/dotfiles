@@ -12,7 +12,7 @@ Set of scripts and files to setup my macOS machines as development environments.
 ## Put the repo somewhere sensible
 
 ```shell
-git clone https://github.com/whyimnobody/dotfiles.git ~/.config/dotfiles
+git clone https://github.com/whyimnobody/dotfiles.git ~/.dotfiles
 ```
 
 ## **Make sure script has execution permission**
@@ -24,7 +24,7 @@ chmod +x setup.sh config.sh
 ## **Execute script to begin setup**
 
 ```shell
-./setup.sh
+./scripts/setup.sh
 ```
 
 ## Apps To Install
@@ -35,12 +35,8 @@ Check the script!
 
 ### Update the user shell to use the Homebrew zsh
 
-```shell
-chsh -s $(which zsh)
-```
-
-Run that and restart terminal in its entirety (not just the session) and if
-that fails, run the below.
+Restart terminal in its entirety (not just the session) and if
+the shell isn't `zsh`, run the below.
 
 ```shell
 sudo dscl . -create /Users/$USER UserShell $(which zsh)

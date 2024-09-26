@@ -29,7 +29,8 @@ export MIX_XDG=1 # https://hexdocs.pm/hex/Mix.Tasks.Hex.Config.html
 export FLY_CONFIG_DIR="$XDG_CONFIG_HOME/fly"
 
 # FZF
-[ -f ${XDG_CONFIG_HOME}/fzf/fzf.zsh ] && source ${XDG_CONFIG_HOME}/fzf/fzf.zsh
+# [ -f ${XDG_CONFIG_HOME}/fzf/fzf.zsh ] && source ${XDG_CONFIG_HOME}/fzf/fzf.zsh
+source <(fzf --zsh)
 
 # GOLANG
 export GOPATH="$HOME/dev/go"

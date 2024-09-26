@@ -1,26 +1,32 @@
 #!/bin/bash
 
+# TODO: Export this pretty stuff
 start=$(date +%s)
 bold=$(tput bold)
 normal=$(tput sgr0)
 red=$(tput setaf 1)
 green=$(tput setaf 2)
-reset=$(tput sgr0)
+# reset=$(tput sgr0)
 
-if test ! $(which gcc); then
+display_message() {
+	echo
+	echo "${bold}${green}$1${normal}"
+}
+error_message() {
+	echo
+	echo "${bold}${red}$1${normal}"
+}
+
+if test ! "$(which gcc)"; then
 	echo "Installing command line developer tools..."
 	xcode-select --install
 fi
 
-if test ! $(which brew); then
+if test ! "$(which brew)"; then
 	echo "Installing homebrew..."
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	brew tap homebrew/cask
-	brew tap homebrew/core
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 	brew tap homebrew/bundle
-	brew tap homebrew/cask-versions
-	brew tap homebrew/cask-drivers
-	brew tap homebrew/cask-fonts
 	brew tap homebrew/services
 	brew tap libsql/sqld
 	brew tap oven-sh/bun
@@ -30,26 +36,15 @@ echo "Updating homebrew..."
 brew update
 brew upgrade
 
-display_message() {
-	echo
-	echo "${bold}${green}$1${normal}"
-}
-
 display_message "############# Shell Stuff #############"
 
 # Install zsh
 brew install zsh
-# Install zplug
-brew install zplug
-# Install Oh My Zsh
-if test ! $(which omz); then
-	ZSH="$HOME/.config/oh-my-zsh" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
 
 # Install stow and get that out the way
 brew install stow
-# TODO: Add TPM installation script here
-stow --dir=$HOME/.dotfiles --target=$HOME
+mkdir "$HOME"/.dotfiles
+stow --dir="$HOME"/.dotfiles --target="$HOME"
 
 display_message "############# General Tools #############"
 
@@ -71,8 +66,8 @@ CaskGeneralToolList=(
 	telegram    # https://formulae.brew.sh/cask/telegram
 	vlc         # https://formulae.brew.sh/cask/vlc
 )
-brew install ${GeneralToolList[@]}
-brew install --cask ${CaskGeneralToolList[@]}
+brew install "${GeneralToolList[@]}"
+brew install --cask "${CaskGeneralToolList[@]}"
 
 display_message "############# Fonts, Media Tools and Players #############"
 
@@ -92,8 +87,8 @@ CaskMediaToolList=(
 	gimp     # https://formulae.brew.sh/cask/gimp
 	inkscape # https://formulae.brew.sh/cask/inkscape
 )
-brew install ${FontList}
-brew install --cask ${CaskMediaToolList[@]}
+brew install "${FontList[@]}"
+brew install --cask "${CaskMediaToolList[@]}"
 
 display_message "############# Developer Utilities #############"
 
@@ -114,6 +109,7 @@ DeveloperUtilitiesList=(
 	fzf             # https://formulae.brew.shh/formula/fzf
 	gh              # https://formulae.brew.sh/formula/gh
 	git-delta       # https://formulae.brew.sh/formula/git-delta
+	git-lfs         # https://formulae.brew.sh/formula/git-lfs
 	glow            # https://formulae.brew.sh/formula/glow
 	gnu-sed         # https://formulae.brew.sh/formula/gnu-sed
 	go              # https://formulae.brew.sh/formula/go
@@ -121,6 +117,7 @@ DeveloperUtilitiesList=(
 	ipython         # https://formulae.brew.sh/formula/ipython
 	jq              # https://formulae.brew.sh/formula/jq
 	just            # https://formulae.brew.sh/formula/just
+	lazydocker      # https://formulae.brew.sh/formula/lazydocker
 	lazygit         # https://formulae.brew.sh/formula/lazygit
 	lsd             # https://formulae.brew.sh/formula/lsd
 	mackup          # https://formulae.brew.sh/formula/mackup
@@ -153,7 +150,7 @@ CaskDeveloperUtilitiesList=(
 	balenaetcher              # https://formulae.brew.sh/cask/balenaetcher
 	chromium                  # https://formulae.brew.sh/cask/chromium
 	cyberduck                 # https://formulae.brew.sh/cask/cyberduck
-	firefox-developer-edition # https://formulae.brew.sh/cask/firefox-developer-edition
+	firefox@developer-edition # https://formulae.brew.sh/cask/firefox@developer-edition
 	flutter                   # https://formulae.brew.sh/cask/flutter
 	fork                      # https://formulae.brew.sh/cask/fork
 	iterm2                    # https://formulae.brew.sh/cask/iterm2
@@ -163,8 +160,8 @@ CaskDeveloperUtilitiesList=(
 	visual-studio-code        # https://formulae.brew.sh/cask/visual-studio-code
 	wireshark                 # https://formulae.brew.sh/cask/wireshark
 )
-brew install ${DeveloperUtilitiesList[@]}
-brew install --cask ${CaskDeveloperUtilitiesList[@]}
+brew install "${DeveloperUtilitiesList[@]}"
+brew install --cask "${CaskDeveloperUtilitiesList[@]}"
 
 display_message "############# Database Tools #############"
 
@@ -180,8 +177,8 @@ CaskDatabaseToolList=(
 	studio-3t           # https://formulae.brew.sh/cask/studio-3t
 	tableplus           # https://formulae.brew.sh/cask/tableplus
 )
-brew install ${DatabaseToolList[@]}
-brew install --cask ${CaskDatabaseToolList[@]}
+brew install "${DatabaseToolList[@]}"
+brew install --cask "${CaskDatabaseToolList[@]}"
 
 display_message "############# DevOps #############"
 
@@ -199,8 +196,8 @@ CaskDevOpsToolList=(
 	docker # https://formulae.brew.sh/cask/docker
 	utm    # https://formulae.brew.sh/cask/utm
 )
-brew install ${DevOpsToolList[@]}
-brew install --cask ${CaskDevOpsToolList[@]}
+brew install "${DevOpsToolList[@]}"
+brew install --cask "${CaskDevOpsToolList[@]}"
 
 display_message "############# Productivity Tools #############"
 
@@ -212,8 +209,6 @@ ProductivityToolList=(
 CaskProductivityToolList=(
 	1password     # https://formulae.brew.sh/cask/1password
 	1password-cli # https://formulae.brew.sh/cask/1password-cli
-	anydo         # https://formulae.brew.sh/cask/anydo
-	authy         # https://formulae.brew.sh/cask/authy
 	keka          # https://formulae.brew.sh/cask/keka
 	linear-linear # https://formulae.brew.sh/cask/linear-linear
 	maccy         # https://formulae.brew.sh/cask/maccy
@@ -221,10 +216,10 @@ CaskProductivityToolList=(
 	raycast       # https://formulae.brew.sh/cask/raycast
 	rectangle     # https://formulae.brew.sh/cask/rectangle
 	slack         # https://formulae.brew.sh/cask/slack
-	zoomus        # https://formulae.brew.sh/cask/zoomus
+	zoom          # https://formulae.brew.sh/cask/zoom
 )
-brew install ${ProductivityToolList[@]}
-brew install --cask ${CaskProductivityToolList[@]}
+brew install "${ProductivityToolList[@]}"
+brew install --cask "${CaskProductivityToolList[@]}"
 
 ############# Mac Application #############
 display_message "############# macOS Applications #############"
@@ -234,11 +229,10 @@ MacApplicationToolList=(
 	409183694  # Keynote
 	409203825  # Numbers
 	409201541  # Pages
-	# 1503446680 # PastePal
-	497799835 # Xcode
+	497799835  # Xcode
 )
 brew install mas
-mas install ${MacApplicationToolList[@]}
+mas install "${MacApplicationToolList[@]}"
 
 display_message "############# Cleaning Up #############"
 brew cleanup
@@ -248,10 +242,11 @@ asdf plugin add python
 asdf plugin add nodejs
 asdf plugin add erlang
 asdf plugin add elixir
+asdf plugin add gleam
 asdf plugin add postgres
 asdf plugin add direnv
 
-runtime=$((($(date +%s) - $start) / 60))
+runtime=$((($(date +%s) - start) / 60))
 
 display_message "############# Total Setup Time ############# $runtime Minutes"
 
