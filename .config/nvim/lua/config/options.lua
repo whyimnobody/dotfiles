@@ -4,6 +4,10 @@
 
 vim.opt.colorcolumn = "80,88,120"
 
+-- Set the fold method to indentation instead of expr
+-- https://vimhelp.org/fold.txt.html#fold-methods
+vim.opt.foldmethod = "indent"
+
 vim.filetype.add({
   extension = {
     postcss = "postcss",

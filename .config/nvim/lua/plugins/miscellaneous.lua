@@ -133,6 +133,8 @@ return {
   -- Peek when navigating by line number
   { "nacro90/numb.nvim" },
 
+  -- Rainbow CSV (in vimscript)
+  { "mechatroner/rainbow_csv" },
   -- Smart columns
   {
     "m4xshen/smartcolumn.nvim",

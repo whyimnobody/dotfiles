@@ -80,10 +80,11 @@ if has_reach then
   end, { desc = "Reach buffers" })
 end
 
--- local has_silicon, _ = pcall(require, "silicon")
--- if has_silicon then
---   vim.keymap.set("v", "<leader>cx", ":Silicon<cr>", { desc = "[S]napshot [C]ode" })
--- end
+-- Silicon (sexy screenshots)
+local has_silicon, _ = pcall(require, "silicon")
+if has_silicon then
+  vim.keymap.set("v", "<leader>cx", ":Silicon<cr>", { desc = "[S]napshot [C]ode" })
+end
 
 -- Telescope
 vim.keymap.set(
@@ -110,13 +111,7 @@ vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle, { desc = "[U]ndotree" }
 
 -- Whichkey group registrations
 local wk = require("which-key")
-wk.register({
-  ["<leader>"] = {
-    h = {
-      name = "harpoon",
-    },
-    n = {
-      name = "+noice",
-    },
-  },
+wk.add({
+  { "<leader>h", group = "+harpoon" },
+  { "<leader>n", group = "+noice" },
 })
