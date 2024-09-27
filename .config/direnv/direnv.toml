@@ -2,5 +2,4 @@
 load_dotenv = true
 
 [whitelist]
-prefix = ["~/repos/", "~/Consulting/Unu/"]
-
+prefix = ["~/repos/", "~/Consulting/"]
