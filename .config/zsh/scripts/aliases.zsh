@@ -5,6 +5,7 @@ alias resource="refresh"
 alias dotfiles="nvim $HOME/.dotfiles"
 alias lazyvim="nvim $XDG_CONFIG_HOME/nvim"
 alias zshconfig="nvim $XDG_CONFIG_HOME/zsh"
+alias sshconfig="nvim $HOME/.ssh/config"
 
 alias pwdc="pwd | pbcopy"
 alias clean.node="rm -rf node_modules/ package-lock.json yarn-lock.json"
@@ -16,6 +17,7 @@ alias random.key="openssl rand -base64 32 | tr -d '\n' | pbcopy"
 alias notes="nvim $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/whyimnobody/"
 alias cvim="NVIM_APPNAME='cvim' nvim"
 alias lvim="nvim"
+alias art="php artisan"
 # TODO: Update to accept arg for app name
 # from oh-my-zsh
 alias md='mkdir -p'

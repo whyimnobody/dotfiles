@@ -29,6 +29,8 @@ git config --global color.diff auto
 git config --global color.interactive auto
 git config --global color.status auto
 git config --global --add --bool push.autoSetupRemote true
+# Sort out git-lfs error. src: https://stackoverflow.com/questions/67395259/git-clone-git-lfs-filter-process-git-lfs-command-not-found#answer-69007609
+ln -s "$(which git-lfs)" "$(git --exec-path)/git-lfs"
 
 # Save screenshots to ${HOME}/Downloads/Screenshots in PNG
 defaults write com.apple.screencapture location -string "${HOME}/Downloads/Screenshots"

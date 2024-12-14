@@ -93,57 +93,58 @@ brew install --cask "${CaskMediaToolList[@]}"
 display_message "############# Developer Utilities #############"
 
 DeveloperUtilitiesList=(
-	act             # https://formulae.brew.sh/formula/act
-	age             # https://formulae.brew.sh/formula/age
-	asdf            # https://formulae.brew.sh/formula/asdf
-	bat             # https://formulae.brew.sh/formula/bat
-	bottom          # https://formulae.brew.sh/formula/bottom
-	bun             # https://formulae.brew.sh/formula/bun
-	commitizen      # https://formulae.brew.sh/formula/commitizen
-	ctop            # https://formulae.brew.sh/formula/ctop
-	diff-so-fancy   # https://formulae.brew.sh/formula/diff-so-fancy
-	direnv          # https://formulae.brew.sh/formula/direnv
-	elixir          # https://formulae.brew.sh/formula/elixir
-	entr            # https://formulae.brew.sh/formula/entr
-	fd              # https://formulae.brew.sh/formula/fd
-	fzf             # https://formulae.brew.shh/formula/fzf
-	gh              # https://formulae.brew.sh/formula/gh
-	git-delta       # https://formulae.brew.sh/formula/git-delta
-	git-lfs         # https://formulae.brew.sh/formula/git-lfs
-	glow            # https://formulae.brew.sh/formula/glow
-	gnu-sed         # https://formulae.brew.sh/formula/gnu-sed
-	go              # https://formulae.brew.sh/formula/go
-	hugo            # https://formulae.brew.sh/formula/hugo
-	ipython         # https://formulae.brew.sh/formula/ipython
-	jq              # https://formulae.brew.sh/formula/jq
-	just            # https://formulae.brew.sh/formula/just
-	lazydocker      # https://formulae.brew.sh/formula/lazydocker
-	lazygit         # https://formulae.brew.sh/formula/lazygit
-	lsd             # https://formulae.brew.sh/formula/lsd
-	mackup          # https://formulae.brew.sh/formula/mackup
-	magic-wormhole  # https://formulae.brew.sh/formula/magic-wormhole
-	mcfly           # https://formulae.brew.sh/formula/mcfly
-	neovim          # https://formulae.brew.sh/formula/neovim
-	netcat          # https://formulae.brew.sh/formula/netcat
-	nmap            # https://formulae.brew.sh/formula/nmap
-	peco            # https://formulae.brew.sh/formula/peco
-	pipx            # https://formulae.brew.sh/formula/pipx
-	poetry          # https://formulae.brew.sh/formula/poetry
-	pre-commit      # https://formulae.brew.sh/formula/pre-commit
-	ripgrep         # https://formulae.brew.sh/formula/ripgrep
-	rm-improved     # https://formulae.brew.sh/formula/rm-improved
-	rustup-init     # https://formulae.brew.sh/formula/rustup-init
-	silicon         # https://formulae.brew.sh/formula/silicon
-	starship        # https://formulae.brew.sh/formula/starship
-	tailwindcss     # https://formulae.brew.sh/formula/tailwindcss
-	thefuck         # https://formulae.brew.sh/formula/thefuck
-	tmux            # https://formulae.brew.sh/formula/tmux
-	tree            # https://formulae.brew.sh/formula/tree
-	wget            # https://formulae.brew.sh/formula/wget
-	yarn            # https://formulae.brew.sh/formula/yarn
-	yarn-completion # https://formulae.brew.sh/formula/yarn-completion
-	yq              # https://formulae.brew.sh/formula/yq
-	zoxide          # https://formulae.brew.sh/formula/zoxide
+	act              # https://formulae.brew.sh/formula/act
+	age              # https://formulae.brew.sh/formula/age
+	asdf             # https://formulae.brew.sh/formula/asdf
+	bat              # https://formulae.brew.sh/formula/bat
+	bottom           # https://formulae.brew.sh/formula/bottom
+	bun              # https://formulae.brew.sh/formula/bun
+	commitizen       # https://formulae.brew.sh/formula/commitizen
+	ctop             # https://formulae.brew.sh/formula/ctop
+	diff-so-fancy    # https://formulae.brew.sh/formula/diff-so-fancy
+	direnv           # https://formulae.brew.sh/formula/direnv
+	elixir           # https://formulae.brew.sh/formula/elixir
+	entr             # https://formulae.brew.sh/formula/entr
+	fd               # https://formulae.brew.sh/formula/fd
+	fzf              # https://formulae.brew.shh/formula/fzf
+	gh               # https://formulae.brew.sh/formula/gh
+	git-delta        # https://formulae.brew.sh/formula/git-delta
+	git-lfs          # https://formulae.brew.sh/formula/git-lfs
+	glow             # https://formulae.brew.sh/formula/glow
+	gnu-sed          # https://formulae.brew.sh/formula/gnu-sed
+	go               # https://formulae.brew.sh/formula/go
+	hugo             # https://formulae.brew.sh/formula/hugo
+	ipython          # https://formulae.brew.sh/formula/ipython
+	jq               # https://formulae.brew.sh/formula/jq
+	just             # https://formulae.brew.sh/formula/just
+	lazydocker       # https://formulae.brew.sh/formula/lazydocker
+	lazygit          # https://formulae.brew.sh/formula/lazygit
+	lsd              # https://formulae.brew.sh/formula/lsd
+	mackup           # https://formulae.brew.sh/formula/mackup
+	magic-wormhole   # https://formulae.brew.sh/formula/magic-wormhole
+	mcfly            # https://formulae.brew.sh/formula/mcfly
+	neovim           # https://formulae.brew.sh/formula/neovim
+	netcat           # https://formulae.brew.sh/formula/netcat
+	nmap             # https://formulae.brew.sh/formula/nmap
+	peco             # https://formulae.brew.sh/formula/peco
+	pipx             # https://formulae.brew.sh/formula/pipx
+	poetry           # https://formulae.brew.sh/formula/poetry
+	pre-commit       # https://formulae.brew.sh/formula/pre-commit
+	ripgrep          # https://formulae.brew.sh/formula/ripgrep
+	rm-improved      # https://formulae.brew.sh/formula/rm-improved
+	rustup-init      # https://formulae.brew.sh/formula/rustup-init
+	silicon          # https://formulae.brew.sh/formula/silicon
+	source-highlight # https://formulae.brew.sh/formula/source-highlight
+	starship         # https://formulae.brew.sh/formula/starship
+	tailwindcss      # https://formulae.brew.sh/formula/tailwindcss
+	thefuck          # https://formulae.brew.sh/formula/thefuck
+	tmux             # https://formulae.brew.sh/formula/tmux
+	tree             # https://formulae.brew.sh/formula/tree
+	wget             # https://formulae.brew.sh/formula/wget
+	yarn             # https://formulae.brew.sh/formula/yarn
+	yarn-completion  # https://formulae.brew.sh/formula/yarn-completion
+	yq               # https://formulae.brew.sh/formula/yq
+	zoxide           # https://formulae.brew.sh/formula/zoxide
 )
 CaskDeveloperUtilitiesList=(
 	android-studio            # https://formulae.brew.sh/cask/android-studio
@@ -166,8 +167,9 @@ brew install --cask "${CaskDeveloperUtilitiesList[@]}"
 display_message "############# Database Tools #############"
 
 DatabaseToolList=(
-	postgis       # https://formulae.brew.sh/formula/postgis
 	libspatialite # https://formulae.brew.sh/formula/libspatialite
+	postgis       # https://formulae.brew.sh/formula/postgis
+	valkey        # https://formulae.brew.sh/formula/valkey
 )
 CaskDatabaseToolList=(
 	beekeeper-studio    # https://formulae.brew.sh/cask/beekeeper-studio
@@ -185,16 +187,17 @@ display_message "############# DevOps #############"
 DevOpsToolList=(
 	awscli     # https://formulae.brew.sh/formula/awscli
 	flyctl     # https://formulae.brew.sh/formula/flyctl
+	k9s        # https://formulae.brew.sh/formula/k9s
 	localstack # https://formulae.brew.sh/formula/localstack
 	opentofu   # https://formulae.brew.sh/formula/opentofu
+	oxker      # https://formulae.brew.sh/formula/oxker
 	railway    # https://formulae.brew.sh/formula/railway
 	terraform  # https://formulae.brew.sh/formula/terraform
 	vault      # https://formulae.brew.sh/formula/vault
-	vercel-cli # https://formulae.brew.sh/formula/vercel-cli
 )
 CaskDevOpsToolList=(
-	docker # https://formulae.brew.sh/cask/docker
-	utm    # https://formulae.brew.sh/cask/utm
+	docker   # https://formulae.brew.sh/cask/docker
+	orbstack # https://formulae.brew.sh/cask/orbstack
 )
 brew install "${DevOpsToolList[@]}"
 brew install --cask "${CaskDevOpsToolList[@]}"

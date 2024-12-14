@@ -12,12 +12,16 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
+setopt autocd
+setopt always_to_end
 
 # Path Management
 # Add local/bin to PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/sbin:$PATH
+# Add XDG_BIN_HOME to PATH
+export PATH=$PATH:$XDG_BIN_HOME
 
 # You may need to manually set your language environment
 export LANG=en_GB.UTF-8
@@ -34,37 +38,38 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit ice atload'unalias zi'
 
 # Plugins
-# TODO: Turbo mode below for that last speed squeeze
-zinit ice wait"1" # load after 1 second
+zinit ice wait"1" lucid # load after 1 second
 zinit light zsh-users/zsh-autosuggestions
-zinit ice wait"1" # load after 1 second
+zinit ice wait"1" lucid # load after 1 second
 zinit light zsh-users/zsh-completions
-zinit ice wait"1" # load after 1 second
+zinit ice wait"1" lucid # load after 1 second
 zinit light zsh-users/zsh-history-substring-search
-zinit ice wait"1" # load after 1 second
+zinit ice wait"1" lucid # load after 1 second
 zinit light zsh-users/zsh-syntax-highlighting
-zinit ice wait"1" # load after 1 second
+# zinit ice wait"1" lucid # load after 1 second
 zinit light Aloxaf/fzf-tab
 # TODO: Check out to see if worthwhile
 # https://github.com/Freed-Wu/fzf-tab-source
 
 # zinit light djui/alias-tips
-# zinit light darvid/zsh-poetry
-# zinit light g-plane/zsh-yarn-autocompletions
+zinit ice wait"1" lucid # load after 1 second
+zinit light darvid/zsh-poetry
+zinit ice wait"1" lucid # load after 1 second
+zinit light g-plane/zsh-yarn-autocompletions
 
-zinit ice wait"1" # load after 1 second
+zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::asdf
-zinit ice wait"1" # load after 1 second
+zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::colored-man-pages
-zinit ice wait"1" # load after 1 second
+zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::gitignore
-zinit ice wait"1" # load after 1 second
+zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::golang
-zinit ice wait"1" # load after 1 second
+zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::npm
-zinit ice wait"1" # load after 1 second
+zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::pip
-zinit ice wait"1" # load after 1 second
+# TODO: Replace below with custom script ## src: https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/tmux/tmux.plugin.zsh
 zinit snippet OMZP::tmux
 
 # Completion config
@@ -88,6 +93,6 @@ bindkey "^[[F" end-of-line
 export EDITOR="$(which nvim)"
 
 # src: https://koenwoortman.com/zsh-split-zshrc-into-multiple-files/
-source "$XDG_CONFIG_HOME/zsh/config.d/applications.zsh"
-source "$XDG_CONFIG_HOME/zsh/config.d/functions.zsh"
-source "$XDG_CONFIG_HOME/zsh/config.d/aliases.zsh"
+source "$XDG_CONFIG_HOME/zsh/scripts/applications.zsh"
+source "$XDG_CONFIG_HOME/zsh/scripts/functions.zsh"
+source "$XDG_CONFIG_HOME/zsh/scripts/aliases.zsh"
