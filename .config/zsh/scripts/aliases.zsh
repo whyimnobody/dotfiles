@@ -11,12 +11,12 @@ alias pwdc="pwd | pbcopy"
 alias clean.node="rm -rf node_modules/ package-lock.json yarn-lock.json"
 alias whatsmyip="dig TXT +short o-o.myaddr.l.google.com @ns1.google.com"
 
-alias random.pwd="shuf -n4 /usr/share/dict/words | tr '\n' _ | sed 's/.$/\n/' | pbcopy"
-alias random.key="openssl rand -base64 32 | tr -d '\n' | pbcopy"
+alias random.phrase="shuf -n4 /usr/share/dict/words | tr '\n' _ | sed 's/.$/\n/' | pbcopy"
+alias random.pwd="openssl rand -hex 64 | tr -d '\n' | pbcopy"
 # QoL Aliases
 alias notes="nvim $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/whyimnobody/"
 alias cvim="NVIM_APPNAME='cvim' nvim"
-alias lvim="nvim"
+alias lvim="NVIM_APPNAME='lvim' nvim"
 alias art="php artisan"
 # TODO: Update to accept arg for app name
 # from oh-my-zsh

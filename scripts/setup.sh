@@ -50,7 +50,7 @@ display_message "############# General Tools #############"
 
 GeneralToolList=(
 	gallery-dl # https://formulae.brew.sh/formula/gallery-dl
-	youtube-dl # https://formulae.brew.sh/formula/youtube-dl
+	yt-dlp     # https://formulae.brew.sh/formula/yt-dlp
 )
 CaskGeneralToolList=(
 	arc         # https://formulae.brew.sh/cask/arc
@@ -65,9 +65,12 @@ CaskGeneralToolList=(
 	steam       # https://formulae.brew.sh/cask/steam
 	telegram    # https://formulae.brew.sh/cask/telegram
 	vlc         # https://formulae.brew.sh/cask/vlc
+	zen-browser # https://formulae.brew.sh/cask/zen-browser
 )
 brew install "${GeneralToolList[@]}"
 brew install --cask "${CaskGeneralToolList[@]}"
+# Additional commands for installations, because macOS
+xattr -d com.apple.quarantine '/Applications/Zen Browser.app/'
 
 display_message "############# Fonts, Media Tools and Players #############"
 
@@ -100,6 +103,7 @@ DeveloperUtilitiesList=(
 	bottom           # https://formulae.brew.sh/formula/bottom
 	bun              # https://formulae.brew.sh/formula/bun
 	commitizen       # https://formulae.brew.sh/formula/commitizen
+	croc             # https://formulae.brew.sh/formula/croc
 	ctop             # https://formulae.brew.sh/formula/ctop
 	diff-so-fancy    # https://formulae.brew.sh/formula/diff-so-fancy
 	direnv           # https://formulae.brew.sh/formula/direnv
@@ -121,7 +125,6 @@ DeveloperUtilitiesList=(
 	lazygit          # https://formulae.brew.sh/formula/lazygit
 	lsd              # https://formulae.brew.sh/formula/lsd
 	mackup           # https://formulae.brew.sh/formula/mackup
-	magic-wormhole   # https://formulae.brew.sh/formula/magic-wormhole
 	mcfly            # https://formulae.brew.sh/formula/mcfly
 	neovim           # https://formulae.brew.sh/formula/neovim
 	netcat           # https://formulae.brew.sh/formula/netcat
