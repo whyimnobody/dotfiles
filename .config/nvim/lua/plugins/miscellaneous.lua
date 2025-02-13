@@ -172,4 +172,10 @@ return {
 
   -- Undotree
   { "mbbill/undotree" },
+
+  {
+    "folke/which-key.nvim",
+    -- opts will be merged with the parent spec
+    opts = { preset = "modern" },
+  },
 }

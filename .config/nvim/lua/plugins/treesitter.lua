@@ -13,7 +13,7 @@ return {
       },
     },
   },
-  { "HiPhish/nvim-ts-rainbow2" },
+  { "HiPhish/rainbow-delimiters.nvim" },
   {
     "windwp/nvim-ts-autotag",
     config = {
