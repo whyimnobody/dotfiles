@@ -1,0 +1,10 @@
+theme = catppuccin-mocha
+font-family = Cascadia Code
+
+window-inherit-working-directory = false
+working-directory = home
+macos-option-as-alt = true
+
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+
+background-opacity = 0.9

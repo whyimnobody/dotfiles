@@ -98,13 +98,14 @@ fi
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
-# # Set the correct local config file to use.
+# Set the correct local config file to use.
 # if [[ "$ZSH_TMUX_ITERM2" == "false" && -e "$ZSH_TMUX_CONFIG" ]]; then
 #   export ZSH_TMUX_CONFIG
 #   export _ZSH_TMUX_FIXED_CONFIG="${0:h:a}/tmux.extra.conf"
 # else
 #   export _ZSH_TMUX_FIXED_CONFIG="${0:h:a}/tmux.only.conf"
 # fi
+export ZSH_TMUX_FIXTERM=false
 
 # Wrapper function for tmux.
 function _zsh_tmux_plugin_run() {

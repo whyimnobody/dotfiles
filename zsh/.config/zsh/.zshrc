@@ -70,9 +70,9 @@ zinit snippet OMZP::npm
 zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::pip
 # NOTE: Replaced below with script ## src: https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/tmux/tmux.plugin.zsh
-# zinit snippet OMZP::tmux
-zinit ice wait"1" lucid # load after 1 second
-zinit snippet "${XDG_CONFIG_HOME}/zsh/scripts/tmux.zsh"
+# zinit ice wait lucid # load immediately
+# zinit snippet "${XDG_CONFIG_HOME}/zsh/scripts/tmux.zsh"
+zinit snippet OMZP::tmux
 
 # Completion config
 autoload -U compinit && compinit

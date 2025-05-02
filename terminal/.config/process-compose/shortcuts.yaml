@@ -1,0 +1,41 @@
+shortcuts:
+  log_follow:        # toggle “follow” (like pressing G in less/vim to go to end)
+    toggle_description:
+      false: Follow Off
+      true:  Follow On
+    shortcut: g
+
+  log_screen:        # toggle log half/full screen (z for “zoom”)
+    toggle_description:
+      false: Half Screen
+      true:  Full Screen
+    shortcut: z
+
+  log_wrap:          # toggle wrap (w for “wrap”)
+    toggle_description:
+      false: Wrap Off
+      true:  Wrap On
+    shortcut: w
+
+  process_restart:   # restart (r for “restart”)
+    description: Restart
+    shortcut: r
+
+  process_screen:    # toggle process half/full screen (m for “maximize”)
+    toggle_description:
+      false: Half Screen
+      true:  Full Screen
+    shortcut: m
+
+  process_start:     # start (s for “start”)
+    description: Start
+    shortcut: s
+
+  process_stop:      # stop/kill (k for “kill”)
+    description: Stop
+    shortcut: k
+
+  quit:              # quit (q to quit)
+    description: Quit
+    shortcut: q
+

@@ -11,7 +11,6 @@ export GIT_REPOS="$HOME/repos"
 # ------------------------------------------------------------------------------
 export PACKAGES_DATABASE="$XDG_STATE_HOME/dotfiles/dotfiles.db"
 export NIX_CONF_DIR="$XDG_CONFIG_HOME/nix"
-# export DEVBOX_USE_VERSION=0.13.7
 
 # ZSH SPECIFIC
 # ------------------------------------------------------------------------------

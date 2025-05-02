@@ -25,7 +25,10 @@ _darcs
 
 # Custom additions for myself
 ^/scripts
+^/_scripts
 __pycache__
-.zsh_sessions
-.zcompdump*
-.zsh_history
+\.zsh_sessions
+\.zcompdump*
+\.zsh_history
+^/history
+^/zsh/.config/zsh/history
