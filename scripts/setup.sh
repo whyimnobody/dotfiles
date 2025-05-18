@@ -117,6 +117,7 @@ brew_devops=(
 )
 brew_databases=(
 	libspatialite # https://formulae.brew.sh/formula/libspatialite
+	pgvector      # https://formulae.brew.sh/formula/pgvector
 	postgis       # https://formulae.brew.sh/formula/postgis
 	valkey        # https://formulae.brew.sh/formula/valkey
 )

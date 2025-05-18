@@ -11,9 +11,11 @@ alias pwdc="pwd | pbcopy"
 alias clean.node="rm -rf node_modules/ package-lock.json yarn-lock.json"
 alias whatsmyip="dig TXT +short o-o.myaddr.l.google.com @ns1.google.com"
 
+# TODO: Make OS agnostic
 alias random.phrase="shuf -n4 /usr/share/dict/words | tr '\n' _ | sed 's/.$/\n/' | pbcopy"
 alias random.pwd="openssl rand -hex 64 | tr -d '\n' | pbcopy"
 # QoL Aliases
+# TODO: Make OS agnostic
 alias notes="nvim $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/whyimnobody/"
 alias cvim="NVIM_APPNAME='cvim' nvim"
 alias lvim="NVIM_APPNAME='lvim' nvim"
@@ -31,7 +33,7 @@ alias .....='cd ../../../..'
 alias ls="lsd"
 alias ll="lsd -l"
 alias tree="lsd --tree"
-alias upgrade="brew update && brew upgrade && brew cleanup && zinit self-update && zinit update && composer global require laravel/valet && valet install"
+# TODO: Make OS agnostic
 # System-related aliases
 alias damagecheck.off="sudo spctl --master-disable"
 alias damagecheck.on="sudo spctl --master-enable"

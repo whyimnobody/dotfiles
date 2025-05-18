@@ -1,0 +1,65 @@
+[includeIf "gitdir:~/repos/personal/"]
+	path = ~/.config/git/user-personal
+
+[includeIf "gitdir:~/repos/eighty86/"]
+	path = ~/.config/git/user-e86
+
+[core]
+	whitespace = blank-at-eol,space-before-tab,indent-with-non-tab
+	preloadindex = true
+	pager = delta
+
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+
+[init]
+	defaultBranch = main
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[status]
+	branch = true
+	# showStash = true
+	# showUntrackedFiles = all
+
+[pager]
+	diff = diff-so-fancy | $PAGER
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	line-numbers = true
+
+	# delta detects terminal colors automatically; set one of these to disable auto-detection
+	# dark = true
+	# light = true
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+
+[url "git@github.com:whyimnobody/"]
+	insteadOf = "nobody:"
+[url "git@github.com:eighty86/"]
+	insteadOf = "e86:"
+[url "git@github.com:"]
+	insteadOf = "gh:"
+
+[alias]
+	undo = reset --soft HEAD^
+

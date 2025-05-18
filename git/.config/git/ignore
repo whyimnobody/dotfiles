@@ -1,0 +1,112 @@
+# === OS files ===
+.DS_Store
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Icon?
+
+# === Editor & IDE ===
+*.swp
+*.swo
+*~
+.netrwhist
+.idea/
+.vscode/
+*.code-workspace
+*.bak
+*.orig
+
+# === Logs and runtime ===
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# === Archives and binaries ===
+*.tar
+*.gz
+*.zip
+*.7z
+*.rar
+*.tar.gz
+*.tgz
+*.bak
+*.exe
+*.out
+*.o
+*.a
+*.so
+*.dylib
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+
+# === Node ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Env ===
+.env
+# .env.*
+
+# === Misc ===
+coverage/
+dist/
+build/
+.cache/
+
+# === Go ===
+bin/
+*.test
+*.exe
+*.mod
+*.sum
+*.cover
+
+# === Elixir / Phoenix ===
+_elixir_ls/
+deps/
+_build/
+erl_crash.dump
+*.ez
+*.beam
+
+# === Laravel / PHP ===
+# vendor/
+# composer.lock
+# composer.phar
+# .env.backup
+# storage/*.key
+# storage/*.log
+# storage/framework/cache/*
+# storage/framework/sessions/*
+# storage/framework/views/*
+# storage/logs/*
+# bootstrap/cache/
+
+# === C / C++ ===
+*.obj
+*.elf
+*.map
+*.gch
+*.pch
+*.dSYM/
+*.bin
+*.hex
+*.lst
+*.lss
+*.sym
+
+# === Rust ===
+target/
+# Cargo.lock
+*.rlib
+*.crate
+

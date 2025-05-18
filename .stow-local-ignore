@@ -32,3 +32,5 @@ __pycache__
 \.zsh_history
 ^/history
 ^/zsh/.config/zsh/history
+
+user-personal
