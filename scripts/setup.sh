@@ -78,7 +78,6 @@ brew_dev=(
 	lazygit          # https://formulae.brew.sh/formula/lazygit
 	lazysql          # https://formulae.brew.sh/formula/lazysql
 	lsd              # https://formulae.brew.sh/formula/lsd
-	mcfly            # https://formulae.brew.sh/formula/mcfly
 	neovim           # https://formulae.brew.sh/formula/neovim
 	netcat           # https://formulae.brew.sh/formula/netcat
 	nmap             # https://formulae.brew.sh/formula/nmap

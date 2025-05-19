@@ -77,5 +77,4 @@ Don't forget to install nix, and set `trusted-users`
 ## Stow TODOs
 
 - [ ] Split gitconfig file into multiple files
-- [ ] Swap out McFly
 - [ ] Figure out encryption?

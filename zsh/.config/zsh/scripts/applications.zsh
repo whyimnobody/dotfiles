@@ -47,13 +47,6 @@ export LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml,$XDG_CONFIG_HOME/lazy
 # Add syntax highlighting to less
 export LESSOPEN="| bat --paging=never --color=always %s"
 
-# # MCFLY
-# eval "$(mcfly init zsh)"
-# export MCFLY_KEY_SCHEME=vim
-# export MCFLY_FUZZY=2
-# export MCFLY_RESULTS=20
-# export MCFLY_PROMPT=""
-
 # POSTGRES
 case "$(uname -s)" in
   Darwin)

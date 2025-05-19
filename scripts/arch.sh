@@ -60,7 +60,6 @@ dev=(
 	just
 	lazygit
 	lsd
-	mcfly
 	neovim
 	nmap
 	nodejs
