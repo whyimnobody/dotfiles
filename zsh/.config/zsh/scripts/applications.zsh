@@ -27,7 +27,7 @@ case "$(uname -s)" in
     export GOROOT="$(brew --prefix golang)/libexec"
     ;;
   Linux)
-    export GOROOT="/usr/bin/go"
+    export GOROOT="/usr/lib/go"
     ;;
 esac
 export GOBIN="$GOPATH/bin"
