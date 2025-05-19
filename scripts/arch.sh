@@ -103,8 +103,16 @@ databases_aur=(
 	pgvector
 )
 
+fonts=(
+	otf-commit-mono-nerd
+	ttf-iosevka-nerd
+	ttf-lilex-nerd
+	ttf-space-mono-nerd
+)
+
 packages=(
 	"${general[@]}"
+	"${fonts[@]}"
 	"${media[@]}"
 	"${dev[@]}"
 	"${devops[@]}"
