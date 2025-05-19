@@ -66,7 +66,6 @@ brew_dev=(
 	entr             # https://formulae.brew.sh/formula/entr
 	fd               # https://formulae.brew.sh/formula/fd
 	fzf              # https://formulae.brew.shh/formula/fzf
-	gh               # https://formulae.brew.sh/formula/gh
 	git-delta        # https://formulae.brew.sh/formula/git-delta
 	git-lfs          # https://formulae.brew.sh/formula/git-lfs
 	glow             # https://formulae.brew.sh/formula/glow
@@ -85,8 +84,6 @@ brew_dev=(
 	netcat           # https://formulae.brew.sh/formula/netcat
 	nmap             # https://formulae.brew.sh/formula/nmap
 	peco             # https://formulae.brew.sh/formula/peco
-	pipx             # https://formulae.brew.sh/formula/pipx
-	poetry           # https://formulae.brew.sh/formula/poetry
 	pre-commit       # https://formulae.brew.sh/formula/pre-commit
 	ripgrep          # https://formulae.brew.sh/formula/ripgrep
 	rm-improved      # https://formulae.brew.sh/formula/rm-improved
@@ -99,6 +96,7 @@ brew_dev=(
 	tlrc             # https://formulae.brew.sh/formula/tlrc
 	tmux             # https://formulae.brew.sh/formula/tmux
 	tree             # https://formulae.brew.sh/formula/tree
+	uv               # https://formulae.brew.sh/formula/uv
 	wget             # https://formulae.brew.sh/formula/wget
 	yarn             # https://formulae.brew.sh/formula/yarn
 	yarn-completion  # https://formulae.brew.sh/formula/yarn-completion
@@ -111,9 +109,6 @@ brew_devops=(
 	k9s        # https://formulae.brew.sh/formula/k9s
 	localstack # https://formulae.brew.sh/formula/localstack
 	opentofu   # https://formulae.brew.sh/formula/opentofu
-	oxker      # https://formulae.brew.sh/formula/oxker
-	railway    # https://formulae.brew.sh/formula/railway
-	vault      # https://formulae.brew.sh/formula/vault
 )
 brew_databases=(
 	libspatialite # https://formulae.brew.sh/formula/libspatialite
@@ -153,10 +148,8 @@ casks_dev=(
 	android-studio     # https://formulae.brew.sh/cask/android-studio
 	balenaetcher       # https://formulae.brew.sh/cask/balenaetcher
 	cyberduck          # https://formulae.brew.sh/cask/cyberduck
-	flox               # https://formulae.brew.sh/cask/flox
 	fork               # https://formulae.brew.sh/cask/fork
 	visual-studio-code # https://formulae.brew.sh/cask/visual-studio-code
-	wireshark          # https://formulae.brew.sh/cask/wireshark
 )
 casks_devops=(
 	# docker   # https://formulae.brew.sh/cask/docker
@@ -179,7 +172,6 @@ casks_productivity=(
 	obsidian      # https://formulae.brew.sh/cask/obsidian
 	raycast       # https://formulae.brew.sh/cask/raycast
 	rectangle     # https://formulae.brew.sh/cask/rectangle
-	slack         # https://formulae.brew.sh/cask/slack
 	zoom          # https://formulae.brew.sh/cask/zoom
 )
 

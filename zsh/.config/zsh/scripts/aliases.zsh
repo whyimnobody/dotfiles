@@ -35,6 +35,14 @@ alias ll="lsd -l"
 alias tree="lsd --tree"
 # TODO: Make OS agnostic
 # System-related aliases
-alias damagecheck.off="sudo spctl --master-disable"
-alias damagecheck.on="sudo spctl --master-enable"
+
+case "$(uname -s)" in
+  Darwin)
+    alias damagecheck.off="sudo spctl --master-disable"
+    alias damagecheck.on="sudo spctl --master-enable"
+  ;;
+  Linux)
+    export GOROOT="/usr/bin/go"
+  ;;
+esac
 

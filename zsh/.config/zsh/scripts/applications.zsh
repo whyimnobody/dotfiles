@@ -34,16 +34,23 @@ source <(fzf --zsh)
 
 # GOLANG
 export GOPATH="$HOME/dev/go"
-export GOROOT="$(brew --prefix golang)/libexec"
+case "$(uname -s)" in
+  Darwin)
+    export GOROOT="$(brew --prefix golang)/libexec"
+    ;;
+  Linux)
+    export GOROOT="/usr/bin/go"
+    ;;
+esac
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$(go env GOPATH)/bin"
 
-# GNUSED
-export PATH="$(brew --prefix gsed)/libexec/gnubin:$PATH"
-
-# ITERM2
-# iTerm2 Shell Integration & Utilities script
-source $HOME/.config/iterm2/iterm2_shell_integration.zsh
+case "$(uname -s)" in
+  Darwin)
+    # GNUSED
+    export PATH="$(brew --prefix gsed)/libexec/gnubin:$PATH"
+  ;;
+esac
 
 # LAZYGIT
 export LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml,$XDG_CONFIG_HOME/lazygit/themes/mocha/teal.yml"
@@ -52,15 +59,19 @@ export LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml,$XDG_CONFIG_HOME/lazy
 # Add syntax highlighting to less
 export LESSOPEN="| bat --paging=never --color=always %s"
 
-# MCFLY
-eval "$(mcfly init zsh)"
-export MCFLY_KEY_SCHEME=vim
-export MCFLY_FUZZY=2
-export MCFLY_RESULTS=20
-export MCFLY_PROMPT=""
+# # MCFLY
+# eval "$(mcfly init zsh)"
+# export MCFLY_KEY_SCHEME=vim
+# export MCFLY_FUZZY=2
+# export MCFLY_RESULTS=20
+# export MCFLY_PROMPT=""
 
 # POSTGRES
-export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+case "$(uname -s)" in
+  Darwin)
+    export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+  ;;
+esac
 
 # RUST
 export PATH="$PATH:$(brew --prefix rustup)/bin"
@@ -74,8 +85,8 @@ eval "$(starship init zsh)"
 # STOW
 export STOW_DIR="$HOME/.dotfiles"
 
-# THEFUCK
-eval $(thefuck --alias)
+# # THEFUCK
+# eval $(thefuck --alias)
 
 # TMUX
 export ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"  # For the zplug plugin
