@@ -54,7 +54,6 @@ brew_fonts=(
 brew_dev=(
 	act              # https://formulae.brew.sh/formula/act
 	age              # https://formulae.brew.sh/formula/age
-	asdf             # https://formulae.brew.sh/formula/asdf
 	bat              # https://formulae.brew.sh/formula/bat
 	bottom           # https://formulae.brew.sh/formula/bottom
 	commitizen       # https://formulae.brew.sh/formula/commitizen
@@ -92,7 +91,6 @@ brew_dev=(
 	source-highlight # https://formulae.brew.sh/formula/source-highlight
 	starship         # https://formulae.brew.sh/formula/starship
 	tailwindcss      # https://formulae.brew.sh/formula/tailwindcss
-	thefuck          # https://formulae.brew.sh/formula/thefuck
 	tlrc             # https://formulae.brew.sh/formula/tlrc
 	tmux             # https://formulae.brew.sh/formula/tmux
 	tree             # https://formulae.brew.sh/formula/tree
@@ -218,6 +216,12 @@ for package in "${crates[@]}"; do install_package "$package" "rust"; done
 xattr -d com.apple.quarantine '/Applications/Zen Browser.app/'
 # Adding `opentofu` to PATH as drop-in replacement for `terraform`
 sudo ln -sf "$(which tofu)" /usr/local/bin/terraform
+
+# Install TPM
+if [ ! -d "$HOME/.local/share/tmux/plugins/tpm/" ]; then
+	git clone "https://github.com/tmux-plugins/tpm" ~/.local/share/tmux/plugins/tpm
+fi
+"$HOME"/.local/share/tmux/plugins/tpm/scripts/install_plugins.sh
 
 display_message "############# Cleaning Up #############"
 brew cleanup

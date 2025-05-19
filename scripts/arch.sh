@@ -138,6 +138,9 @@ fi
 # Unpack the key bits
 stow git nvim terminal tmux zsh
 
+# Setup rust toolchain
+rustup default stable
+
 # TODO: Sort out GPGP on system
 # TODO: Figure out a Maccy like experience
 # TODO: Install fonts and wallpapers (hyprpaper?)

@@ -7,18 +7,6 @@
 # ANSIBLE
 export ANSIBLE_CONFIG="$XDG_CONFIG_HOME/ansible/ansible.cfg"
 
-# ASDF
-export ASDF_CONFIG_FILE="$ASDF_DIR/asdfrc"
-export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
-
-export ASDF_GEM_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME/gem/default-gems"
-export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME/pip/default-python-packages"
-export ASDF_NPM_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME/npm/default-npm-packages"
-export ASDF_YARN_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME/yarn/default-npm-packages"
-# . $(brew --prefix asdf)/libexec/asdf.sh # Completions
-export ASDF_DIRENV_BIN="$(which direnv)" # From installation script
-eval "$($ASDF_DIRENV_BIN hook zsh)" # From installation script
-
 # DIRENV
 eval "$(direnv hook zsh)"
 
@@ -72,11 +60,6 @@ case "$(uname -s)" in
     export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
   ;;
 esac
-
-# RUST
-export PATH="$PATH:$(brew --prefix rustup)/bin"
-# export CARGO_HOME="$HOME/dev/cargo"  # For cargo binaries, cache, and config
-# export RUSTUP_HOME="$HOME/dev/rustup"  # For XDG reasons, of course
 
 # STARSHIP
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
