@@ -137,12 +137,17 @@ fi
 # Unpack the key bits
 stow git nvim terminal tmux zsh
 
+# Set zsh as the default shell
+if [[ "$SHELL" != "$(command -v zsh)" ]]; then
+	chsh -s "$(command -v zsh)"
+fi
+
 # Setup rust toolchain
 rustup default stable
 
-# TODO: Sort out GPGP on system
+# TODO: Sort out GPG on system
 # TODO: Figure out a Maccy like experience
-# TODO: Install fonts and wallpapers (hyprpaper?)
+# TODO: Install wallpapers (hyprpaper?)
 # TODO: Sort out bluetooth devices (keeb & mouse)
 # TODO: Check speakers
 # TODO: Make the login pretty
