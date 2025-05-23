@@ -26,9 +26,9 @@ case "$(uname -s)" in
   Darwin)
     export GOROOT="$(brew --prefix golang)/libexec"
     ;;
-  Linux)
-    export GOROOT="/usr/lib/go"
-    ;;
+  # Linux)
+  #   export GOROOT="/usr/lib/go"
+  #   ;;
 esac
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$(go env GOPATH)/bin"

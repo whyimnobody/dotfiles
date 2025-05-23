@@ -41,8 +41,5 @@ case "$(uname -s)" in
     alias damagecheck.off="sudo spctl --master-disable"
     alias damagecheck.on="sudo spctl --master-enable"
   ;;
-  Linux)
-    export GOROOT="/usr/bin/go"
-  ;;
 esac
 

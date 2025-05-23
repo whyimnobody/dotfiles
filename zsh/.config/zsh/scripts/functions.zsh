@@ -54,6 +54,21 @@ function format.json {
   pbpaste >"${1:-/tmp/some.json}" && jq . "${1:-/tmp/some.json}"
 }
 
+function upgrade {
+  case "$(uname -s)" in
+    Darwin)
+      brew update
+      brew upgrade
+      brew cleanup
+    ;;
+    Linux)
+      sudo pacman -Syu --noconfirm
+      yay -Syu --noconfirm
+    ;;
+  esac
+  zinit update
+}
+
 ## @description: Checks and installs a package.
 ## @param {string} package: The name of the package to install.
 ## @param {string} type: The type of package ("app_store", "formula", "cask", "go", "rust").

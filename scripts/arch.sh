@@ -15,6 +15,7 @@ fi
 
 # Packages
 general=(
+	dragon-drop
 	obsidian
 	syncthing
 )
@@ -23,6 +24,7 @@ general_aur=(
 	brave-bin
 	gallery-dl
 	librewolf-bin
+	signal-desktop
 	wireguard-tools
 	yt-dlp-git
 	zen-browser-bin
@@ -43,10 +45,12 @@ dev=(
 	croc
 	ctop
 	dbeaver
+	devbox
 	diff-so-fancy
 	direnv
 	elixir
 	fd
+	ffmpeg
 	fzf
 	ghostty
 	git-delta
@@ -55,6 +59,7 @@ dev=(
 	gnu-netcat
 	go
 	hugo
+	imagemagick
 	ipython
 	jq
 	just
@@ -64,17 +69,23 @@ dev=(
 	nmap
 	nodejs
 	peco
+	poppler
 	pre-commit
+	resvg
 	ripgrep
 	rustup
 	silicon
 	source-highlight
 	starship
+	stow
 	tmux
 	tree
 	uv
+	words
+	yazi
 	yq
 	zoxide
+	zsh
 )
 dev_aur=(
 	beekeeper-studio
@@ -99,11 +110,13 @@ databases=(
 	valkey
 )
 databases_aur=(
+	libsql
 	pgvector
 )
 
 fonts=(
 	otf-commit-mono-nerd
+	ttf-cascadia-code-nerd
 	ttf-iosevka-nerd
 	ttf-lilex-nerd
 	ttf-space-mono-nerd
@@ -135,7 +148,7 @@ fi
 "$HOME"/.local/share/tmux/plugins/tpm/scripts/install_plugins.sh
 
 # Unpack the key bits
-stow git nvim terminal tmux zsh
+stow --dir="$HOME"/.dotfiles --target="$HOME" dev git terminal tmux zsh
 
 # Set zsh as the default shell
 if [[ "$SHELL" != "$(command -v zsh)" ]]; then
@@ -160,3 +173,4 @@ rustup default stable
 # TODO: Proton
 # TODO: some games
 # TODO: Password managers
+# TODO: Maybe Laravel stuff?
