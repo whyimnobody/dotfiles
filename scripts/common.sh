@@ -12,7 +12,7 @@ if [ ! -d "$HOME/.local/share/tmux/plugins/tpm/" ]; then
 fi
 
 # Install tmux-sessionizer
-if [ ! -d "$XDG_BIN_HOME/tmux-sessionizer" ]; then
+if [ ! -f "$XDG_BIN_HOME/tmux-sessionizer" ]; then
 	info "Grabbing tmux-sessionizer"
 	curl -fsSL "https://raw.githubusercontent.com/ThePrimeagen/tmux-sessionizer/fa17fa10a47db3a5a3e4f22f1b7eea618691b058/tmux-sessionizer" -o "$XDG_BIN_HOME/tmux-sessionizer"
 	chmod +x "$XDG_BIN_HOME/tmux-sessionizer"

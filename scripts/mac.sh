@@ -151,7 +151,7 @@ casks_media=(
 	vlc      # https://formulae.brew.sh/cask/vlc
 )
 
-brew_fonts=(
+casks_fonts=(
 	font-cascadia-code            # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-cascadia-code.rb
 	font-caskaydia-cove-nerd-font # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-caskaydia-cove-nerd-font.rb
 	font-commit-mono-nerd-font    # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-commit-mono-nerd-font.rb
@@ -177,7 +177,6 @@ formulae=(
 	"${brew_dev[@]}"
 	"${brew_devops[@]}"
 	"${brew_databases[@]}"
-	"${brew_fonts[@]}"
 )
 casks=(
 	"${casks_general[@]}"
@@ -185,27 +184,33 @@ casks=(
 	"${casks_devops[@]}"
 	"${casks_databases[@]}"
 	"${casks_media[@]}"
+	"${casks_fonts[@]}"
 )
 # gophers=()
 # crates=()
 
 # Install packages
 info "Let's get to the hard stuff"
-brew install "${formulae[@]}"
+brew install --formula "${formulae[@]}"
 brew install --cask "${casks[@]}"
 mas install "${app_store_apps[@]}"
 # go install "${gophers[@]}"
 # cargo install "${crates[@]}"
 
 # Additional commands for installations, because macOS (fucking Apple fucks)
-warning "Let Zen be zen (fucking Apple fucks)"
-xattr -d com.apple.quarantine '/Applications/Zen Browser.app/'
+if xattr '/Applications/Zen Browser.app/' | grep -q 'com.apple.quarantine'; then
+	warning "Let Zen be zen (fucking Apple fucks)"
+	xattr -d com.apple.quarantine '/Applications/Zen Browser.app/'
+fi
 
 # Adding `opentofu` to PATH as drop-in replacement for `terraform`
-sudo ln -sf "$(which tofu)" /usr/local/bin/terraform
+if [ "$(readlink /usr/local/bin/terraform 2>/dev/null)" != "$(which tofu)" ]; then
+	sudo ln -sf "$(which tofu)" /usr/local/bin/terraform
+fi
 
 # Make sure macOS runtime and bin dirs exist
 if [ ! -d "$XDG_BIN_HOME" ]; then
+	info "Creating ZDG_BIN_HOME directory"
 	mkdir -p "$XDG_BIN_HOME"
 fi
 
