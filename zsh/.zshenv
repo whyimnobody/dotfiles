@@ -1,10 +1,14 @@
 # GENERAL
 # ------------------------------------------------------------------------------
 export LC_ALL="en_ZA.UTF-8"
+
 export XDG_BIN_HOME="${XDG_BIN_HOME:-$HOME/.local/bin}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+mkdir -p /tmp/${USER}-runtime
+chmod 700 /tmp/${USER}-runtime
+export XDG_RUNTIME_DIR="/tmp/${USER}-runtime"
 
 export GIT_REPOS="$HOME/repos"
 

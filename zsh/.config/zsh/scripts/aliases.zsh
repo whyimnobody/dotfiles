@@ -33,7 +33,6 @@ alias .....='cd ../../../..'
 alias ls="lsd"
 alias ll="lsd -l"
 alias tree="lsd --tree"
-# TODO: Make OS agnostic
 # System-related aliases
 
 case "$(uname -s)" in

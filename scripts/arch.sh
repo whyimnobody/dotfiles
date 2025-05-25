@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Install the things we need first, because yikes
-sudo pacman -S --noconfirm --needed git less man-db
+sudo pacman -S --noconfirm --needed git
 
 # Get the dotfiles
 if [ ! -d "$HOME/.dotfiles/" ]; then
@@ -64,7 +64,9 @@ dev=(
 	jq
 	just
 	lazygit
+	less
 	lsd
+	man-db
 	neovim
 	nmap
 	nodejs
@@ -140,23 +142,7 @@ aura=(
 sudo pacman -Syu --needed --noconfirm "${packages[@]}"
 yay -Syu --needed "${aura[@]}"
 
-# Install TPM
-if [ ! -d "$HOME/.local/share/tmux/plugins/tpm/" ]; then
-	git clone "https://github.com/tmux-plugins/tpm" ~/.local/share/tmux/plugins/tpm
-fi
-# Install tmux plugins
-"$HOME"/.local/share/tmux/plugins/tpm/scripts/install_plugins.sh
-
-# Unpack the key bits
-stow --dir="$HOME"/.dotfiles --target="$HOME" dev git terminal tmux zsh
-
-# Set zsh as the default shell
-if [[ "$SHELL" != "$(command -v zsh)" ]]; then
-	chsh -s "$(command -v zsh)"
-fi
-
-# Setup rust toolchain
-rustup default stable
+source "$HOME/.dotfiles/scripts/common.sh"
 
 # TODO: Sort out GPG on system
 # TODO: Figure out a Maccy like experience
@@ -173,4 +159,3 @@ rustup default stable
 # TODO: Proton
 # TODO: some games
 # TODO: Password managers
-# TODO: Maybe Laravel stuff?

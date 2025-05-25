@@ -1,32 +1,32 @@
 # Color Codes (RGB)
-LIGHT_BLUE="\e[38;2;116;199;236m" #74c7ec
-LIGHT_GREEN="\e[38;2;166;227;161m" #a6e3a1
-LIGHT_YELLOW="\e[38;2;249;226;175m" #f9e2af
-LIGHT_RED="\e[38;2;243;139;168m" #f38ba8
-RESET_COLOR="\e[0m"
+LIGHT_BLUE=$'\e[38;2;116;199;236m' #74c7ec
+LIGHT_GREEN=$'\e[38;2;166;227;161m' #a6e3a1
+LIGHT_YELLOW=$'\e[38;2;249;226;175m' #f9e2af
+LIGHT_RED=$'\e[38;2;243;139;168m' #f38ba8
+RESET_COLOR=$'\e[0m'
 
 ## @description: Prints a message in an informational color (light blue).
 ## @param {string} message: The message to print.
 function info {
-  echo -e "${LIGHT_BLUE}${1}${RESET_COLOR}"
+  printf "%b\n" "${LIGHT_BLUE}${1}${RESET_COLOR}"
 }
 
 ## @description: Prints a message in a success color (light green).
 ## @param {string} message: The message to print.
 function success {
-  echo -e "${LIGHT_GREEN}${1}${RESET_COLOR}"
+  printf "%b\n" "${LIGHT_GREEN}${1}${RESET_COLOR}"
 }
 
 ## @description: Prints a message in a warning color (light yellow).
 ## @param {string} message: The message to print.
 function warning {
-  echo -e "${LIGHT_YELLOW}${1}${RESET_COLOR}"
+  printf "%b\n" "${LIGHT_YELLOW}${1}${RESET_COLOR}"
 }
 
 ## @description: Prints a message in an error color (light red).
 ## @param {string} message: The message to print.
 function error {
-  echo -e "${LIGHT_RED}${1}${RESET_COLOR}"
+  printf "%b\n" "${LIGHT_RED}${1}${RESET_COLOR}"
 }
 ## @description: Refreshes the current Zsh session.
 ## If background jobs are running, it prints an error message.
@@ -57,7 +57,7 @@ function format.json {
 function upgrade {
   case "$(uname -s)" in
     Darwin)
-      brew update
+      brew update-if-needed 
       brew upgrade
       brew cleanup
     ;;

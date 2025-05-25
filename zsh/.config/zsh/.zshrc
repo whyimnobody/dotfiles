@@ -53,12 +53,8 @@ zinit light Aloxaf/fzf-tab
 
 # zinit light djui/alias-tips
 zinit ice wait"1" lucid # load after 1 second
-zinit light darvid/zsh-poetry
-zinit ice wait"1" lucid # load after 1 second
 zinit light g-plane/zsh-yarn-autocompletions
 
-zinit ice wait"1" lucid # load after 1 second
-zinit snippet OMZP::asdf
 zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::colored-man-pages
 zinit ice wait"1" lucid # load after 1 second
@@ -67,8 +63,6 @@ zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::golang
 zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::npm
-zinit ice wait"1" lucid # load after 1 second
-zinit snippet OMZP::pip
 # NOTE: Replaced below with script ## src: https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/tmux/tmux.plugin.zsh
 # zinit ice wait lucid # load immediately
 # zinit snippet "${XDG_CONFIG_HOME}/zsh/scripts/tmux.zsh"
