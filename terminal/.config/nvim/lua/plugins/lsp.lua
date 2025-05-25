@@ -4,7 +4,8 @@ return {
     init = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- change a keymap
-      keys[#keys + 1] = { "K", "5k" }
+      -- keys[#keys + 1] = { "K", "5k" }
+      table.insert(keys, { "K", "5k", desc = "Up faster" })
     end,
   },
   {

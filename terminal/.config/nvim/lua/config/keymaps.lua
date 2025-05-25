@@ -5,23 +5,16 @@
 -- https://github.com/pazams/d-is-for-delete
 -- GENERAL
 vim.keymap.set("n", "x", '"_x', { desc = "Delete char into the void" })
+vim.keymap.set({ "n", "v" }, "c", '"_c', { desc = "Change char into the void" })
 vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "[D]elete mode into the void" })
 vim.keymap.set("n", "D", '"_D', { desc = "[D]elete line into the void" })
-vim.keymap.set({ "n", "v" }, "<leader>d", '""d', { desc = "[D]elete to buffer" })
-vim.keymap.set("n", "<leader>D", '""D', { desc = "Cut to EOL to buffer" })
 
 -- Substitute
 vim.keymap.set(
   { "n", "v" },
   "<leader>cs",
-  '"zy:s/<C-r>z//g<Left><Left>',
+  '"zy:%s/<C-r>z//g<Left><Left>',
   { noremap = true, desc = "[S]ubstitute across buffer" }
-)
-vim.keymap.set(
-  { "n", "v" },
-  "<leader>cw",
-  '"zyiw:s/<C-r>z//g<Left><Left>',
-  { noremap = true, desc = "[S]ubstitute word under cursor" }
 )
 
 -- Perusing code faster with K and J
@@ -72,18 +65,10 @@ vim.keymap.set({ "n" }, "<leader>fl", "<cmd>lua require('flash').flash()<cr>", {
 vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<cr>", { desc = "[D]ismiss [N]oice Message" })
 vim.keymap.set("n", "<leader>nh", "<cmd>NoiceDismiss<cr>", { desc = "[N]oice Message [H]istory" })
 
--- Reach
-local has_reach, _ = pcall(require, "reach")
-if has_reach then
-  vim.keymap.set("n", "<leader>rb", function()
-    require("reach").buffers()
-  end, { desc = "Reach buffers" })
-end
-
 -- Silicon (sexy screenshots)
-local has_silicon, _ = pcall(require, "silicon")
+local has_silicon, _ = pcall(require, "nvim-silicon")
 if has_silicon then
-  vim.keymap.set("v", "<leader>cx", ":Silicon<cr>", { desc = "[S]napshot [C]ode" })
+  vim.keymap.set({ "n", "v" }, "<leader>cx", ":Silicon<cr>", { desc = "[S]napshot [C]ode" })
 end
 
 -- Telescope
