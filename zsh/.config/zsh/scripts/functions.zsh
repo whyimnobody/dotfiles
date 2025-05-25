@@ -69,6 +69,17 @@ function upgrade {
   zinit update
 }
 
+
+ta()  { tmux attach -t "$@"; }
+tad() { tmux attach -d -t "$@"; }
+ts()  { tmux new-session -s "$@"; }
+tl()  { tmux list-sessions; }
+tkss() { tmux kill-session -t "$@"; }
+tksv() { tmux kill-server; }
+tz() {
+  CONFIG_DIR="${XDG_CONFIG_HOME}/tmux" tmux-sessionizer;
+}
+
 ## @description: Checks and installs a package.
 ## @param {string} package: The name of the package to install.
 ## @param {string} type: The type of package ("app_store", "formula", "cask", "go", "rust").
