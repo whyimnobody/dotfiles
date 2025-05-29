@@ -17,8 +17,7 @@ alias random.pwd="openssl rand -hex 64 | tr -d '\n' | pbcopy"
 # QoL Aliases
 # TODO: Make OS agnostic
 alias notes="nvim $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/whyimnobody/"
-alias cvim="NVIM_APPNAME='cvim' nvim"
-alias lvim="NVIM_APPNAME='lvim' nvim"
+alias vim="nvim"
 alias art="php artisan"
 # TODO: Update to accept arg for app name
 # from oh-my-zsh
