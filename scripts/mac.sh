@@ -37,7 +37,6 @@ casks_general=(
 	brave-browser          # https://formulae.brew.sh/cask/brave-browser
 	keka                   # https://formulae.brew.sh/cask/keka
 	librewolf              # https://formulae.brew.sh/cask/librewolf
-	linear-linear          # https://formulae.brew.sh/cask/linear-linear
 	logi-options+          # https://formulae.brew.sh/cask/logi-options+#default
 	maccy                  # https://formulae.brew.sh/cask/maccy
 	obsidian               # https://formulae.brew.sh/cask/obsidian
@@ -48,7 +47,6 @@ casks_general=(
 	rectangle              # https://formulae.brew.sh/cask/rectangle
 	signal                 # https://formulae.brew.sh/cask/signal
 	steam                  # https://formulae.brew.sh/cask/steam
-	telegram               # https://formulae.brew.sh/cask/telegram
 	yubico-yubikey-manager # https://formulae.brew.sh/cask/yubico-yubikey-manager#default
 	zen-browser            # https://formulae.brew.sh/cask/zen-browser
 	zoom                   # https://formulae.brew.sh/cask/zoom
