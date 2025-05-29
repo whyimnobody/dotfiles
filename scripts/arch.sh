@@ -1,27 +1,32 @@
 #!/usr/bin/env bash
 
-# Install the things we need first, because yikes
-sudo pacman -S --noconfirm --needed git
-
 # Get the dotfiles
 if [ ! -d "$HOME/.dotfiles/" ]; then
 	git clone "https://github.com/whyimnobody/dotfiles" ~/.dotfiles
 fi
 
+# Import my functions, including the install_package function and coloured stdout functions
+source "$HOME/.dotfiles/zsh/.config/zsh/scripts/functions.zsh"
+source "$HOME/.dotfiles/zsh/.zshenv"
+
+info "Install the things we need first, because yikes"
+sudo pacman -S --noconfirm --needed git
+
 # Install yay
 if ! command -v yay &>/dev/null; then
+	info "Installing yay"
 	git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay/ && makepkg -si
 fi
 
 # Packages
 general=(
-	dragon-drop
 	obsidian
 	syncthing
 )
 general_aur=(
 	1password
 	brave-bin
+	dragon-drop
 	gallery-dl
 	librewolf-bin
 	signal-desktop
@@ -45,7 +50,7 @@ dev=(
 	croc
 	ctop
 	dbeaver
-	devbox
+	# devbox
 	diff-so-fancy
 	direnv
 	elixir
@@ -73,8 +78,8 @@ dev=(
 	peco
 	poppler
 	pre-commit
-	resvg
 	ripgrep
+	rsync
 	rustup
 	silicon
 	source-highlight
@@ -94,6 +99,7 @@ dev_aur=(
 	lazydocker
 	lazysql
 	python-commitizen
+	resvg
 	rm-improved
 	tlrc
 )
@@ -124,6 +130,21 @@ fonts=(
 	ttf-space-mono-nerd
 )
 
+system=(
+	flameshot
+	hyprlock
+	hyprpaper
+	hyprpicker
+	rofi-wayland
+	waybar
+	wf-recorder
+	wl-clipboard
+)
+
+system_aur=(
+	wlogout
+)
+
 packages=(
 	"${general[@]}"
 	"${fonts[@]}"
@@ -131,31 +152,33 @@ packages=(
 	"${dev[@]}"
 	"${devops[@]}"
 	"${databases[@]}"
+	"${system[@]}"
 )
 aura=(
 	"${general_aur[@]}"
 	"${dev_aur[@]}"
 	"${devops_aur[@]}"
 	"${databases_aur[@]}"
+	"${system_aur[@]}"
 )
 
+info "The actual package installs now"
 sudo pacman -Syu --needed --noconfirm "${packages[@]}"
-yay -Syu --needed "${aura[@]}"
+yay -S --needed --noconfirm --answerclean NotInstalled --answerdiff None "${aura[@]}"
+
+# Some housekeeping
 
 source "$HOME/.dotfiles/scripts/common.sh"
 
 # TODO: Sort out GPG on system
 # TODO: Figure out a Maccy like experience
-# TODO: Install wallpapers (hyprpaper?)
 # TODO: Sort out bluetooth devices (keeb & mouse)
-# TODO: Check speakers
 # TODO: Make the login pretty
 # TODO: Sort out the power and logout things
 # TODO: Sort out mic
 # TODO: Mount second drive
 # TODO: Install waybar
 # TODO: Install rofi
-# TODO: Install Steam
 # TODO: Proton
 # TODO: some games
 # TODO: Password managers

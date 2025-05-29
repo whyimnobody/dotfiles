@@ -1,3 +1,6 @@
+# 1PASSWORD
+export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+
 # ANDROID
 # export ANDROID_HOME="$HOME/dev/android/sdk"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -60,9 +63,6 @@ eval "$(starship init zsh)"
 
 # STOW
 export STOW_DIR="$HOME/.dotfiles"
-
-# # THEFUCK
-# eval $(thefuck --alias)
 
 # TMUX
 export ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"  # For the zplug plugin
