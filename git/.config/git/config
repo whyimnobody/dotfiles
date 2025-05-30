@@ -1,9 +1,3 @@
-[includeIf "gitdir:~/repos/personal/"]
-	path = ~/.config/git/user-personal
-
-[includeIf "gitdir:~/repos/eighty86/"]
-	path = ~/.config/git/user-e86
-
 [core]
 	whitespace = blank-at-eol,space-before-tab,indent-with-non-tab
 	preloadindex = true
@@ -22,10 +16,22 @@
 	autoSetupRemote = true
 	default = current
 
+[pull]
+    rebase = true
+
+[rebase]
+    autoStash = true
+
 [status]
 	branch = true
 	# showStash = true
 	# showUntrackedFiles = all
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
 
 [pager]
 	diff = diff-so-fancy | $PAGER
@@ -40,12 +46,6 @@
 	# delta detects terminal colors automatically; set one of these to disable auto-detection
 	# dark = true
 	# light = true
-
-[merge]
-	conflictstyle = diff3
-
-[diff]
-	colorMoved = default
 
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
@@ -62,4 +62,7 @@
 
 [alias]
 	undo = reset --soft HEAD^
+
+[include]
+	path = ~/.config/git/user
 

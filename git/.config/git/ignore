@@ -13,6 +13,7 @@ Icon?
 .netrwhist
 .idea/
 .vscode/
+.nvim/
 *.code-workspace
 *.bak
 *.orig
@@ -54,6 +55,7 @@ yarn-error.log*
 
 # === Env ===
 .env
+.envrc
 # .env.*
 
 # === Misc ===

@@ -7,3 +7,5 @@
 **/.zcompdump
 
 zsh/.config/zsh/.zcompcache
+
+**/git/user*
