@@ -20,6 +20,8 @@ vim.filetype.add({
 -- vim.g.lazyvim_python_lsp = "basedpyright"
 -- Set to "ruff_lsp" to use the old LSP implementation version.
 
+vim.g.lazyvim_picker = "snacks"
+
 -- Allow loading of local lua files in nvim
 -- Primarily for DAP and maybe testing stuff
 -- Hoping I can customise Ruff and other aggressive linters and checkers

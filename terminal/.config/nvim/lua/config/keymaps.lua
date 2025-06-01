@@ -65,6 +65,9 @@ vim.keymap.set({ "n" }, "<leader>fl", "<cmd>lua require('flash').flash()<cr>", {
 vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<cr>", { desc = "[D]ismiss [N]oice Message" })
 vim.keymap.set("n", "<leader>nh", "<cmd>NoiceDismiss<cr>", { desc = "[N]oice Message [H]istory" })
 
+-- Oil
+vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "[O]pen parent directory" })
+
 -- Silicon (sexy screenshots)
 local has_silicon, _ = pcall(require, "nvim-silicon")
 if has_silicon then

@@ -52,17 +52,11 @@ zinit light Aloxaf/fzf-tab
 # https://github.com/Freed-Wu/fzf-tab-source
 
 # zinit light djui/alias-tips
-zinit ice wait"1" lucid # load after 1 second
-zinit light g-plane/zsh-yarn-autocompletions
 
 zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::colored-man-pages
 zinit ice wait"1" lucid # load after 1 second
 zinit snippet OMZP::gitignore
-zinit ice wait"1" lucid # load after 1 second
-zinit snippet OMZP::golang
-zinit ice wait"1" lucid # load after 1 second
-zinit snippet OMZP::npm
 
 # Completion config
 autoload -U compinit && compinit

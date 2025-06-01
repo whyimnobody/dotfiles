@@ -63,60 +63,6 @@ return {
   -- Multicursor
   { "mg979/vim-visual-multi" },
 
-  -- Navigation
-  {
-    -- TODO: Switch to harpoon2
-    "ThePrimeagen/harpoon",
-    -- branch = "harpoon2",
-    lazy = false,
-    config = true,
-    keys = {
-      { "<leader>hm", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Mark file with harpoon" },
-      { "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", desc = "Go to next harpoon mark" },
-      { "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", desc = "Go to previous harpoon mark" },
-      { "<leader>ha", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Show harpoon marks" },
-    },
-  },
-
-  -- Neotree
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    opts = {
-      filesystem = {
-        filtered_items = {
-          visible = true,
-          hide_dotfiles = false,
-          hide_gitignored = true,
-        },
-      },
-      window = {
-        mappings = {
-          ["<space>"] = "none",
-          ["C"] = "close_all_subnodes",
-          ["Z"] = "expand_all_nodes",
-          ["h"] = function(state)
-            local node = state.tree:get_node()
-            if node.type == "directory" and node:is_expanded() then
-              require("neo-tree.sources.filesystem").toggle_directory(state, node)
-            else
-              require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
-            end
-          end,
-          ["l"] = function(state)
-            local node = state.tree:get_node()
-            if node.type == "directory" then
-              if not node:is_expanded() then
-                require("neo-tree.sources.filesystem").toggle_directory(state, node)
-              elseif node:has_children() then
-                require("neo-tree.ui.renderer").focus_node(state, node:get_child_ids()[1])
-              end
-            end
-          end,
-        },
-      },
-    },
-  },
-
   -- Noice customisation
   {
     "folke/noice.nvim",
@@ -130,16 +76,50 @@ return {
     },
   },
 
+  -- oil.nvim
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    opts = {
+      default_file_explorer = false,
+      view_options = {
+        show_hidden = false, -- Show files and directories that start with "."
+      },
+    },
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    lazy = false,
+  },
+
   -- Peek when navigating by line number
   { "nacro90/numb.nvim" },
 
   -- Rainbow CSV (in vimscript)
   { "mechatroner/rainbow_csv" },
+
   -- Smart columns
   {
     "m4xshen/smartcolumn.nvim",
     event = "VeryLazy",
     opts = {},
+  },
+
+  -- Snacks
+  {
+    "folke/snacks.nvim",
+    opts = {
+      picker = {
+        hidden = true,
+        ignored = true,
+        preview = true,
+        sources = {
+          files = {
+            show_empty = true,
+            hidden = true,
+            ignored = true,
+          },
+        },
+      },
+    },
   },
 
   -- Snapshots
@@ -163,9 +143,6 @@ return {
 
   -- Templating
   { "glench/vim-jinja2-syntax" },
-
-  -- Terminal
-  { "akinsho/toggleterm.nvim", version = "*", config = true },
 
   -- Tmux Navigator
   { "christoomey/vim-tmux-navigator" },
