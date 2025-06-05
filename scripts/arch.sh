@@ -72,6 +72,7 @@ dev=(
 	less
 	lsd
 	man-db
+	mailpit
 	neovim
 	nmap
 	nodejs

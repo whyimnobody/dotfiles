@@ -82,6 +82,7 @@ brew_dev=(
 	lazysql          # https://formulae.brew.sh/formula/lazysql
 	less             # https://formulae.brew.sh/formula/less
 	lsd              # https://formulae.brew.sh/formula/lsd
+	mailpit          # https://formulae.brew.sh/formula/mailpit
 	neovim           # https://formulae.brew.sh/formula/neovim
 	netcat           # https://formulae.brew.sh/formula/netcat
 	nmap             # https://formulae.brew.sh/formula/nmap
@@ -151,10 +152,7 @@ casks_media=(
 
 casks_fonts=(
 	font-cascadia-code            # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-cascadia-code.rb
-	font-caskaydia-cove-nerd-font # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-caskaydia-cove-nerd-font.rb
-	font-commit-mono-nerd-font    # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-commit-mono-nerd-font.rb
 	font-hack-nerd-font           # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-hack-nerd-font.rb
-	font-iosevka-nerd-font        # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-iosevka-nerd-font.rb
 	font-jetbrains-mono-nerd-font # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-jetbrains-mono-nerd-font.rb
 	font-lilex-nerd-font          # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-lilex-nerd-font.rb
 	font-space-mono-nerd-font     # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-space-mono-nerd-font.rb

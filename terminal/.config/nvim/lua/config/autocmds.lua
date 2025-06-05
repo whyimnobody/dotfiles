@@ -27,3 +27,32 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "md" },
   command = "setlocal wrap",
 })
+
+-- oil toggle file detail view
+local oil_detail = false
+local function toggle_oil_detail()
+  oil_detail = not oil_detail
+  if oil_detail then
+    require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+  else
+    require("oil").set_columns({ "icon" })
+  end
+end
+
+-- Set the keymap only for Oil buffers
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "oil",
+  callback = function()
+    vim.keymap.set("n", "gd", toggle_oil_detail, { desc = "Toggle file detail view", buffer = true })
+  end,
+})
+
+-- Define a Lua function to turn an env into envrc
+local function env_to_envrc()
+  vim.cmd([[silent! %norm Iexport ]])
+  vim.cmd([[silent! %s/export \n/\r/g]])
+  vim.cmd([[silent! %s/export #/#/g]])
+end
+
+-- Create a user command :EnvToEnvrc
+vim.api.nvim_create_user_command("EnvToEnvrc", env_to_envrc, {})

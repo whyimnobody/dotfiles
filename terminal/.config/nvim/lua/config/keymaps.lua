@@ -61,32 +61,11 @@ vim.keymap.set(
 -- flash.nvim
 vim.keymap.set({ "n" }, "<leader>fl", "<cmd>lua require('flash').flash()<cr>", { desc = "Toggle flash.nvim" })
 
--- Noice
-vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<cr>", { desc = "[D]ismiss [N]oice Message" })
-vim.keymap.set("n", "<leader>nh", "<cmd>NoiceDismiss<cr>", { desc = "[N]oice Message [H]istory" })
-
 -- Oil
 vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "[O]pen parent directory" })
 
 -- Silicon (sexy screenshots)
-local has_silicon, _ = pcall(require, "nvim-silicon")
-if has_silicon then
-  vim.keymap.set({ "n", "v" }, "<leader>cx", ":Silicon<cr>", { desc = "[S]napshot [C]ode" })
-end
-
--- Telescope
-vim.keymap.set(
-  "n",
-  "<leader>ff",
-  "<cmd>lua require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' } })<cr>",
-  { noremap = true, silent = true, desc = "Find files (all the things)" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>fg",
-  "<cmd>lua require('telescope.builtin').live_grep({ additional_args = function(opts) return {'--hidden'} end})<cr>",
-  { noremap = true, silent = true, desc = "Live Grep (all the things)" }
-)
+vim.keymap.set({ "n", "v" }, "<leader>cx", ":Silicon<cr>", { desc = "[S]napshot [C]ode" })
 
 -- tmux navigation
 vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { silent = true, desc = "Navigate left" })
@@ -99,7 +78,4 @@ vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle, { desc = "[U]ndotree" }
 
 -- Whichkey group registrations
 local wk = require("which-key")
-wk.add({
-  -- { "<leader>h", group = "+harpoon" },
-  { "<leader>n", group = "+noice" },
-})
+wk.add({})

@@ -35,9 +35,9 @@ return {
   },
 
   -- Database Stuff
-  { "tpope/vim-dadbod" },
-  { "kristijanhusak/vim-dadbod-ui" },
-  -- { "kristijanhusak/vim-dadbod-completion" },
+  -- { "tpope/vim-dadbod" },
+  -- { "kristijanhusak/vim-dadbod-ui" },
+  -- -- { "kristijanhusak/vim-dadbod-completion" },
 
   -- direnv
   { "direnv/direnv.vim" },
@@ -107,10 +107,21 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
+      -- dashboard = {
+      --   sections = {
+      --     {
+      --       section = "terminal",
+      --       cmd = "chafa ~/.config/nvim/banner.jpg; sleep .1",
+      --       height = 17,
+      --       padding = 1,
+      --     },
+      --     { section = "keys", gap = 1, padding = 1 },
+      --     { section = "startup" },
+      --   },
+      -- },
       picker = {
         hidden = true,
         ignored = true,
-        preview = true,
         sources = {
           files = {
             show_empty = true,
