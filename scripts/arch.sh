@@ -125,9 +125,10 @@ databases_aur=(
 
 fonts=(
 	otf-commit-mono-nerd
-	ttf-cascadia-code-nerd
-	ttf-iosevka-nerd
+	ttf-cascadia-code
+	ttc-iosevka
 	ttf-lilex-nerd
+	ttf-nerd-fonts-symbols
 	ttf-space-mono-nerd
 )
 
@@ -178,8 +179,5 @@ source "$HOME/.dotfiles/scripts/common.sh"
 # TODO: Sort out the power and logout things
 # TODO: Sort out mic
 # TODO: Mount second drive
-# TODO: Install waybar
-# TODO: Install rofi
 # TODO: Proton
 # TODO: some games
-# TODO: Password managers

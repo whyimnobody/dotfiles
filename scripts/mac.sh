@@ -151,12 +151,11 @@ casks_media=(
 )
 
 casks_fonts=(
-	font-cascadia-code            # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-cascadia-code.rb
-	font-hack-nerd-font           # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-hack-nerd-font.rb
-	font-jetbrains-mono-nerd-font # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-jetbrains-mono-nerd-font.rb
-	font-lilex-nerd-font          # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-lilex-nerd-font.rb
-	font-space-mono-nerd-font     # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-space-mono-nerd-font.rb
-	font-symbols-only-nerd-font   # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-symbols-only-nerd-font.rb
+	font-cascadia-code          # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-cascadia-code.rb
+	font-commit-mono            # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-commit-mono.rb
+	font-iosevka                # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-iosevka.rb
+	font-lilex                  # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-lilex.rb
+	font-symbols-only-nerd-font # https://github.com/Homebrew/homebrew-cask-fonts/blob/master/Casks/font-symbols-only-nerd-font.rb
 )
 
 # For AppStore Apps
@@ -206,7 +205,7 @@ fi
 
 # Make sure macOS runtime and bin dirs exist
 if [ ! -d "$XDG_BIN_HOME" ]; then
-	info "Creating ZDG_BIN_HOME directory"
+	info "Creating XDG_BIN_HOME directory"
 	mkdir -p "$XDG_BIN_HOME"
 fi
 

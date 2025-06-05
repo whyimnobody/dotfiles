@@ -24,7 +24,7 @@
 
 [status]
 	branch = true
-	# showStash = true
+	showStash = true
 	# showUntrackedFiles = all
 
 [merge]
