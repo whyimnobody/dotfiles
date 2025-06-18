@@ -54,6 +54,7 @@ dev=(
 	diff-so-fancy
 	direnv
 	elixir
+	entr
 	fd
 	ffmpeg
 	fzf
@@ -101,7 +102,7 @@ dev_aur=(
 	lazysql
 	python-commitizen
 	resvg
-	rm-improved
+	rip2-bin
 	tlrc
 )
 

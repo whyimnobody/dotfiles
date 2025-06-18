@@ -91,8 +91,8 @@ brew_dev=(
 	poppler          # https://formulae.brew.sh/formula/poppler
 	pre-commit       # https://formulae.brew.sh/formula/pre-commit
 	resvg            # https://formulae.brew.sh/formula/resvg
+	rip2             # https://formulae.brew.sh/formula/rip2
 	ripgrep          # https://formulae.brew.sh/formula/ripgrep
-	rm-improved      # https://formulae.brew.sh/formula/rm-improved
 	rustup           # https://formulae.brew.sh/formula/rustup
 	silicon          # https://formulae.brew.sh/formula/silicon
 	source-highlight # https://formulae.brew.sh/formula/source-highlight
