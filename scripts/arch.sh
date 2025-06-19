@@ -133,6 +133,8 @@ fonts=(
 )
 
 system=(
+	bluez
+	bluez-utils
 	flameshot
 	hyprlock
 	hyprpaper
@@ -154,6 +156,7 @@ packages=(
 	"${dev[@]}"
 	"${devops[@]}"
 	"${databases[@]}"
+	"${fonts[@]}"
 	"${system[@]}"
 )
 aura=(
