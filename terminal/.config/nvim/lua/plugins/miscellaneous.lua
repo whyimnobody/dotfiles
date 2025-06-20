@@ -152,6 +152,9 @@ return {
     end,
   },
 
+  -- Tabs (and buffers [and scope of them])
+  { "tiagovla/scope.nvim", config = true },
+
   -- Templating
   { "glench/vim-jinja2-syntax" },
 

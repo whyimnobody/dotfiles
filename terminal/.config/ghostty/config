@@ -14,3 +14,4 @@ keybind = global:§=toggle_quick_terminal
 keybind = global:cmd+grave_accent=toggle_quick_terminal
 
 background-opacity = 0.9
+cursor-opacity=0.35
