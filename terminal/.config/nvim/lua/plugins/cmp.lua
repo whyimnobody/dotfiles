@@ -46,6 +46,10 @@ return {
 
       ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
     },
+    cmdline = {
+      keymap = { preset = "inherit" },
+      completion = { menu = { auto_show = true } },
+    },
 
     appearance = {
       -- Sets the fallback highlight groups to nvim-cmp's highlight groups

@@ -1,6 +1,6 @@
 {
   "ui": {
-    "theme": "dracula",
+    "theme": "catppuccin",
     "theme-defs": {
       "default": {
         "highlights": {
