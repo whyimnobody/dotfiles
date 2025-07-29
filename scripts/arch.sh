@@ -64,9 +64,11 @@ dev=(
 	glow
 	gnu-netcat
 	go
+	gum
 	hugo
 	imagemagick
 	ipython
+	jnv
 	jq
 	just
 	lazygit

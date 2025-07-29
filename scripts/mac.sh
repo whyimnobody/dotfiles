@@ -72,9 +72,11 @@ brew_dev=(
 	glow             # https://formulae.brew.sh/formula/glow
 	gnu-sed          # https://formulae.brew.sh/formula/gnu-sed
 	go               # https://formulae.brew.sh/formula/go
+	gum              # https://formulae.brew.sh/formula/gum
 	hugo             # https://formulae.brew.sh/formula/hugo
 	imagemagick      # https://formulae.brew.sh/formula/imagemagick
 	ipython          # https://formulae.brew.sh/formula/ipython
+	jnv              # https://formulae.brew.sh/formula/jnv
 	jq               # https://formulae.brew.sh/formula/jq
 	just             # https://formulae.brew.sh/formula/just
 	lazydocker       # https://formulae.brew.sh/formula/lazydocker
@@ -114,6 +116,7 @@ casks_dev=(
 	balenaetcher       # https://formulae.brew.sh/cask/balenaetcher
 	cyberduck          # https://formulae.brew.sh/cask/cyberduck
 	fork               # https://formulae.brew.sh/cask/fork
+	keymapp            # https://formulae.brew.sh/cask/keymapp
 	visual-studio-code # https://formulae.brew.sh/cask/visual-studio-code
 )
 
