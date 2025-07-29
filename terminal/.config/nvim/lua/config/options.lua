@@ -21,20 +21,3 @@ vim.filetype.add({
 -- Set to "ruff_lsp" to use the old LSP implementation version.
 
 vim.g.lazyvim_picker = "snacks"
-
--- Allow loading of local lua files in nvim
--- Primarily for DAP and maybe testing stuff
--- Hoping I can customise Ruff and other aggressive linters and checkers
-local function load_local_nvim_configs()
-  local Path = vim.fn.getcwd() .. "/.nvim"
-  local files = vim.fn.glob(Path .. "/*.lua", false, true)
-
-  for _, file in ipairs(files) do
-    local ok, err = pcall(dofile, file)
-    if not ok then
-      vim.notify("Failed to load " .. file .. ": " .. err, vim.log.levels.ERROR)
-    end
-  end
-end
-
-load_local_nvim_configs()

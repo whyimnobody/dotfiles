@@ -9,6 +9,8 @@ return {
     },
   },
 
+  { "kaymmm/bullets.nvim" },
+
   -- Cloak secrets and config
   { "laytan/cloak.nvim", config = true },
 
@@ -53,12 +55,8 @@ return {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
       opts.options.section_separators = { left = "", right = "" }
-      -- table.insert(opts.sections.lualine_c, { require("auto-session.lib").current_session_name })
     end,
   },
-
-  -- Markdown previewer
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
 
   -- Multicursor
   { "mg979/vim-visual-multi" },
@@ -91,7 +89,12 @@ return {
   },
 
   -- Peek when navigating by line number
-  { "nacro90/numb.nvim" },
+  {
+    "nacro90/numb.nvim",
+    config = function()
+      require("numb").setup()
+    end,
+  },
 
   -- Rainbow CSV (in vimscript)
   { "mechatroner/rainbow_csv" },
@@ -100,7 +103,9 @@ return {
   {
     "m4xshen/smartcolumn.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      colorcolumn = "100",
+    },
   },
 
   -- Snacks
@@ -127,6 +132,11 @@ return {
             show_empty = true,
             hidden = true,
             ignored = true,
+          },
+        },
+        formatters = {
+          file = {
+            truncate = 80,
           },
         },
       },
@@ -160,9 +170,6 @@ return {
 
   -- Tmux Navigator
   { "christoomey/vim-tmux-navigator" },
-
-  -- Undotree
-  { "mbbill/undotree" },
 
   {
     "folke/which-key.nvim",

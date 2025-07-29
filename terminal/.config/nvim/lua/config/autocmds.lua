@@ -2,6 +2,9 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+-- Load custom utility functions and commands
+require("util.functions")
+
 -- Change directory to working directory
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   group = vim.api.nvim_create_augroup("lazyvim_custom_cd_pwd", { clear = true }),
@@ -22,6 +25,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.wo.conceallevel = 0
   end,
 })
+
 -- Set Markdown word wrap
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "md" },
@@ -47,12 +51,30 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Define a Lua function to turn an env into envrc
-local function env_to_envrc()
-  vim.cmd([[silent! %norm Iexport ]])
-  vim.cmd([[silent! %s/export \n/\r/g]])
-  vim.cmd([[silent! %s/export #/#/g]])
-end
+-- Numberline toggle - src: https://github.com/sitiom/nvim-numbertoggle
+local numbertoggle_group = vim.api.nvim_create_augroup("numbertoggle", {})
 
--- Create a user command :EnvToEnvrc
-vim.api.nvim_create_user_command("EnvToEnvrc", env_to_envrc, {})
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "CmdlineLeave", "WinEnter" }, {
+  pattern = "*",
+  group = numbertoggle_group,
+  callback = function()
+    if vim.o.nu and vim.api.nvim_get_mode().mode ~= "i" then
+      vim.opt.relativenumber = true
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "CmdlineEnter", "WinLeave" }, {
+  pattern = "*",
+  group = numbertoggle_group,
+  callback = function()
+    if vim.o.nu then
+      vim.opt.relativenumber = false
+      -- Conditional taken from https://github.com/rockyzhang24/dotfiles/commit/03dd14b5d43f812661b88c4660c03d714132abcf
+      -- Workaround for https://github.com/neovim/neovim/issues/32068
+      if not vim.tbl_contains({ "@", "-" }, vim.v.event.cmdtype) then
+        vim.cmd("redraw")
+      end
+    end
+  end,
+})
