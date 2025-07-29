@@ -2,7 +2,6 @@
 # ------------------------------------------------------------------------------
 alias resource="refresh"
 
-alias dotfiles="nvim $HOME/.dotfiles"
 alias lazyvim="nvim $XDG_CONFIG_HOME/nvim"
 alias zshconfig="nvim $XDG_CONFIG_HOME/zsh"
 alias sshconfig="nvim $HOME/.ssh/config"

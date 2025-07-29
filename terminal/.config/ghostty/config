@@ -12,6 +12,8 @@ working-directory = home
 
 keybind = global:§=toggle_quick_terminal
 keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = alt+tab=text:\x00n
+keybind = shift+alt+tab=text:\x00p
 
 background-opacity = 0.9
 cursor-opacity=0.35
