@@ -69,6 +69,13 @@ function upgrade {
   zinit update
 }
 
+dotfiles() {
+  tmux has-session -t dotfiles 2>/dev/null
+  if [ $? != 0 ]; then
+    tmux new-session -s dotfiles -d "nvim $HOME/.dotfiles"
+  fi
+  tmux attach-session -t dotfiles
+}
 
 ta()  { tmux attach -t "$@"; }
 tad() { tmux attach -d -t "$@"; }
@@ -80,6 +87,33 @@ tz() {
   CONFIG_DIR="${XDG_CONFIG_HOME}/tmux" tmux-sessionizer;
 }
 
+set_terminal_title() {
+    local title=""
+    local current_dir=$(basename "$PWD")
+
+    if [ -n "$TMUX" ]; then
+        local current_cmd=$(tmux display-message -p '#{pane_current_command}')
+        if [[ "$current_cmd" != "zsh" && "$current_cmd" != "bash" ]]; then
+            title="$current_cmd | $current_dir"
+        else
+            title="$current_dir"
+        fi
+    else
+        title="$current_dir"
+    fi
+ 
+    # For Ghostty with shell integration, use the proper escape sequence
+    # but wrap it to work with shell integration
+    if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
+        # Ghostty shell integration compatible
+        printf "\e]133;A\e\\"  # Start command
+        printf "\e]0;%s\a" "$title"
+        printf "\e]133;B\e\\"  # End command
+    else
+        # Fallback for when shell integration is off
+        printf "\e]0;%s\a" "$title"
+    fi
+}
 ## @description: Checks and installs a package.
 ## @param {string} package: The name of the package to install.
 ## @param {string} type: The type of package ("app_store", "formula", "cask", "go", "rust").
