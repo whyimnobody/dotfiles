@@ -2,6 +2,9 @@ local util = require("conform.util")
 
 return {
   {
+    "sindrets/diffview.nvim",
+  },
+  {
     "nvim-neotest/neotest",
     opts = {
       icons = {
