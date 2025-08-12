@@ -35,6 +35,7 @@ casks_general=(
 	1password-cli          # https://formulae.brew.sh/cask/1password-cli
 	backblaze              # https://formulae.brew.sh/cask/backblaze
 	brave-browser          # https://formulae.brew.sh/cask/brave-browser
+	hammerspoon            # https://formulae.brew.sh/cask/hammerspoon
 	keka                   # https://formulae.brew.sh/cask/keka
 	librewolf              # https://formulae.brew.sh/cask/librewolf
 	logi-options+          # https://formulae.brew.sh/cask/logi-options+#default
