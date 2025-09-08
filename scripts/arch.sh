@@ -107,6 +107,9 @@ dev_aur=(
 	rip2-bin
 	tlrc
 )
+dev_go=(
+	github.com/control-theory/gonzo/cmd/gonzo@latest
+)
 
 devops=(
 	aws-cli
@@ -169,10 +172,14 @@ aura=(
 	"${databases_aur[@]}"
 	"${system_aur[@]}"
 )
+go=(
+	"${dev_go[@]}"
+)
 
 info "The actual package installs now"
 sudo pacman -Syu --needed --noconfirm "${packages[@]}"
 yay -S --needed --noconfirm --answerclean NotInstalled --answerdiff None "${aura[@]}"
+go install "${go[@]}"
 
 # Some housekeeping
 

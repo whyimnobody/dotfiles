@@ -73,6 +73,7 @@ brew_dev=(
 	glow             # https://formulae.brew.sh/formula/glow
 	gnu-sed          # https://formulae.brew.sh/formula/gnu-sed
 	go               # https://formulae.brew.sh/formula/go
+	gonzo            # https://formulae.brew.sh/formula/gonzo
 	gum              # https://formulae.brew.sh/formula/gum
 	hugo             # https://formulae.brew.sh/formula/hugo
 	imagemagick      # https://formulae.brew.sh/formula/imagemagick
