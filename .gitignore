@@ -5,6 +5,7 @@
 **/node_modules
 **/history
 **/.zcompdump
+**/.zsh_sessions
 
 zsh/.config/zsh/.zcompcache
 

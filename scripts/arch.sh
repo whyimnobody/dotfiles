@@ -29,6 +29,7 @@ general_aur=(
 	dragon-drop
 	gallery-dl
 	librewolf-bin
+	mullvad-vpn
 	signal-desktop
 	wireguard-tools
 	yt-dlp-git

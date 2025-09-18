@@ -92,7 +92,7 @@ return {
         show_hidden = false, -- Show files and directories that start with "."
       },
     },
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    dependencies = { { "nvim-mini/mini.icons", opts = {} } },
     lazy = false,
   },
 

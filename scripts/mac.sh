@@ -40,6 +40,8 @@ casks_general=(
 	librewolf              # https://formulae.brew.sh/cask/librewolf
 	logi-options+          # https://formulae.brew.sh/cask/logi-options+#default
 	maccy                  # https://formulae.brew.sh/cask/maccy
+	mullvad-browser        # https://formulae.brew.sh/cask/mullvad-browser
+	mullvad-vpn            # https://formulae.brew.sh/cask/mullvad-vpn
 	obsidian               # https://formulae.brew.sh/cask/obsidian
 	protonvpn              # https://formulae.brew.sh/cask/protonvpn
 	qbittorrent            # https://formulae.brew.sh/cask/qbittorrent
