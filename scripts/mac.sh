@@ -58,6 +58,7 @@ casks_general=(
 brew_dev=(
 	act              # https://formulae.brew.sh/formula/act
 	age              # https://formulae.brew.sh/formula/age
+	asciinema        # https://formulae.brew.sh/formula/asciinema
 	bat              # https://formulae.brew.sh/formula/bat
 	bottom           # https://formulae.brew.sh/formula/bottom
 	commitizen       # https://formulae.brew.sh/formula/commitizen

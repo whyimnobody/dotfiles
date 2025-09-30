@@ -2,14 +2,6 @@ return {
   -- Bufferline
   {
     "akinsho/bufferline.nvim",
-    -- TODO: Remove this once https://github.com/LazyVim/LazyVim/pull/6354 is merged
-    init = function()
-      local bufline = require("catppuccin.groups.integrations.bufferline")
-      function bufline.get()
-        return bufline.get_theme()
-      end
-    end,
-
     opts = {
       options = {
         always_show_bufferline = true,
@@ -23,20 +15,20 @@ return {
   { "laytan/cloak.nvim", config = true },
 
   -- Colorscheme
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    flavour = "mocha",
-    opts = {
-      color_overrides = {
-        mocha = {
-          base = "#000000",
-          mantle = "#000000",
-          crust = "#000000",
-        },
-      },
-    },
-  },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   flavour = "mocha",
+  --   -- opts = {
+  --   --   color_overrides = {
+  --   --     mocha = {
+  --   --       base = "#000000",
+  --   --       mantle = "#000000",
+  --   --       crust = "#000000",
+  --   --     },
+  --   --   },
+  --   -- },
+  -- },
   {
     "LazyVim/LazyVim",
     opts = {
@@ -158,7 +150,7 @@ return {
     cmd = "Silicon",
     config = function()
       require("silicon").setup({
-        font = "CommitMono Nerd Font=34",
+        font = "CommitMono=34",
         theme = "Catppuccin Mocha",
         window_title = function()
           return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ":t")

@@ -46,6 +46,7 @@ media=(
 dev=(
 	act
 	age
+	asciinema
 	bat
 	bottom
 	croc
