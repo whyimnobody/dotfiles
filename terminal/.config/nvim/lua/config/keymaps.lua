@@ -42,6 +42,10 @@ vim.keymap.set("i", "<A-K>", "<esc><cmd>t .-1<cr>==gi", { desc = "Duplicate up" 
 vim.keymap.set("v", "<A-J>", ":t '><cr>gv=gv", { desc = "Duplicate down" })
 vim.keymap.set("v", "<A-K>", ":t '<-1<cr>gv=gv", { desc = "Duplicate up" })
 
+-- Escape TERMINAL mode
+vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]], { noremap = true, desc = "Exit terminal mode" })
+-- vim.keymap.set("t", "<Esc>[27;5;27~", [[<C-\><C-n>]], { noremap = true, desc = "Exit terminal mode" })
+
 -- Bufferline
 vim.keymap.set("n", "<leader>bh", ":BufferLineMovePrev<cr>", { desc = "Move buffer left" })
 vim.keymap.set("n", "<leader>bl", ":BufferLineMoveNext<cr>", { desc = "Move buffer right" })
