@@ -17,6 +17,11 @@ return {
       formatters_by_ft = {
         htmldjango = { "djlint" },
       },
+      formatters = {
+        djlint = {
+          timeout_ms = 5000, -- Increase this value if you experience timeouts
+        },
+      },
     },
   },
 }

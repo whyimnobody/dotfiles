@@ -55,7 +55,7 @@
 
 [url "git@github.com:whyimnobody/"]
 	insteadOf = "nobody:"
-[url "git@github.com:eighty86/"]
+[url "git@github.com:eighty-86/"]
 	insteadOf = "e86:"
 [url "git@github.com:"]
 	insteadOf = "gh:"

@@ -88,6 +88,7 @@ brew_dev=(
 	lazygit          # https://formulae.brew.sh/formula/lazygit
 	lazysql          # https://formulae.brew.sh/formula/lazysql
 	less             # https://formulae.brew.sh/formula/less
+	lima             # https://formulae.brew.sh/formula/lima
 	lsd              # https://formulae.brew.sh/formula/lsd
 	mailpit          # https://formulae.brew.sh/formula/mailpit
 	neovim           # https://formulae.brew.sh/formula/neovim

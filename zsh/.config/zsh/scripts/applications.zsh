@@ -50,10 +50,10 @@ export LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml,$XDG_CONFIG_HOME/lazy
 # Add syntax highlighting to less
 export LESSOPEN="| bat --paging=never --color=always %s"
 
-# NGROK (I know, I know)
-if command -v ngrok &>/dev/null; then
-  eval "$(ngrok completion)"
-fi
+# # NGROK (I know, I know)
+# if command -v ngrok &>/dev/null; then
+#   eval "$(ngrok completion)"
+# fi
 
 # POSTGRES
 case "$(uname -s)" in
