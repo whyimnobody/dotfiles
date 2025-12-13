@@ -114,6 +114,11 @@ set_terminal_title() {
         printf "\e]0;%s\a" "$title"
     fi
 }
+
+stow() {
+  command stow --no-folding "$@"
+}
+
 ## @description: Checks and installs a package.
 ## @param {string} package: The name of the package to install.
 ## @param {string} type: The type of package ("app_store", "formula", "cask", "go", "rust").

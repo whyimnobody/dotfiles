@@ -1,0 +1,26 @@
+* {
+  background: transparent;
+  color: #cdd6f4;
+  font-family: "Commit Mono";
+}
+
+window {
+  background-color: rgba(17, 17, 27, 0.9);
+}
+
+button {
+  background-color: #1e1e2e;
+  border-radius: 12px;
+  border: 2px solid #313244;
+  margin: 12px;
+  padding: 24px;
+}
+
+button:hover {
+  background-color: #313244;
+  border-color: #89b4fa;
+}
+
+button label {
+  font-size: 18px;
+}

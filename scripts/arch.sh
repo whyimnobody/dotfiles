@@ -21,6 +21,7 @@ fi
 # Packages
 general=(
 	obsidian
+	proton-vpn-gtk-app
 	syncthing
 )
 general_aur=(
@@ -29,7 +30,6 @@ general_aur=(
 	dragon-drop
 	gallery-dl
 	librewolf-bin
-	mullvad-vpn
 	signal-desktop
 	wireguard-tools
 	yt-dlp-git
@@ -55,6 +55,9 @@ dev=(
 	# devbox
 	diff-so-fancy
 	direnv
+	distrobox
+	docker
+	docker-compose
 	elixir
 	entr
 	fd
@@ -64,8 +67,8 @@ dev=(
 	git-delta
 	git-lfs
 	glow
-	gnu-netcat
 	go
+	gopass
 	gum
 	hugo
 	imagemagick
@@ -77,10 +80,11 @@ dev=(
 	less
 	lsd
 	man-db
-	mailpit
 	neovim
 	nmap
 	nodejs
+	npm
+	pastel
 	peco
 	poppler
 	pre-commit
@@ -88,6 +92,7 @@ dev=(
 	rsync
 	rustup
 	silicon
+	sops
 	source-highlight
 	starship
 	stow
@@ -104,6 +109,7 @@ dev_aur=(
 	beekeeper-studio
 	lazydocker
 	lazysql
+	mailpit
 	python-commitizen
 	resvg
 	rip2-bin
@@ -132,21 +138,32 @@ databases_aur=(
 )
 
 fonts=(
-	otf-commit-mono-nerd
+	noto-fonts
+	noto-fonts-cjk
+	noto-fonts-emoji
+	noto-fonts-extra
+	otf-commit-mono
 	ttf-cascadia-code
 	ttc-iosevka
 	ttf-lilex-nerd
 	ttf-nerd-fonts-symbols
+	ttf-nerd-fonts-symbols-mono
+	ttf-phosphor-icons
 	ttf-space-mono-nerd
 )
 
 system=(
 	bluez
 	bluez-utils
-	flameshot
+	bluetui
+	caligula
+	grim
 	hyprlock
 	hyprpaper
 	hyprpicker
+	pavucontrol
+	slurp
+	swaync
 	rofi-wayland
 	waybar
 	wf-recorder
@@ -154,6 +171,7 @@ system=(
 )
 
 system_aur=(
+	vinicae-bin
 	wlogout
 )
 
@@ -183,9 +201,15 @@ sudo pacman -Syu --needed --noconfirm "${packages[@]}"
 yay -S --needed --noconfirm --answerclean NotInstalled --answerdiff None "${aura[@]}"
 go install "${go[@]}"
 
+fc-cache -fv
+
+sudo usermod -aG docker "$(whoami)"
+sudo systemctl enable docker.socket
+
 # Some housekeeping
 
 source "$HOME/.dotfiles/scripts/common.sh"
+stow --dir="$HOME"/.dotfiles --target="$HOME" --no-folding nice
 
 # TODO: Sort out GPG on system
 # TODO: Figure out a Maccy like experience
