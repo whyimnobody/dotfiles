@@ -12,7 +12,6 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
-setopt CORRECT
 setopt autocd
 setopt always_to_end
 

@@ -77,6 +77,7 @@ brew_dev=(
 	gnu-sed          # https://formulae.brew.sh/formula/gnu-sed
 	go               # https://formulae.brew.sh/formula/go
 	gonzo            # https://formulae.brew.sh/formula/gonzo
+	gopass           # https://formulae.brew.sh/formula/gopass
 	gum              # https://formulae.brew.sh/formula/gum
 	hugo             # https://formulae.brew.sh/formula/hugo
 	imagemagick      # https://formulae.brew.sh/formula/imagemagick
@@ -95,15 +96,18 @@ brew_dev=(
 	netcat           # https://formulae.brew.sh/formula/netcat
 	nmap             # https://formulae.brew.sh/formula/nmap
 	node             # https://formulae.brew.sh/formula/node
+	pastel           # https://formulae.brew.sh/formula/pastel
 	peco             # https://formulae.brew.sh/formula/peco
 	poppler          # https://formulae.brew.sh/formula/poppler
 	pre-commit       # https://formulae.brew.sh/formula/pre-commit
+	resterm          # https://formulae.brew.sh/formula/resterm
 	resvg            # https://formulae.brew.sh/formula/resvg
 	rip2             # https://formulae.brew.sh/formula/rip2
 	ripgrep          # https://formulae.brew.sh/formula/ripgrep
 	rustup           # https://formulae.brew.sh/formula/rustup
 	silicon          # https://formulae.brew.sh/formula/silicon
 	source-highlight # https://formulae.brew.sh/formula/source-highlight
+	sops             # https://formulae.brew.sh/formula/sops
 	starship         # https://formulae.brew.sh/formula/starship
 	stow             # https://formulae.brew.sh/formula/stow
 	tlrc             # https://formulae.brew.sh/formula/tlrc

@@ -43,12 +43,18 @@ case "$(uname -s)" in
   ;;
 esac
 
+# GPG
+export GPG_TTY=$(tty)
+
 # LAZYGIT
 export LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml,$XDG_CONFIG_HOME/lazygit/themes/mocha/teal.yml"
 
 # LESS
 # Add syntax highlighting to less
 export LESSOPEN="| bat --paging=never --color=always %s"
+
+# MAILPIT
+export MP_DATABASE="$XDG_STATE_HOME/mailpit/database.db"
 
 # # NGROK (I know, I know)
 # if command -v ngrok &>/dev/null; then

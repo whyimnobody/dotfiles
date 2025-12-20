@@ -8,6 +8,15 @@ return {
             { "K", "5k", desc = "Up faster" },
           },
         },
+        -- pyright = {
+        --   settings = {
+        --     python = {
+        --       analysis = {
+        --         diagnosticMode = "workspace",
+        --       },
+        --     },
+        --   },
+        -- },
       },
     },
   },
