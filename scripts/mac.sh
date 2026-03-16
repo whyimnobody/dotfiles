@@ -38,7 +38,6 @@ casks_general=(
 	hammerspoon            # https://formulae.brew.sh/cask/hammerspoon
 	keka                   # https://formulae.brew.sh/cask/keka
 	librewolf              # https://formulae.brew.sh/cask/librewolf
-	logi-options+          # https://formulae.brew.sh/cask/logi-options+#default
 	maccy                  # https://formulae.brew.sh/cask/maccy
 	mullvad-browser        # https://formulae.brew.sh/cask/mullvad-browser
 	mullvad-vpn            # https://formulae.brew.sh/cask/mullvad-vpn
@@ -49,6 +48,7 @@ casks_general=(
 	raycast                # https://formulae.brew.sh/cask/raycast
 	rectangle              # https://formulae.brew.sh/cask/rectangle
 	signal                 # https://formulae.brew.sh/cask/signal
+	sioyek                 # https://formulae.brew.sh/cask/sioyek
 	steam                  # https://formulae.brew.sh/cask/steam
 	yubico-yubikey-manager # https://formulae.brew.sh/cask/yubico-yubikey-manager#default
 	zen-browser            # https://formulae.brew.sh/cask/zen-browser
@@ -83,10 +83,12 @@ brew_dev=(
 	imagemagick      # https://formulae.brew.sh/formula/imagemagick
 	ipython          # https://formulae.brew.sh/formula/ipython
 	jnv              # https://formulae.brew.sh/formula/jnv
+	jj               # https://formulae.brew.sh/formula/jj
 	jq               # https://formulae.brew.sh/formula/jq
 	just             # https://formulae.brew.sh/formula/just
 	lazydocker       # https://formulae.brew.sh/formula/lazydocker
 	lazygit          # https://formulae.brew.sh/formula/lazygit
+	lazyjournal      # https://formulae.brew.sh/formula/lazyjournal
 	lazysql          # https://formulae.brew.sh/formula/lazysql
 	less             # https://formulae.brew.sh/formula/less
 	lima             # https://formulae.brew.sh/formula/lima
@@ -127,6 +129,7 @@ casks_dev=(
 	cyberduck          # https://formulae.brew.sh/cask/cyberduck
 	fork               # https://formulae.brew.sh/cask/fork
 	keymapp            # https://formulae.brew.sh/cask/keymapp
+	tablepro           # https://formulae.brew.sh/cask/tablepro
 	visual-studio-code # https://formulae.brew.sh/cask/visual-studio-code
 )
 

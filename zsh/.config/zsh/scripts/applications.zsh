@@ -68,6 +68,12 @@ case "$(uname -s)" in
   ;;
 esac
 
+# # RESTERM
+# export RESTERM_CONFIG_DIR="$XDG_CONFIG_HOME/resterm"
+
+# RUST
+export PATH="$(brew --prefix rustup)/bin:$PATH"
+
 # STARSHIP
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 eval "$(starship init zsh)"
