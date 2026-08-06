@@ -72,7 +72,12 @@ esac
 # export RESTERM_CONFIG_DIR="$XDG_CONFIG_HOME/resterm"
 
 # RUST
-export PATH="$(brew --prefix rustup)/bin:$PATH"
+if [[ "$OSTYPE" == darwin* ]] && (( $+commands[brew] )); then
+  if rustup_prefix="$(brew --prefix rustup 2>/dev/null)"; then
+    path=("$rustup_prefix/bin" $path)
+  fi
+  unset rustup_prefix
+fi
 
 # STARSHIP
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
@@ -113,4 +118,3 @@ compdef _tmux_attach_completion tmux
 
 # ZOXIDE
 eval "$(zoxide init zsh)"
-

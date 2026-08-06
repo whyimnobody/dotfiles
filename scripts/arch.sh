@@ -81,6 +81,9 @@ dev=(
 	neovim
 	nmap
 	nodejs
+	npm
+	octave
+	pastel
 	peco
 	poppler
 	pre-commit
@@ -102,11 +105,17 @@ dev=(
 )
 dev_aur=(
 	beekeeper-studio
+	claude-code
+	cursor-cli
 	lazydocker
 	lazysql
+	mailpit
+	openai-codex-bin
+	opencode-bin
 	python-commitizen
 	resvg
 	rip2-bin
+	rr
 	tlrc
 )
 dev_go=(
@@ -184,15 +193,9 @@ yay -S --needed --noconfirm --answerclean NotInstalled --answerdiff None "${aura
 go install "${go[@]}"
 
 # Some housekeeping
-
 source "$HOME/.dotfiles/scripts/common.sh"
 
 # TODO: Sort out GPG on system
 # TODO: Figure out a Maccy like experience
 # TODO: Sort out bluetooth devices (keeb & mouse)
-# TODO: Make the login pretty
-# TODO: Sort out the power and logout things
 # TODO: Sort out mic
-# TODO: Mount second drive
-# TODO: Proton
-# TODO: some games

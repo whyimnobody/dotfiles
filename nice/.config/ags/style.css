@@ -1,0 +1,81 @@
+@define-color surface-darkgrey #20252b;
+@define-color surface-fg #949494;
+@define-color surface-lightgrey #3d464e;
+@define-color surface-red #f87070;
+
+/* * { */
+/*   all: unset; */
+/* } */
+
+/* powermenu */
+.layout-box {
+  font-family: "Commit Mono", Koulen;
+  padding: 5em;
+  color: alpha(@surface-fg, 0.8);
+}
+
+.close-btn {
+  font-family: "Phosphor";
+  font-size: 2em;
+}
+.close-btn:hover {
+  color: @surface-red;
+}
+
+.btns-box {
+  font-family: "Phosphor";
+  font-size: 2.5em;
+}
+.btns-box button {
+  padding: 0.4em;
+  border-radius: 0.1em;
+  background-color: alpha(@surface-darkgrey, 0.3);
+}
+.btns-box button:hover {
+  background-color: alpha(@surface-lightgrey, 0.6);
+}
+.btns-box button:first-child {
+  color: alpha(@surface-red, 0.8);
+}
+
+.sep {
+  font-size: 1em;
+  padding: 0.15em 0.2em 0 0.2em;
+  font-family: Iosevka;
+  font-weight: 400;
+}
+
+.sundial-lbl {
+  font-size: 1.5em;
+  font-weight: 700;
+  border-radius: 0.2em;
+  padding: 0.4em 0.4em 0.5em 0.4em;
+  font-family: "Commit Mono", "Noto Sans", sans-serif;
+}
+
+/* shared overlay */
+.overlay-root {
+  padding: 2em;
+}
+
+.panel {
+  padding: 1em;
+  border-radius: 0.6em;
+  background-color: alpha(@surface-darkgrey, 0.6);
+}
+
+.action-btn {
+  font-family: "Phosphor";
+  font-size: 2em;
+  padding: 0.4em;
+  border-radius: 0.4em;
+  background-color: alpha(@surface-darkgrey, 0.3);
+}
+.action-btn:hover {
+  background-color: alpha(@surface-lightgrey, 0.6);
+}
+
+.panel-title {
+  font-family: "Commit Mono", "Noto Sans", sans-serif;
+  font-size: 1.1em;
+}
