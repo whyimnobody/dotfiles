@@ -152,6 +152,7 @@ fonts=(
 system=(
 	bluez
 	bluez-utils
+	caddy
 	flameshot
 	hyprlock
 	hyprpaper
@@ -186,11 +187,20 @@ aura=(
 go=(
 	"${dev_go[@]}"
 )
+user_services=(
+	syncthing.service
+)
 
 info "The actual package installs now"
 sudo pacman -Syu --needed --noconfirm "${packages[@]}"
 yay -S --needed --noconfirm --answerclean NotInstalled --answerdiff None "${aura[@]}"
 go install "${go[@]}"
+
+info "Configure Caddy"
+"$HOME/.dotfiles/scripts/caddy.sh"
+
+info "Enable and start user services"
+systemctl --user enable --now "${user_services[@]}"
 
 # Some housekeeping
 source "$HOME/.dotfiles/scripts/common.sh"

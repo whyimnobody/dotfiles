@@ -26,6 +26,7 @@ brew update
 brew upgrade
 
 brew_general=(
+	caddy       # https://formulae.brew.sh/formula/caddy
 	gallery-dl # https://formulae.brew.sh/formula/gallery-dl
 	syncthing  # https://formulae.brew.sh/formula/syncthing
 	yt-dlp     # https://formulae.brew.sh/formula/yt-dlp
@@ -207,6 +208,12 @@ brew install --cask "${casks[@]}"
 mas install "${app_store_apps[@]}"
 # go install "${gophers[@]}"
 # cargo install "${crates[@]}"
+
+info "Enable and start Syncthing"
+brew services start syncthing
+
+info "Configure Caddy"
+"$HOME/.dotfiles/scripts/caddy.sh"
 
 # Additional commands for installations, because macOS (fucking Apple fucks)
 if xattr '/Applications/Zen Browser.app/' | grep -q 'com.apple.quarantine'; then
