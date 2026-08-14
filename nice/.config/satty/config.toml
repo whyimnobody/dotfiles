@@ -1,0 +1,43 @@
+[general]
+fullscreen = false
+resize = { mode = "smart" }
+floating-hack = true
+early-exit = ["all"]
+corner-roundness = 12
+initial-tool = "arrow"
+copy-command = "wl-copy"
+annotation-size-factor = 1.5
+output-filename = "~/Pictures/Screenshots/screenshot-%Y%m%d-%H%M%S.png"
+default-hide-toolbars = false
+no-window-decoration = true
+brush-smooth-history-size = 5
+title = "Satty"
+app-id = "org.satty.satty"
+actions-on-enter = ["save-to-clipboard", "save-to-file", "exit"]
+actions-on-escape = ["exit"]
+
+[font]
+family = "Commit Mono"
+fallback = ["Noto Sans"]
+
+[color-palette]
+palette = [
+	"#f38ba8",
+	"#fab387",
+	"#f9e2af",
+	"#a6e3a1",
+	"#89dceb",
+	"#89b4fa",
+	"#cba6f7",
+	"#cdd6f4",
+]
+custom = [
+	"#f38ba8",
+	"#fab387",
+	"#f9e2af",
+	"#a6e3a1",
+	"#89dceb",
+	"#89b4fa",
+	"#cba6f7",
+	"#cdd6f4",
+]

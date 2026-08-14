@@ -1,0 +1,17 @@
+@define-color base #1e1e2e;
+@define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color text #cdd6f4;
+@define-color subtext #a6adc8;
+@define-color red #f38ba8;
+
+* { font-family: "Commit Mono", "Noto Sans", sans-serif; font-size: 14px; }
+.notification-window, .control-center { background: alpha(@base, 0.96); color: @text; border: 2px solid @surface1; border-radius: 14px; }
+.notification-row, .notification { outline: none; }
+.notification { margin: 8px; padding: 12px; background: @surface0; border: 1px solid @surface1; border-radius: 10px; }
+.notification-content, .summary, .body { color: @text; }
+.summary { font-weight: bold; }
+.body { color: @subtext; }
+.close-button, .control-center-close { color: @subtext; background: transparent; }
+.close-button:hover, .control-center-close:hover { color: @red; }
+button:hover { background: @surface1; }

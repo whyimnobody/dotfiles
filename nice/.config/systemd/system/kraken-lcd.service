@@ -1,0 +1,12 @@
+[Unit]
+Description=Set NZXT Kraken LCD orientation
+Wants=systemd-udev-settle.service
+After=systemd-udev-settle.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/liquidctl --match kraken set lcd screen orientation 180
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

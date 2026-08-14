@@ -1,0 +1,11 @@
+[Unit]
+Description=Mailpit server
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/mailpit --database %h/.local/state/mailpit/database.db
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

@@ -51,7 +51,7 @@
         "max-length": 50
     },
     "clock": {
-        "timezone": "Africa/Harare",
+        "timezone": "Africa/Johannesburg",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": " {:%Y-%m-%d}",
         "format": " {:%H:%M}"
@@ -99,8 +99,8 @@
         "tooltip-format-wifi": "{icon} {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
         "tooltip-format-ethernet": "󰀂  {ifname}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click": "~/.config/rofi/wifi/wifi.sh &",
-        "on-click-right": "~/.config/rofi/wifi/wifinew.sh &",
+        "on-click": "ghostty --class=nmcli-wifi -e nmcli device wifi list",
+        "on-click-right": "nmcli radio wifi | grep -q enabled && nmcli radio wifi off || nmcli radio wifi on",
         "interval": 5,
         "nospacing": 1
     },

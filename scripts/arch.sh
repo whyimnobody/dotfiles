@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # Get the dotfiles
 if [ ! -d "$HOME/.dotfiles/" ]; then
 	git clone "https://github.com/whyimnobody/dotfiles" ~/.dotfiles
@@ -15,7 +17,15 @@ sudo pacman -S --noconfirm --needed git
 # Install yay
 if ! command -v yay &>/dev/null; then
 	info "Installing yay"
-	git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay/ && makepkg -si
+	yay_build_dir="$(mktemp -d)"
+	trap 'rm -rf -- "$yay_build_dir"' EXIT
+	git clone https://aur.archlinux.org/yay.git "$yay_build_dir"
+	(
+		cd "$yay_build_dir"
+		makepkg -si
+	)
+	rm -rf -- "$yay_build_dir"
+	trap - EXIT
 fi
 
 # Packages
@@ -77,7 +87,6 @@ dev=(
 	less
 	lsd
 	man-db
-	mailpit
 	neovim
 	nmap
 	nodejs
@@ -153,23 +162,27 @@ system=(
 	bluez
 	bluez-utils
 	caddy
-	flameshot
+	grim
 	hyprlock
 	hyprpaper
 	hyprpicker
+	kanshi
+	liquidctl
 	rofi-wayland
+	satty
+	slurp
 	waybar
 	wf-recorder
 	wl-clipboard
 )
 
 system_aur=(
+	clipse
 	wlogout
 )
 
 packages=(
 	"${general[@]}"
-	"${fonts[@]}"
 	"${media[@]}"
 	"${dev[@]}"
 	"${devops[@]}"
@@ -198,6 +211,10 @@ go install "${go[@]}"
 
 info "Configure Caddy"
 "$HOME/.dotfiles/scripts/caddy.sh"
+
+info "Configure the nice desktop package"
+"$HOME/.dotfiles/scripts/nice.sh"
+stow --dir="$HOME/.dotfiles" --target="$HOME" nice
 
 info "Enable and start user services"
 systemctl --user enable --now "${user_services[@]}"

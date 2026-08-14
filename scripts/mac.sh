@@ -1,9 +1,11 @@
 #!/bin/bash
 
+set -euo pipefail
+
 start=$(date +%s)
 
 # --- Ensure the stuff we need is here ---
-if test ! "$(which gcc)"; then
+if ! command -v gcc >/dev/null 2>&1; then
 	xcode-select --install
 fi
 
@@ -17,7 +19,7 @@ source "$HOME/.dotfiles/zsh/.config/zsh/scripts/functions.zsh"
 source "$HOME/.dotfiles/zsh/.zshenv"
 
 # --- Install Homebrew if required
-if test ! "$(which brew)"; then
+if ! command -v brew >/dev/null 2>&1; then
 	info "Installing homebrew..."
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi

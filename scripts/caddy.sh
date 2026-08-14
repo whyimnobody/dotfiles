@@ -15,14 +15,26 @@ caddy validate --config "$source_config"
 case "$(uname -s)" in
 	Darwin)
 		brew_prefix="$(brew --prefix)"
-		install -m 644 "$source_config" "$brew_prefix/etc/Caddyfile"
-		sudo brew services restart caddy
+		target_config="$brew_prefix/etc/Caddyfile"
+		if [[ ! -f "$target_config" ]] || ! cmp -s "$source_config" "$target_config"; then
+			install -m 644 "$source_config" "$target_config"
+			sudo brew services restart caddy
+		else
+			sudo brew services start caddy
+		fi
 		sudo env XDG_DATA_HOME="$brew_prefix/var/lib" caddy trust
 		;;
 	Linux)
-		sudo install -Dm644 "$source_config" /etc/caddy/Caddyfile
+		target_config=/etc/caddy/Caddyfile
+		config_changed=false
+		if [[ ! -f "$target_config" ]] || ! cmp -s "$source_config" "$target_config"; then
+			sudo install -Dm644 "$source_config" "$target_config"
+			config_changed=true
+		fi
 		sudo systemctl enable --now caddy.service
-		sudo systemctl reload-or-restart caddy.service
+		if [[ "$config_changed" == true ]]; then
+			sudo systemctl reload-or-restart caddy.service
+		fi
 		sudo env XDG_DATA_HOME=/var/lib caddy trust
 		;;
 	*)

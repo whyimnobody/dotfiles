@@ -23,7 +23,7 @@ info "Stowing packages"
 stow --dir="$HOME"/.dotfiles --target="$HOME" git terminal tmux zsh
 
 # Set zsh as the default shell
-if [[ "$SHELL" != "$(command -v zsh)" ]]; then
+if [[ "${SHELL:-}" != "$(command -v zsh)" ]]; then
 	info "Changing shell to zsh"
 	chsh -s "$(command -v zsh)"
 fi
