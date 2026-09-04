@@ -1,0 +1,288 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+	cat <<'EOF'
+usage: 1p-bridge <command> [host] [options]
+
+Commands:
+  install    Generate the per-user LaunchAgent (does not start it)
+  uninstall  Stop the bridge and remove its generated LaunchAgent
+  start      Start the supervised bridge
+  stop       Stop and unload the supervised bridge
+  restart    Restart the supervised bridge
+  status     Show bridge state; add --json for machine-readable output
+  check      Probe the forwarded agent on the remote host
+  logs       Follow the bridge logs
+
+The host defaults to asura and must be an SSH host alias.
+EOF
+}
+
+die() {
+	echo "1p-bridge: $*" >&2
+	exit 1
+}
+
+host="asura"
+json_output=false
+
+if [[ $# -lt 1 ]]; then
+	usage >&2
+	exit 64
+fi
+
+command_name="$1"
+shift
+
+while [[ $# -gt 0 ]]; do
+	case "$1" in
+		--json)
+			json_output=true
+			;;
+		-h | --help)
+			usage
+			exit 0
+			;;
+		-*)
+			die "unknown option: $1"
+			;;
+		*)
+			host="$1"
+			;;
+	esac
+	shift
+done
+
+case "$host" in
+	*[!A-Za-z0-9._-]*) die "host must be an SSH host alias" ;;
+esac
+
+label="com.whyimnobody.1p-bridge.${host}"
+domain="gui/$(id -u)"
+service_target="$domain/$label"
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/1p-bridge"
+template="$config_dir/launch-agent.plist.in"
+launch_agent_dir="$HOME/Library/Application Support/1p-bridge"
+plist="$launch_agent_dir/$label.plist"
+control_socket="$HOME/.ssh/1p-bridge-${host}.ctl"
+local_agent="$HOME/.1password/agent.sock"
+log_dir="$HOME/Library/Logs/1p-bridge"
+stdout_log="$log_dir/${host}.log"
+stderr_log="$log_dir/${host}.error.log"
+service_bin="$HOME/.local/bin/1p-bridge-service"
+
+require_macos() {
+	[[ "$(uname -s)" == "Darwin" ]] || die "$command_name is only supported on macOS"
+	command -v launchctl >/dev/null 2>&1 || die "launchctl is not available"
+}
+
+launchd_loaded() {
+	launchctl print "$service_target" >/dev/null 2>&1
+}
+
+transport_connected() {
+	[[ -S "$control_socket" ]] && /usr/bin/ssh -S "$control_socket" -O check "$host" >/dev/null 2>&1
+}
+
+find_tailscale() {
+	local candidate
+
+	if command -v tailscale >/dev/null 2>&1; then
+		command -v tailscale
+		return
+	fi
+
+	for candidate in \
+		/usr/local/bin/tailscale \
+		/opt/homebrew/bin/tailscale \
+		/Applications/Tailscale.app/Contents/MacOS/Tailscale \
+		/Applications/Tailscale.app/Contents/MacOS/tailscale; do
+		if [[ -x "$candidate" ]]; then
+			printf '%s\n' "$candidate"
+			return
+		fi
+	done
+
+	return 1
+}
+
+tailscale_state() {
+	local tailscale_bin status_json backend
+
+	tailscale_bin="$(find_tailscale || true)"
+	if [[ -z "$tailscale_bin" || ! -x "$(command -v jq 2>/dev/null || true)" ]]; then
+		printf '%s\n' unknown
+		return
+	fi
+
+	status_json="$("$tailscale_bin" status --json 2>/dev/null || true)"
+	backend="$(printf '%s' "$status_json" | jq -r '.BackendState // "Unknown"' 2>/dev/null || true)"
+	case "$backend" in
+		Running) printf '%s\n' connected ;;
+		Stopped) printf '%s\n' disconnected ;;
+		NeedsLogin) printf '%s\n' needs-login ;;
+		*) printf '%s\n' unknown ;;
+	esac
+}
+
+render_plist() {
+	local temporary escape_home escape_label escape_host escape_service escape_stdout escape_stderr path_value
+
+	[[ -f "$template" ]] || die "LaunchAgent template not found: $template"
+	[[ -x "$service_bin" ]] || die "bridge service not found or not executable: $service_bin"
+
+	mkdir -p "$launch_agent_dir" "$log_dir" "$HOME/.ssh"
+	chmod 700 "$HOME/.ssh"
+	temporary="$(mktemp "$launch_agent_dir/.${label}.XXXXXX")"
+	trap 'rm -f "$temporary"' EXIT
+
+	path_value="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+	escape_home="${HOME//&/\\&}"
+	escape_label="${label//&/\\&}"
+	escape_host="${host//&/\\&}"
+	escape_service="${service_bin//&/\\&}"
+	escape_stdout="${stdout_log//&/\\&}"
+	escape_stderr="${stderr_log//&/\\&}"
+
+	sed \
+		-e "s|__LABEL__|$escape_label|g" \
+		-e "s|__HOST__|$escape_host|g" \
+		-e "s|__SERVICE_BIN__|$escape_service|g" \
+		-e "s|__HOME__|$escape_home|g" \
+		-e "s|__PATH__|$path_value|g" \
+		-e "s|__STDOUT_LOG__|$escape_stdout|g" \
+		-e "s|__STDERR_LOG__|$escape_stderr|g" \
+		"$template" >"$temporary"
+
+	chmod 644 "$temporary"
+	mv "$temporary" "$plist"
+	trap - EXIT
+}
+
+show_status() {
+	local service_state transport_state agent_state ts_state state
+
+	service_state=stopped
+	transport_state=disconnected
+	agent_state=missing
+	ts_state="$(tailscale_state)"
+
+	if [[ -S "$local_agent" ]]; then
+		agent_state=available
+	fi
+	if launchd_loaded; then
+		service_state=running
+	fi
+	if transport_connected; then
+		transport_state=connected
+	fi
+
+	if [[ "$agent_state" == missing ]]; then
+		state=error
+	elif [[ "$ts_state" == disconnected || "$ts_state" == needs-login ]]; then
+		state=waiting
+	elif [[ "$transport_state" == connected ]]; then
+		state=connected
+	elif [[ "$service_state" == running ]]; then
+		state=retrying
+	else
+		state=stopped
+	fi
+
+	if [[ "$json_output" == true ]]; then
+		printf '{"host":"%s","state":"%s","tailscale":"%s","service":"%s","transport":"%s","local_agent":"%s"}\n' \
+			"$host" "$state" "$ts_state" "$service_state" "$transport_state" "$agent_state"
+	else
+		printf 'host:        %s\n' "$host"
+		printf 'state:       %s\n' "$state"
+		printf 'tailscale:   %s\n' "$ts_state"
+		printf 'service:     %s\n' "$service_state"
+		printf 'transport:   %s\n' "$transport_state"
+		printf 'local agent: %s\n' "$agent_state"
+	fi
+}
+
+case "$command_name" in
+	install)
+		require_macos
+		render_plist
+		echo "Installed $plist"
+		echo "Run '1p-bridge start $host' when the bridge is needed."
+		;;
+	uninstall)
+		require_macos
+		if launchd_loaded; then
+			launchctl bootout "$service_target"
+		fi
+		rm -f "$plist"
+		echo "Removed $plist"
+		;;
+	start)
+		require_macos
+		if [[ ! -f "$plist" ]]; then
+			render_plist
+		fi
+		if launchd_loaded; then
+			echo "Bridge is already running for $host"
+		else
+			launchctl bootstrap "$domain" "$plist"
+			echo "Started bridge for $host"
+		fi
+		;;
+	stop)
+		require_macos
+		if launchd_loaded; then
+			launchctl bootout "$service_target"
+			echo "Stopped bridge for $host"
+		else
+			echo "Bridge is already stopped for $host"
+		fi
+		;;
+	restart)
+		require_macos
+		if [[ ! -f "$plist" ]]; then
+			render_plist
+		fi
+		if launchd_loaded; then
+			launchctl kickstart -k "$service_target"
+		else
+			launchctl bootstrap "$domain" "$plist"
+		fi
+		echo "Restarted bridge for $host"
+		;;
+	status)
+		require_macos
+		show_status
+		;;
+	check)
+		require_macos
+		show_status
+		if ! transport_connected; then
+			die "bridge transport is not connected"
+		fi
+		echo
+		echo "Remote agent identities:"
+		/usr/bin/ssh \
+			-S "$control_socket" \
+			-o BatchMode=yes \
+			-o ControlMaster=no \
+			"$host" \
+			'SSH_AUTH_SOCK="$HOME/.ssh/agent.sock" ssh-add -l'
+		;;
+	logs)
+		require_macos
+		mkdir -p "$log_dir"
+		touch "$stdout_log" "$stderr_log"
+		echo "Following $stdout_log and $stderr_log (Ctrl-C to stop)"
+		tail -n 80 -F "$stdout_log" "$stderr_log"
+		;;
+	-h | --help | help)
+		usage
+		;;
+	*)
+		usage >&2
+		exit 64
+		;;
+esac

@@ -108,9 +108,12 @@ conform.setup({
 end
 
 -- === 2. Append DAP Config ===
-local function scaffold_dap(app_type)
+local function scaffold_dap(app_type, override)
   ensure_dir(".nvim")
   local dap_path = ".nvim/dap.lua"
+
+  -- Nuxt 4 defaults to app/ as srcDir; older Vite/Vue/React setups use src/
+  local web_root = vim.fn.isdirectory(vim.fn.getcwd() .. "/app") == 1 and "app" or "src"
 
   local dap_configs = {
     django = [[
@@ -148,19 +151,28 @@ local function scaffold_dap(app_type)
           ["/var/www/html"] = "${workspaceFolder}"
         }
       })]],
-    typescript = [[
+    typescript = function(port_override)
+      -- port_override: an explicit port (from `:ScaffoldDap typescript 9230`).
+      -- Otherwise read NODE_INSPECT_PORT at dap.lua load time, falling back to
+      -- Node's --inspect default. Start the target with e.g.
+      -- NODE_OPTIONS="--inspect=${NODE_INSPECT_PORT:-9229}" pnpm dev
+      local port_expr = port_override or "(tonumber(vim.env.NODE_INSPECT_PORT) or 9229)"
+      return string.format(
+        [[
       table.insert(dap.configurations.typescript, {
         type = "pwa-node",
-        request = "launch",
-        name = "Debug TypeScript File",
-        program = "${file}",
+        request = "attach",
+        name = "Attach: dev server",
+        port = %s,
+        address = "localhost",
         cwd = "${workspaceFolder}",
-        runtimeExecutable = "node",
-        runtimeArgs = { "--loader", "ts-node/esm" },
         sourceMaps = true,
         protocol = "inspector",
         skipFiles = { "<node_internals>/**" },
       })]],
+        port_expr
+      )
+    end,
     javascript = [[
       table.insert(dap.configurations.javascript, {
         type = "pwa-node",
@@ -173,28 +185,46 @@ local function scaffold_dap(app_type)
         protocol = "inspector",
         skipFiles = { "<node_internals>/**" },
       })]],
-    react = [[
+    react = function(url_override)
+      local url_expr = url_override and string.format("%q", url_override) or "\"http://localhost:3000\""
+      return string.format(
+        [[
       table.insert(dap.configurations.javascript, {
         type = "pwa-chrome",
         name = "Attach to React (Vite or CRA)",
         request = "launch",
-        url = "http://localhost:3000",
-        webRoot = "${workspaceFolder}/src",
+        url = %s,
+        webRoot = "${workspaceFolder}/%s",
         sourceMaps = true,
         protocol = "inspector",
         skipFiles = { "<node_internals>/**" },
       })]],
-    vue = [[
+        url_expr,
+        web_root
+      )
+    end,
+    vue = function(url_override)
+      -- url_override: an explicit URL (from `:ScaffoldDap vue http://whatanevent.test`).
+      -- Otherwise read PORT / NUXT_DEV_HOST at dap.lua load time. Adjust if the
+      -- dev domain is reverse-proxied on 80 (no port needed) vs served directly.
+      local url_expr = url_override and string.format("%q", url_override)
+        or "\"http://\" .. (vim.env.NUXT_DEV_HOST or \"whatanevent.test\") .. \":\" .. (vim.env.PORT or \"7225\")"
+      return string.format(
+        [[
       table.insert(dap.configurations.javascript, {
         type = "pwa-chrome",
-        name = "Attach to Vue (Vite or Vue CLI)",
+        name = "Attach to Vue (whatanevent dev server)",
         request = "launch",
-        url = "http://localhost:5173",
-        webRoot = "${workspaceFolder}/src",
+        url = %s,
+        webRoot = "${workspaceFolder}/%s",
         sourceMaps = true,
         protocol = "inspector",
         skipFiles = { "<node_internals>/**" },
       })]],
+        url_expr,
+        web_root
+      )
+    end,
     pytest = [[
       table.insert(dap.configurations.python, {
         name = "Debug Pytest",
@@ -239,11 +269,18 @@ local function scaffold_dap(app_type)
       })]],
   }
 
-  local content = dap_configs[app_type]
-  if not content then
+  if not app_type then
+    print("Usage: :ScaffoldDap <type> [port|url]")
+    return
+  end
+
+  local raw = dap_configs[app_type]
+  if not raw then
     print("Unsupported app type: " .. app_type)
     return
   end
+
+  local content = type(raw) == "function" and raw(override) or raw
 
   -- Add base adapter section if new file
   if vim.fn.filereadable(dap_path) == 0 then

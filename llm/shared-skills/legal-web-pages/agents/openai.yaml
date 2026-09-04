@@ -1,0 +1,4 @@
+interface:
+  display_name: "Legal Web Pages"
+  short_description: "Draft legal pages for websites and apps"
+  default_prompt: "Use $legal-web-pages to draft or update a privacy policy or terms of use for a web product in a specified jurisdiction and locale."

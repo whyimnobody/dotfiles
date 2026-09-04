@@ -1,0 +1,5 @@
+version: 1
+interface:
+  display_name: Infra Platform Ops
+  description: Run safe, repeatable Docker, Ansible, OpenTofu, and cloud CLI operations across repositories.
+  default_prompt: Use this skill to plan and execute infrastructure and infra-component changes with verification-first workflows.

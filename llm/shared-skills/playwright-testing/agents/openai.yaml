@@ -1,0 +1,4 @@
+interface:
+  display_name: "Playwright Testing"
+  short_description: "Reproduce UI bugs and write Playwright tests"
+  default_prompt: "Use $playwright-testing to reproduce a browser issue, add or repair a Playwright test, and collect clear failure artifacts."

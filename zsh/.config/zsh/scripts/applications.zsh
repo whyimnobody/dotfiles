@@ -1,5 +1,5 @@
 # 1PASSWORD
-export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
 
 # ANDROID
 # export ANDROID_HOME="$HOME/dev/android/sdk"

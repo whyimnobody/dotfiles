@@ -3,7 +3,8 @@ Description=Mailpit server
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/mailpit --database %h/.local/state/mailpit/database.db
+StateDirectory=mailpit
+ExecStart=/usr/bin/mailpit --database %h/.local/state/mailpit/database.db --listen 127.0.0.1:8025 --smtp 127.0.0.1:1025
 Restart=on-failure
 RestartSec=10
 

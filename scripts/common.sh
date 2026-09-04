@@ -20,7 +20,15 @@ fi
 
 # Sort out stowed packages
 info "Stowing packages"
-stow --dir="$HOME"/.dotfiles --target="$HOME" git terminal tmux zsh
+stow --dir="$HOME"/.dotfiles --target="$HOME" dev-services local-bin git terminal tmux zsh
+
+# Give shells and SSH clients one stable agent path. On Linux the bridge swaps
+# this symlink to the forwarded Mac agent and restores the local agent on exit.
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+if [[ ! -e "$HOME/.ssh/agent.sock" && ! -L "$HOME/.ssh/agent.sock" ]]; then
+	ln -s "$HOME/.1password/agent.sock" "$HOME/.ssh/agent.sock"
+fi
 
 # Set zsh as the default shell
 if [[ "${SHELL:-}" != "$(command -v zsh)" ]]; then

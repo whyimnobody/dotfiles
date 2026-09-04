@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+host="${1:-asura}"
+agent_socket="$HOME/.1password/agent.sock"
+control_socket="$HOME/.ssh/1p-bridge-${host}.ctl"
+
+case "$host" in
+	*[!A-Za-z0-9._-]*)
+		echo "1p-bridge-service: host must be an SSH host alias" >&2
+		exit 64
+		;;
+esac
+
+find_command() {
+	local name="$1"
+	local candidate
+
+	if command -v "$name" >/dev/null 2>&1; then
+		command -v "$name"
+		return
+	fi
+
+	for candidate in "/opt/homebrew/bin/$name" "/usr/local/bin/$name"; do
+		if [[ -x "$candidate" ]]; then
+			printf '%s\n' "$candidate"
+			return
+		fi
+	done
+
+	return 1
+}
+
+autossh_bin="$(find_command autossh || true)"
+if [[ -z "$autossh_bin" ]]; then
+	echo "1p-bridge-service: autossh is not installed" >&2
+	exit 69
+fi
+
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+
+last_wait_reason=""
+while [[ ! -S "$agent_socket" ]]; do
+	if [[ "$last_wait_reason" != "agent" ]]; then
+		echo "1p-bridge-service: waiting for the 1Password agent"
+		last_wait_reason="agent"
+	fi
+	sleep 15
+done
+
+# OpenSSH removes stale control sockets itself in most cases. Remove one only
+# after proving that it cannot address a live master connection.
+if [[ -S "$control_socket" ]] && ! /usr/bin/ssh -S "$control_socket" -O check "$host" >/dev/null 2>&1; then
+	rm -f "$control_socket"
+fi
+
+export AUTOSSH_GATETIME=0
+export AUTOSSH_POLL=15
+export SSH_AUTH_SOCK="$agent_socket"
+
+exec "$autossh_bin" -M 0 \
+	-A -T \
+	-o BatchMode=yes \
+	-o ConnectTimeout=10 \
+	-o ConnectionAttempts=1 \
+	-o ControlMaster=yes \
+	-o ControlPath="$control_socket" \
+	-o ControlPersist=no \
+	-o IdentityAgent="$agent_socket" \
+	-o ServerAliveCountMax=3 \
+	-o ServerAliveInterval=15 \
+	"$host" '~/.local/bin/1p-bridge-remote'

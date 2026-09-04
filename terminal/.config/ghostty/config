@@ -4,6 +4,7 @@ font-family = "Symbols Nerd Font Mono"
 font-size = 13
 
 macos-option-as-alt = true
+shell-integration-features = ssh-env,ssh-terminfo
 
 quick-terminal-space-behavior = remain
 window-inherit-working-directory = false

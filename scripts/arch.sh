@@ -92,6 +92,7 @@ dev=(
 	nodejs
 	npm
 	octave
+	opencode
 	pastel
 	peco
 	poppler
@@ -120,7 +121,6 @@ dev_aur=(
 	lazysql
 	mailpit
 	openai-codex-bin
-	opencode-bin
 	python-commitizen
 	resvg
 	rip2-bin
@@ -133,6 +133,8 @@ dev_go=(
 
 devops=(
 	aws-cli
+	docker
+	docker-compose
 	k9s
 )
 devops_aur=(
@@ -171,6 +173,7 @@ system=(
 	rofi-wayland
 	satty
 	slurp
+	tailscale
 	waybar
 	wf-recorder
 	wl-clipboard
@@ -203,6 +206,10 @@ go=(
 user_services=(
 	syncthing.service
 )
+system_services=(
+	docker.service
+	tailscaled.service
+)
 
 info "The actual package installs now"
 sudo pacman -Syu --needed --noconfirm "${packages[@]}"
@@ -216,8 +223,14 @@ info "Configure the nice desktop package"
 "$HOME/.dotfiles/scripts/nice.sh"
 stow --dir="$HOME/.dotfiles" --target="$HOME" nice
 
+info "Enable boot-time user services"
+sudo loginctl enable-linger "$(id -un)"
+
 info "Enable and start user services"
 systemctl --user enable --now "${user_services[@]}"
+
+info "Enable and start system services"
+sudo systemctl enable --now "${system_services[@]}"
 
 # Some housekeeping
 source "$HOME/.dotfiles/scripts/common.sh"

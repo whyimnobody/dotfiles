@@ -1,0 +1,4 @@
+interface:
+  display_name: "Container Platform Delivery"
+  short_description: "Build container and platform artefacts"
+  default_prompt: "Use $container-platform-delivery to create or update Docker, Kubernetes, Helm, Compose, or related infra artefacts using the repo standard and the simplest viable defaults."

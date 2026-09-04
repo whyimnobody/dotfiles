@@ -28,7 +28,7 @@ brew update
 brew upgrade
 
 brew_general=(
-	caddy       # https://formulae.brew.sh/formula/caddy
+	caddy      # https://formulae.brew.sh/formula/caddy
 	gallery-dl # https://formulae.brew.sh/formula/gallery-dl
 	syncthing  # https://formulae.brew.sh/formula/syncthing
 	yt-dlp     # https://formulae.brew.sh/formula/yt-dlp
@@ -53,6 +53,7 @@ casks_general=(
 	signal                 # https://formulae.brew.sh/cask/signal
 	sioyek                 # https://formulae.brew.sh/cask/sioyek
 	steam                  # https://formulae.brew.sh/cask/steam
+	swiftbar               # https://formulae.brew.sh/cask/swiftbar
 	yubico-yubikey-manager # https://formulae.brew.sh/cask/yubico-yubikey-manager#default
 	zen-browser            # https://formulae.brew.sh/cask/zen-browser
 	zoom                   # https://formulae.brew.sh/cask/zoom
@@ -62,6 +63,7 @@ brew_dev=(
 	act              # https://formulae.brew.sh/formula/act
 	age              # https://formulae.brew.sh/formula/age
 	asciinema        # https://formulae.brew.sh/formula/asciinema
+	autossh          # https://formulae.brew.sh/formula/autossh
 	bat              # https://formulae.brew.sh/formula/bat
 	bottom           # https://formulae.brew.sh/formula/bottom
 	commitizen       # https://formulae.brew.sh/formula/commitizen
@@ -97,6 +99,7 @@ brew_dev=(
 	lima             # https://formulae.brew.sh/formula/lima
 	lsd              # https://formulae.brew.sh/formula/lsd
 	mailpit          # https://formulae.brew.sh/formula/mailpit
+	mosh             # https://formulae.brew.sh/formula/mosh
 	neovim           # https://formulae.brew.sh/formula/neovim
 	netcat           # https://formulae.brew.sh/formula/netcat
 	nmap             # https://formulae.brew.sh/formula/nmap
@@ -235,6 +238,25 @@ if [ ! -d "$XDG_BIN_HOME" ]; then
 fi
 
 source "$HOME/.dotfiles/scripts/common.sh"
+
+info "Stowing macOS configuration"
+stow --dir="$HOME"/.dotfiles --target="$HOME" mac
+
+info "Configure the 1Password SSH agent bridge"
+onepassword_agent_native="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+onepassword_agent_link="$HOME/.1password/agent.sock"
+mkdir -p "$HOME/.1password"
+if [[ -L "$onepassword_agent_link" ]]; then
+	ln -sfn "$onepassword_agent_native" "$onepassword_agent_link"
+elif [[ -e "$onepassword_agent_link" ]]; then
+	warning "$onepassword_agent_link exists and is not a symlink; leaving it unchanged"
+else
+	ln -s "$onepassword_agent_native" "$onepassword_agent_link"
+fi
+if [[ ! -S "$onepassword_agent_native" ]]; then
+	warning "Enable the SSH agent in 1Password before starting the bridge"
+fi
+"$HOME/.local/bin/1p-bridge" install asura
 
 success "Cleaning Up"
 brew cleanup

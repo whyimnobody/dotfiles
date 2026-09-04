@@ -6,15 +6,16 @@ export XDG_BIN_HOME="${XDG_BIN_HOME:-$HOME/.local/bin}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
-export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp/$USER-runtime}"
 
 case "$(uname -s)" in
   Darwin)
-    mkdir -p /tmp/${USER}-runtime
-    chmod 700 /tmp/${USER}-runtime
+    _runtime_root="${TMPDIR:-$(getconf DARWIN_USER_TEMP_DIR)}"
+    export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-${_runtime_root%/}/xdg-runtime}"
+    mkdir -p "${XDG_RUNTIME_DIR}"
+    chmod 700 "${XDG_RUNTIME_DIR}"
+    unset _runtime_root
   ;;
   Linux)
-    echo "Linux!"
     mkdir -p "${XDG_BIN_HOME}"
   ;;
 esac

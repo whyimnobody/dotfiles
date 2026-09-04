@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/dev-services"
+compose_file="$config_dir/compose.yml"
+env_file="$config_dir/.env"
+
+usage() {
+	cat <<'EOF'
+usage: dev-services <command> [service]
+
+commands:
+  up [clamav|minio]       start all services, or one service
+  down                    stop and remove containers (data is retained)
+  stop [clamav|minio]     stop all services, or one service
+  restart [clamav|minio]  restart all services, or one service
+  status                  show service status
+  logs [clamav|minio]     follow logs
+  pull [clamav|minio]     update images
+EOF
+}
+
+if [[ ! -f "$compose_file" ]]; then
+	printf 'dev-services: missing %s\n' "$compose_file" >&2
+	exit 1
+fi
+
+command="${1:-}"
+case "$command" in
+	-h | --help | help)
+		usage
+		exit 0
+	;;
+	"")
+		usage >&2
+		exit 2
+	;;
+esac
+
+if ! docker info >/dev/null 2>&1; then
+	cat >&2 <<'EOF'
+dev-services: cannot access the Docker daemon.
+
+Make sure Docker is running, then grant your user access once:
+  sudo systemctl enable --now docker
+  sudo usermod -aG docker "$USER"
+
+Log out and back in after changing group membership. The docker group grants
+root-equivalent access to the machine; use `sudo docker compose ...` instead if
+you do not want that membership.
+EOF
+	exit 1
+fi
+
+if [[ ! -f "$env_file" ]]; then
+	if ! command -v openssl >/dev/null 2>&1; then
+		printf 'dev-services: openssl is required to create %s\n' "$env_file" >&2
+		exit 1
+	fi
+
+	umask 077
+	{
+		printf 'MINIO_ROOT_USER=devadmin\n'
+		printf 'MINIO_ROOT_PASSWORD=%s\n' "$(openssl rand -hex 24)"
+		printf 'CLAMAV_PORT=3310\n'
+		printf 'MINIO_API_PORT=9000\n'
+		printf 'MINIO_CONSOLE_PORT=9001\n'
+	} > "$env_file"
+	printf 'Created %s with private MinIO credentials.\n' "$env_file"
+fi
+
+compose=(docker compose --project-directory "$config_dir" --file "$compose_file" --env-file "$env_file")
+
+case "$command" in
+	up)
+		shift
+		"${compose[@]}" up --detach --wait "$@"
+	;;
+	down)
+		"${compose[@]}" down
+	;;
+	stop)
+		shift
+		"${compose[@]}" stop "$@"
+	;;
+	restart)
+		shift
+		"${compose[@]}" restart "$@"
+	;;
+	status | ps)
+		"${compose[@]}" ps
+	;;
+	logs)
+		shift
+		"${compose[@]}" logs --follow "$@"
+	;;
+	pull)
+		shift
+		"${compose[@]}" pull "$@"
+	;;
+	*)
+		usage >&2
+		exit 2
+	;;
+esac

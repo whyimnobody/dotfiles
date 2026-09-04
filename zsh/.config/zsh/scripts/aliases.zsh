@@ -5,6 +5,7 @@ alias resource="refresh"
 alias lazyvim="nvim $XDG_CONFIG_HOME/nvim"
 alias zshconfig="nvim $XDG_CONFIG_HOME/zsh"
 alias sshconfig="nvim $HOME/.ssh/config"
+alias asura="mosh1p asura"
 
 alias pwdc="pwd | pbcopy"
 alias clean.node="rm -rf node_modules/ package-lock.json yarn-lock.json"
@@ -39,4 +40,3 @@ case "$(uname -s)" in
     alias damagecheck.on="sudo spctl --master-enable"
   ;;
 esac
-

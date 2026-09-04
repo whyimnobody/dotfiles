@@ -13,9 +13,9 @@ vim.api.nvim_create_user_command("ScaffoldRuff", function()
 end, {})
 
 vim.api.nvim_create_user_command("ScaffoldDap", function(opts)
-  require("util.functions").scaffold_dap(opts.args)
+  require("util.functions").scaffold_dap(opts.fargs[1], opts.fargs[2])
 end, {
-  nargs = 1,
+  nargs = "*",
   complete = function()
     return {
       "django",

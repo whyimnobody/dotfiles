@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+host="${1:-asura}"
+if [[ $# -gt 0 ]]; then
+	shift
+fi
+
+bridge_bin="$HOME/.local/bin/1p-bridge"
+[[ -x "$bridge_bin" ]] || {
+	echo "mosh1p: $bridge_bin is not installed" >&2
+	exit 1
+}
+
+status_json="$($bridge_bin status "$host" --json)"
+tailscale_state="$(printf '%s' "$status_json" | jq -r '.tailscale')"
+bridge_state="$(printf '%s' "$status_json" | jq -r '.state')"
+service_state="$(printf '%s' "$status_json" | jq -r '.service')"
+
+if [[ "$tailscale_state" == disconnected || "$tailscale_state" == needs-login ]]; then
+	echo "mosh1p: Tailscale is $tailscale_state; connect it before using $host" >&2
+	exit 1
+fi
+
+if [[ "$bridge_state" != connected ]]; then
+	echo "Checking interactive SSH access to $host..."
+	/usr/bin/ssh -T -o ForwardAgent=no "$host" true
+	if [[ "$service_state" == running ]]; then
+		"$bridge_bin" restart "$host"
+	else
+		"$bridge_bin" start "$host"
+	fi
+
+	for _ in 1 2 3 4 5 6 7 8 9 10; do
+		status_json="$($bridge_bin status "$host" --json)"
+		bridge_state="$(printf '%s' "$status_json" | jq -r '.state')"
+		[[ "$bridge_state" == connected ]] && break
+		sleep 1
+	done
+fi
+
+if [[ "$bridge_state" != connected ]]; then
+	"$bridge_bin" status "$host" >&2
+	echo "mosh1p: bridge did not become ready; inspect '1p-bridge logs $host'" >&2
+	exit 1
+fi
+
+exec mosh "$host" "$@"

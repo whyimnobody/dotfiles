@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+stable_socket="$HOME/.ssh/agent.sock"
+local_socket="$HOME/.1password/agent.sock"
+forwarded_socket="${SSH_AUTH_SOCK:-}"
+temporary_link="${stable_socket}.tmp.$$"
+
+if [[ -z "$forwarded_socket" || ! -S "$forwarded_socket" ]]; then
+	echo "1p-bridge-remote: no forwarded SSH agent" >&2
+	exit 1
+fi
+
+umask 077
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+
+switch_socket() {
+	local target="$1"
+
+	rm -f "$temporary_link"
+	ln -s "$target" "$temporary_link"
+	mv -Tf "$temporary_link" "$stable_socket"
+}
+
+cleanup() {
+	rm -f "$temporary_link"
+	if [[ -L "$stable_socket" && "$(readlink "$stable_socket")" == "$forwarded_socket" ]]; then
+		switch_socket "$local_socket" || true
+	fi
+}
+
+trap cleanup EXIT
+trap 'exit 0' HUP INT TERM
+switch_socket "$forwarded_socket"
+echo "1p-bridge-ready"
+
+# The socket disappears when OpenSSH tears down agent forwarding. Polling it also
+# gives the helper a bounded cleanup delay if the connection ends ungracefully.
+while [[ -S "$forwarded_socket" ]]; do
+	sleep 10
+done

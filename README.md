@@ -32,8 +32,14 @@ when the source differs.
 - Syncthing: `systemctl --user status syncthing.service`; web UI at
   `https://sync.localhost` when Caddy and the local hosts entry are configured,
   or `http://127.0.0.1:8384` directly.
+- Tailscale: `systemctl status tailscaled.service`; authenticate with
+  `sudo tailscale up`.
 - Mailpit is a user service: `systemctl --user enable --now mailpit.service`;
   its UI is available at `http://127.0.0.1:8025`.
+- ClamAV and MinIO are an on-demand Docker Compose stack. Run
+  `dev-services up`, `dev-services status`, or `dev-services down`; see
+  `~/.config/dev-services/README.md` for individual-service commands and
+  endpoints. The first use creates private MinIO credentials locally.
 - Satty screenshots use Meta+Shift+S for a selected region, Meta+Shift+C to
   copy a region, Meta+Shift+F for the focused output, and Meta+Shift+W for the
   active window. The screenshot script focuses the output where the capture
@@ -59,6 +65,12 @@ sudo dscl . -create /Users/$USER UserShell $(which zsh)
 Open Neovim once to install its plugins and configure 1Password, browsers,
 backup/sync tools, and the other applications listed in `scripts/mac.sh`.
 
+The macOS setup also installs the on-demand 1Password SSH agent bridge and its
+SwiftBar monitor. After restowing `local-bin` and `zsh` on Asura, use
+`mosh1p asura` to start the supervised bridge and enter Mosh. See the
+[1Password SSH agent bridge runbook](docs/1password-ssh-bridge.md) for setup,
+status commands, Tailscale behaviour, and rollback.
+
 ## Review after an Arch upgrade
 
 Review `.pacnew` files before removing them. Keep the working local settings
@@ -68,7 +80,7 @@ manually; do not overwrite the active files blindly. The current machine's
 
 ## Next steps
 
-- [ ] Figure out encryption?
+- [ ] Follow the [in-place root encryption runbook](docs/in-place-root-encryption.md).
 - [ ] Define backup tooling for the Btrfs root and user data (for example,
       snapper + snap-pac for snapshots and restic/Borg for off-machine copies).
 - [ ] Choose and configure a firewall frontend. `firewalld` plus

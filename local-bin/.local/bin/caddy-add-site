@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CADDYFILE="/etc/caddy/Caddyfile"
+START_MARKER="# >>> devports: "
+END_MARKER="# <<< devports"
+
+if [[ $# -ne 2 ]]; then
+  echo "usage: caddy-add-site <name> <port>" >&2
+  exit 1
+fi
+
+name="$1"
+port="$2"
+domain="${name}.test"
+
+block=$(cat <<EOF
+${START_MARKER}${name}
+http://${domain} {
+    bind 127.0.0.1
+    reverse_proxy 127.0.0.1:${port}
+}
+${END_MARKER}
+EOF
+)
+
+tmpfile=$(mktemp)
+trap 'rm -f "$tmpfile"' EXIT
+
+if grep -qF "${START_MARKER}${name}" "$CADDYFILE" 2>/dev/null; then
+  # Replace the existing block for this name in place
+  awk -v start="${START_MARKER}${name}" -v end="$END_MARKER" -v block="$block" '
+    $0 == start { print block; skip=1; next }
+    skip && $0 == end { skip=0; next }
+    skip { next }
+    { print }
+  ' "$CADDYFILE" > "$tmpfile"
+else
+  cp "$CADDYFILE" "$tmpfile"
+  printf '\n%s\n' "$block" >> "$tmpfile"
+fi
+
+sudo caddy validate --config "$tmpfile" --adapter caddyfile
+sudo cp "$tmpfile" "$CADDYFILE"
+sudo systemctl reload caddy
+echo "http://${domain} -> localhost:${port}"
