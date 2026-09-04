@@ -183,6 +183,9 @@ return {
     end,
   },
 
+  -- SOPS
+  { "dawidd6/nvim-sops" },
+
   -- Tabs (and buffers [and scope of them])
   { "tiagovla/scope.nvim", config = true },
 

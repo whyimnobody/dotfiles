@@ -16,7 +16,7 @@ alias random.phrase="shuf -n4 /usr/share/dict/words | tr '\n' _ | sed 's/.$/\n/'
 alias random.pwd="openssl rand -hex 64 | tr -d '\n' | pbcopy"
 # QoL Aliases
 # TODO: Make OS agnostic
-alias notes="nvim $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/whyimnobody/"
+alias notes="nvim $HOME/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/whyimnobody/"
 alias vim="nvim"
 alias art="php artisan"
 # TODO: Update to accept arg for app name

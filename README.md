@@ -71,6 +71,34 @@ SwiftBar monitor. After restowing `local-bin` and `zsh` on Asura, use
 [1Password SSH agent bridge runbook](docs/1password-ssh-bridge.md) for setup,
 status commands, Tailscale behaviour, and rollback.
 
+## Screenshot sync (Marceline ↔ Asura)
+
+Mutagen mirrors `~/Downloads/Screenshots` over Tailscale SSH so a Finder drop
+into a Mosh/Ghostty window pastes a path that exists on Asura. Asura's
+`/Users/seven` → `/home/seven` symlink is what makes the Mac path resolve.
+The daemon runs on Marceline (`mutagen daemon register` starts it at login);
+when Tailscale is down it waits and retries.
+
+Create the session once on Marceline:
+
+```sh
+mutagen sync create \
+  --name screenshots \
+  --sync-mode two-way-resolved \
+  --ignore '.DS_Store' \
+  ~/Downloads/Screenshots \
+  asura:~/Downloads/Screenshots
+```
+
+macOS already saves screenshots to that folder via `scripts/config.sh`. Drag
+from Finder or after the thumbnail has saved. The floating thumbnail itself
+is a short-lived `/var/folders/.../TemporaryItems/NSIRD_screencaptureui_*`
+path and will not survive on Asura.
+
+See the [screenshot sync runbook](docs/screenshot-sync.md) for the LaunchAgent,
+the Mutagen 0.18 agent `chmod` workaround, status commands, and thumbnail
+limitations.
+
 ## Review after an Arch upgrade
 
 Review `.pacnew` files before removing them. Keep the working local settings

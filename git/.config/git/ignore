@@ -112,3 +112,4 @@ target/
 *.rlib
 *.crate
 
+**/.claude/settings.local.json

@@ -67,6 +67,7 @@ case "$(uname -s)" in
     export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
   ;;
 esac
+export PGRX_HOME="$XDG_DATA_HOME/pgrx"
 
 # # RESTERM
 # export RESTERM_CONFIG_DIR="$XDG_CONFIG_HOME/resterm"

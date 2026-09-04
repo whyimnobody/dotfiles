@@ -13,6 +13,7 @@ zsh/.config/zsh/.zcompcache
 
 # Runtime state that must not be folded into Stow packages
 /terminal/.config/lnav/
+/tmux/.config/tmux-sessionizer/state.yml
 /tmux/.local/share/tmux/
 
 # Stow-managed personal commands (overrides the global `bin/` ignore rule)
