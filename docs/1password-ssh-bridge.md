@@ -131,6 +131,9 @@ The 15-second refresh checks only local Tailscale, launchd, socket, and OpenSSH
 control state. Use **Probe remote agent…** for the deeper `ssh-add -l` check.
 The menu also exposes Start, Reconnect, Stop, and logs.
 
+`mutagen-sync.30s.sh` is a separate plugin for the screenshot Mutagen session.
+It does not share state with this bridge.
+
 The separate `brew-services.30d.sh` plugin refreshes when opened. It uses
 Homebrew's JSON output for user services and checks launchd separately for the
 root-owned Caddy service. Root service actions open a terminal so macOS can ask

@@ -1,0 +1,13 @@
+[Unit]
+Description=JupyterLab (localhost)
+After=network.target
+ConditionPathExists=%h/.local/state/jupyter/token
+
+[Service]
+StateDirectory=jupyter
+ExecStart=%h/.local/bin/jupyter-lab-serve
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

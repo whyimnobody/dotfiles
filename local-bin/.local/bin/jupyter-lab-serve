@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+token_file="${XDG_STATE_HOME:-$HOME/.local/state}/jupyter/token"
+root="${JUPYTER_LAB_ROOT:-$HOME/study}"
+
+if [[ ! -s "$token_file" ]]; then
+	echo "jupyter-lab-serve: missing token file: $token_file" >&2
+	echo "Write a single-line token from 1Password, chmod 600, then start the service." >&2
+	exit 64
+fi
+
+token="$(tr -d '[:space:]' <"$token_file")"
+if [[ -z "$token" ]]; then
+	echo "jupyter-lab-serve: token file is empty: $token_file" >&2
+	exit 64
+fi
+
+mkdir -p "$root"
+umask 077
+
+exec /usr/bin/jupyter lab \
+	--no-browser \
+	--ip=127.0.0.1 \
+	--port=8888 \
+	--IdentityProvider.token="$token" \
+	--ServerApp.root_dir="$root" \
+	--ServerApp.allow_remote_access=True

@@ -1,3 +1,7 @@
+# OSC 52 from Mosh/tmux yanks on Asura. Ghostty defaults to allow writes, but
+# a denied prompt or a Mac default of ask/deny drops the sequence silently.
+clipboard-write = allow
+
 theme = Catppuccin Mocha
 font-family = "Cascadia Code"
 font-family = "Symbols Nerd Font Mono"

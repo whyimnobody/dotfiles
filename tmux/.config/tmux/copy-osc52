@@ -2,23 +2,67 @@
 
 set -eu
 
-client_tty=${1:-}
+# Write OSC 52 (`c`) to tmux client ptys. Mosh 1.4 only forwards that
+# clipboard, and tmux's own `load-buffer -w` / copy-mode redraw can split the
+# sequence. Copy-mode and Neovim both call this; clients are resolved at
+# yank time so a Mosh reconnect (new pts) still gets the payload.
 
-# Only write to a Linux pseudoterminal belonging to the tmux client that
-# initiated the copy. This keeps the destination from becoming shell input.
-case "$client_tty" in
-    /dev/pts/*) ;;
-    *) exit 1 ;;
-esac
+is_safe_tty() {
+    case "$1" in
+        /dev/pts/*)
+            tty_number=${1#/dev/pts/}
+            case "$tty_number" in
+                '' | *[!0-9]*) return 1 ;;
+                *) return 0 ;;
+            esac
+            ;;
+        /dev/ttys*)
+            tty_number=${1#/dev/ttys}
+            case "$tty_number" in
+                '' | *[!0-9]*) return 1 ;;
+                *) return 0 ;;
+            esac
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
 
-tty_number=${client_tty#/dev/pts/}
-case "$tty_number" in
-    ''|*[!0-9]*) exit 1 ;;
-esac
+target=${1:-}
+
+if [ -n "$target" ] && is_safe_tty "$target"; then
+    ttys=$target
+else
+    if [ -z "$target" ]; then
+        if [ -n "${TMUX_PANE:-}" ]; then
+            target=$TMUX_PANE
+        fi
+    fi
+    if [ -n "$target" ]; then
+        session=$(tmux display-message -p -t "$target" '#{session_name}')
+    else
+        session=$(tmux display-message -p '#{session_name}')
+    fi
+    ttys=$(tmux list-clients -t "$session" -F '#{client_tty}')
+fi
+
+safe_ttys=
+for client_tty in $ttys; do
+    if is_safe_tty "$client_tty"; then
+        safe_ttys="${safe_ttys}${safe_ttys:+ }${client_tty}"
+    fi
+done
+
+if [ -z "$safe_ttys" ]; then
+    exit 1
+fi
 
 # Build the complete sequence before writing anything. copy-pipe-and-cancel
 # redraws the client as it exits copy mode; writing the prefix early allows
 # that redraw to split the OSC sequence and expose its base64 payload.
 payload=$(base64 | tr -d '\n')
-sleep 0.1
-printf '\033]52;c;%s\007' "$payload" > "$client_tty"
+sleep 0.25
+for client_tty in $safe_ttys; do
+    printf '\033]52;c;%s\007' "$payload" >"$client_tty"
+done

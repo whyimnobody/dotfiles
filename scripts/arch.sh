@@ -56,6 +56,7 @@ media=(
 dev=(
 	act
 	age
+	ansible
 	asciinema
 	bat
 	bottom
@@ -80,6 +81,7 @@ dev=(
 	hugo
 	imagemagick
 	ipython
+	jupyterlab
 	jnv
 	jq
 	just
@@ -165,11 +167,13 @@ system=(
 	bluez-utils
 	caddy
 	grim
+	hypridle
 	hyprlock
 	hyprpaper
 	hyprpicker
 	kanshi
 	liquidctl
+	openrgb
 	rofi-wayland
 	satty
 	slurp
@@ -205,6 +209,8 @@ go=(
 )
 user_services=(
 	syncthing.service
+	openrgb-dram.service
+	jupyter-lab.service
 )
 system_services=(
 	docker.service
@@ -225,6 +231,7 @@ stow --dir="$HOME/.dotfiles" --target="$HOME" nice
 
 info "Enable boot-time user services"
 sudo loginctl enable-linger "$(id -un)"
+sudo gpasswd -a "$(id -un)" i2c
 
 info "Enable and start user services"
 systemctl --user enable --now "${user_services[@]}"

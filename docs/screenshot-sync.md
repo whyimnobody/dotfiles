@@ -93,6 +93,10 @@ mutagen sync monitor screenshots
 A healthy session shows `Watching` on both sides while Tailscale is connected,
 or `Connecting` while it waits.
 
+SwiftBar on Marceline runs `mac/.config/swiftbar/plugins/mutagen-sync.30s.sh`.
+Green is `Watching`; yellow is connecting or paused; red is a dead daemon or a
+missing session. The menu can flush the session or start the daemon.
+
 ## Thumbnail drops
 
 The floating macOS screenshot thumbnail is **not** a file in

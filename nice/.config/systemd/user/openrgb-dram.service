@@ -1,0 +1,12 @@
+[Unit]
+Description=Apply OpenRGB DRAM profile
+After=graphical-session.target
+ConditionPathExists=%h/.config/OpenRGB/profiles/dram.json
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/openrgb --profile dram
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target

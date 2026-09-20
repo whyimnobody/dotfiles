@@ -65,5 +65,7 @@ sudo install -Dm644 "$repo_root/nice/.config/sddm/virtualkbd.conf" \
 # setting across power cycles, so keep the service source in the dotfiles.
 sudo install -Dm644 "$repo_root/nice/.config/systemd/system/kraken-lcd.service" \
 	/etc/systemd/system/kraken-lcd.service
+sudo install -Dm644 "$repo_root/nice/.config/modules-load.d/i2c-dev.conf" \
+	/etc/modules-load.d/i2c-dev.conf
 sudo systemctl daemon-reload
 sudo systemctl enable --now kraken-lcd.service

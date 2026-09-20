@@ -6,3 +6,26 @@ syncthing.localhost {
 		header_up Host {upstream_hostport}
 	}
 }
+
+# Syncthing GUI on the tailnet (no TLS). Needs Tailscale split-DNS for the
+# `asura` zone → this node, same as *.test. dnsmasq answers *.asura.
+http://syncthing.asura {
+	bind 127.0.0.1 [::1]
+	reverse_proxy 127.0.0.1:8384 {
+		header_up Host {upstream_hostport}
+	}
+}
+
+# Mailpit UI. Reachable on the tailnet as http://email.test because
+# Tailscale split-DNS maps *.test to Asura and serve forwards :80 to Caddy.
+http://email.test {
+	bind 127.0.0.1 [::1]
+	reverse_proxy 127.0.0.1:8025
+}
+
+# JupyterLab. Same tailnet pattern as email.test. Token is not in this file;
+# see docs/jupyter-lab.md.
+http://jupyter.test {
+	bind 127.0.0.1 [::1]
+	reverse_proxy 127.0.0.1:8888
+}
