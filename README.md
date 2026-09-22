@@ -55,6 +55,11 @@ sites are not wiped.
   was made before opening Satty.
 - Clipse listens in the background and opens with Meta+V; Meta+Shift+V toggles
   the active window's floating state.
+- Caelestia bindings are additive in
+  `nice/.config/hypr/config/caelestia.lua`: shell controls use alternate
+  chords, while the existing Vicinae, SwayNC, Satty, Clipse, and media
+  bindings remain unchanged. Caelestia CLI actions become active after the
+  shell is installed.
 - Kanshi manages the configured DP-1/DP-2 layout and can be extended with
   laptop or dock profiles in `nice/.config/kanshi/config`.
 - Eww and wlogout live in `nice/.config`; SDDM's system snippets are sourced
@@ -71,7 +76,7 @@ sites are not wiped.
 ### Idle lock
 
 `hypridle` is installed and configured, and starts from
-`nice/.config/hypr/hyprland.conf`. `hyprctl dispatch dpms off` was tested
+`nice/.config/hypr/hyprland.lua`. `hyprctl dispatch dpms off` was tested
 successfully in the active Hyprland session.
 
 Policy in `nice/.config/hypr/hypridle.conf` (no suspend — SSH, Mosh, Mutagen,
