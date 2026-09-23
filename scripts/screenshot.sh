@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-screenshot_dir="$HOME/Pictures/Screenshots"
+screenshot_dir="$HOME/Downloads/Screenshots"
 mkdir -p "$screenshot_dir"
 
 annotate() {

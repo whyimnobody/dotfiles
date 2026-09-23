@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Caelestia invokes Swappy as `swappy -f -` or `swappy -f <path>`.
+# Route both forms through Satty while keeping the Caelestia CLI unchanged.
+if [[ "${1:-}" == "-f" && $# -ge 2 ]]; then
+	shift
+	exec satty --filename "$1"
+fi
+
+exec satty "$@"

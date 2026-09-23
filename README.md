@@ -51,19 +51,37 @@ sites are not wiped.
   endpoints. The first use creates private MinIO credentials locally.
 - Satty screenshots use Meta+Shift+S for a selected region, Meta+Shift+C to
   copy a region, Meta+Shift+F for the focused output, and Meta+Shift+W for the
-  active window. The screenshot script focuses the output where the capture
-  was made before opening Satty.
-- Clipse listens in the background and opens with Meta+V; Meta+Shift+V toggles
-  the active window's floating state.
-- Caelestia bindings are additive in
-  `nice/.config/hypr/config/caelestia.lua`: shell controls use alternate
-  chords, while the existing Vicinae, SwayNC, Satty, Clipse, and media
-  bindings remain unchanged. Caelestia CLI actions become active after the
-  shell is installed.
+  active window. `grim` captures pixels, `slurp` selects regions, `satty`
+  annotates, and `wl-clipboard` handles clipboard copies. Annotated captures
+  are saved to `~/Downloads/Screenshots`; copy-only captures are not saved.
+  Caelestia's built-in fullscreen capture initially uses
+  `~/.cache/caelestia/screenshots` and can save to `~/Downloads/Screenshots`.
+  Caelestia's Swappy calls are routed through the local Satty shim, so both
+  screenshot paths use Satty for annotation.
+- Caelestia is built from the downstream checkout at
+  `~/repos/personal/shell`, while `caelestia-cli` and `quickshell-git` provide
+  the launcher and runtime. It starts from
+  `nice/.config/hypr/config/startup.lua` and owns the bar, launcher,
+  notifications, clipboard UI, wallpaper, and idle policy. The shell settings
+  are versioned in `nice/.config/caelestia/shell.json`. Use the checkout's
+  `justfile` for the user-local workflow:
+  `just --justfile ~/repos/personal/shell/justfile install` builds and installs
+  it without `sudo`, while
+  `just --justfile ~/repos/personal/shell/justfile update` fetches upstream,
+  rebases the current downstream branch, validates, and reinstalls. Do not run
+  `caelestia install`, which installs the larger Caelestia desktop dots.
+  Caelestia reads wallpapers from the `wallpapers` submodule at
+  `~/.dotfiles/wallpapers`.
+- Caelestia's primary shortcuts are Meta+Space for the launcher, Meta+N for
+  the sidebar, Meta+Shift+N for clearing notifications, and Meta+V for the
+  clipboard. Meta+Shift+V still toggles the active window's floating state.
+- Waybar, Eww, SwayNC, Vicinae, Clipse, Hyprpaper, Hyprlock, and Hypridle are
+  no longer installed or started. Their old configuration files remain in the
+  repository as rollback references while the Caelestia migration settles.
 - Kanshi manages the configured DP-1/DP-2 layout and can be extended with
   laptop or dock profiles in `nice/.config/kanshi/config`.
-- Eww and wlogout live in `nice/.config`; SDDM's system snippets are sourced
-  from `nice/.config/sddm` and installed by `scripts/nice.sh`.
+- SDDM's system snippets are sourced from `nice/.config/sddm` and installed by
+  `scripts/nice.sh`.
 - liquidctl is installed by the Arch setup, and `kraken-lcd.service` reapplies
   the 180° LCD orientation at boot. The service deliberately does not choose
   an image or GIF yet.
@@ -75,25 +93,17 @@ sites are not wiped.
 
 ### Idle lock
 
-`hypridle` is installed and configured, and starts from
-`nice/.config/hypr/hyprland.lua`. `hyprctl dispatch dpms off` was tested
-successfully in the active Hyprland session.
+Caelestia QuickShell owns idle handling through
+`nice/.config/caelestia/shell.json`. `hypridle.conf`, `hyprlock.conf`, and
+`hyprpaper.conf` are retained as rollback references but are no longer
+started.
 
-Policy in `nice/.config/hypr/hypridle.conf` (no suspend — SSH, Mosh, Mutagen,
-and the 1Password bridge must keep running while the machine is locked):
+Policy (no suspend — SSH, Mosh, Mutagen, and the 1Password bridge must keep
+running while the machine is locked):
 
-- 15 minutes: `hyprlock`
-- 30 minutes: monitors off (`hyprctl dispatch dpms off`)
+- 15 minutes: Caelestia lockscreen
+- 30 minutes: monitors off (`dpms off`), restored with `dpms on`
 - never: `systemctl suspend`
-
-The DPMS check was performed from a Hyprland session with work that could be
-recovered if necessary:
-
-```sh
-hyprctl dispatch dpms off
-```
-
-If the displays need to be restored manually, use `hyprctl dispatch dpms on`.
 
 ## macOS post-install
 
@@ -164,4 +174,5 @@ manually; do not overwrite the active files blindly. The current machine's
 - [ ] Put a 1Password token in `~/.local/state/jupyter/token`, then start
       JupyterLab (`docs/jupyter-lab.md`). Also `caddy-add-site jupyter 8888`
       or re-run `scripts/caddy.sh` so `http://jupyter.test` is live.
-- [x] Enable `hypridle` after confirming the DPMS path is stable.
+- [x] Install Caelestia shell and move bar, launcher, notifications, clipboard,
+      wallpaper, and idle handling into QuickShell.

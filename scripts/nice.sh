@@ -21,15 +21,14 @@ ensure_hyprpm_plugin() {
 	fi
 }
 
-# Hyprland, hyprpaper, hyprpm
+# Desktop support and Hyprland plugins
 sudo pacman -S --needed --noconfirm \
 	cmake \
 	cpio \
 	qt6-multimedia-ffmpeg \
 	qt6-svg \
 	qt6-virtualkeyboard \
-	sddm \
-	waybar
+	sddm
 
 ensure_hyprpm_repo https://github.com/hyprwm/hyprland-plugins hyprland-plugins
 ensure_hyprpm_plugin hyprexpo
@@ -38,11 +37,6 @@ ensure_hyprpm_plugin Hyprspace
 
 # Wallpapers
 git -C "$repo_root" submodule update --init --recursive wallpapers
-mkdir -p "$HOME/pictures/wallpapers"
-rsync -av --exclude=".*" "$repo_root/wallpapers/" "$HOME/pictures/wallpapers/"
-
-# AGS
-yay -S --needed --noconfirm --answerclean NotInstalled --answerdiff None aylurs-gtk-shell-git
 
 # sddm looking spicy
 rice_root="$repo_root/../rice"

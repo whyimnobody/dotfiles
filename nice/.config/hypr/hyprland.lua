@@ -1,7 +1,7 @@
 -- Hyprland compositor configuration.
 --
--- Keep application-specific configuration in the neighbouring files:
--- hypridle.conf, hyprlock.conf, and hyprpaper.conf.
+-- Keep application-specific configuration in the neighbouring files. The
+-- legacy hypridle, hyprlock, and hyprpaper files remain for rollback only.
 
 require("config.startup")
 require("config.environment")

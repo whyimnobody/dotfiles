@@ -167,25 +167,19 @@ system=(
 	bluez-utils
 	caddy
 	grim
-	hypridle
-	hyprlock
-	hyprpaper
 	hyprpicker
 	kanshi
 	liquidctl
 	openrgb
-	rofi-wayland
 	satty
 	slurp
 	tailscale
-	waybar
-	wf-recorder
 	wl-clipboard
 )
 
 system_aur=(
-	clipse
-	wlogout
+	caelestia-cli
+	caelestia-shell
 )
 
 packages=(

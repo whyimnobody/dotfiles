@@ -1,8 +1,8 @@
--- Additive Caelestia integration.
+-- Caelestia shell integration.
 --
--- Existing bindings stay in config.keybindings.lua. The global dispatchers
--- below are inert until the Caelestia shell is running, so this can land
--- before the shell itself is installed.
+-- The primary launcher, sidebar, notification, and clipboard bindings live in
+-- config.keybindings.lua. These alternate chords expose additional shell and
+-- utility actions without disturbing the retained application shortcuts.
 
 local programs = require("config.programs")
 local main_mod = "SUPER"
@@ -18,8 +18,7 @@ end
 local locked = { locked = true }
 local repeating = { locked = true, repeating = true }
 
--- Shell controls. These use alternate chords so Vicinae, SwayNC, and the
--- existing exit/close bindings remain available during the migration.
+-- Alternate shell controls.
 shell(main_mod .. " + ALT + SPACE", "launcher")
 shell(main_mod .. " + ALT + N", "sidebar")
 shell(main_mod .. " + ALT + K", "showall")
@@ -77,8 +76,8 @@ bind(main_mod .. " + ALT + V", hl.dsp.exec_cmd("pkill fuzzel || caelestia clipbo
 bind("CTRL + SHIFT + ALT + V", hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard -d"))
 bind(main_mod .. " + PERIOD", hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"))
 
--- Keep the Caelestia app roles reachable without changing the current app
--- shortcuts (Q/E/V/Space).
+-- Keep the Caelestia app roles reachable without changing the terminal,
+-- file-manager, browser, and editor choices.
 bind(main_mod .. " + ALT + T", hl.dsp.exec_cmd(programs.terminal))
 bind(main_mod .. " + ALT + W", hl.dsp.exec_cmd(programs.browser))
 bind(main_mod .. " + ALT + I", hl.dsp.exec_cmd("ghostty -e nvim"))

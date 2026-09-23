@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+local_root="${HOME}/.local"
+
+export CAELESTIA_SCREENSHOTS_DIR="${CAELESTIA_SCREENSHOTS_DIR:-${HOME}/Downloads/Screenshots}"
+export PATH="${local_root}/bin:${PATH}"
+
+# Hyprland normally exports this, but shells started by some Hyprland startup
+# paths do not inherit it. Quickshell's Hyprland service needs the signature to
+# connect to the correct IPC socket.
+if [[ -z "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]] && command -v hyprctl >/dev/null 2>&1 && command -v jq >/dev/null 2>&1; then
+	hyprland_signature="$(hyprctl instances -j 2>/dev/null | jq -er '.[0].instance' 2>/dev/null || true)"
+	if [[ -n "${hyprland_signature}" ]]; then
+		export HYPRLAND_INSTANCE_SIGNATURE="${hyprland_signature}"
+	fi
+fi
+
+export CAELESTIA_LIB_DIR="${CAELESTIA_LIB_DIR:-${local_root}/lib/caelestia}"
+if [[ -n "${QML2_IMPORT_PATH:-}" ]]; then
+	export QML2_IMPORT_PATH="${local_root}/lib/qt6/qml:${QML2_IMPORT_PATH}"
+else
+	export QML2_IMPORT_PATH="${local_root}/lib/qt6/qml"
+fi
+
+exec /usr/bin/caelestia "$@"
