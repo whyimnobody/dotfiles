@@ -21,6 +21,7 @@ local repeating = { locked = true, repeating = true }
 -- Alternate shell controls.
 shell(main_mod .. " + ALT + SPACE", "launcher")
 shell(main_mod .. " + ALT + N", "sidebar")
+shell(main_mod .. " + ALT + Y", "recentFiles")
 shell(main_mod .. " + ALT + K", "showall")
 shell("CTRL + ALT + C", "clearNotifs", locked)
 shell("CTRL + ALT + DELETE", "session")

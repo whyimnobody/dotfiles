@@ -72,6 +72,8 @@ sites are not wiped.
   `caelestia install`, which installs the larger Caelestia desktop dots.
   Caelestia reads wallpapers from the `wallpapers` submodule at
   `~/.dotfiles/wallpapers`.
+- Known Caelestia rendering issues and local workarounds are tracked in the
+  [Caelestia known-issues note](docs/caelestia-known-issues.md).
 - Caelestia's primary shortcuts are Meta+Space for the launcher, Meta+N for
   the sidebar, Meta+Shift+N for clearing notifications, and Meta+V for the
   clipboard. Meta+Shift+V still toggles the active window's floating state.

@@ -17,14 +17,7 @@
 			"occupiedLabel": "",
 			"activeLabel": "",
 			"showWindows": true,
-			"maxWindowIcons": 5,
-			"windowIcons": [
-				{
-					"regex": "^zen",
-					"flags": "i",
-					"icon": "language"
-				}
-			]
+			"maxWindowIcons": 5
 		}
     },
     "dashboard": {
