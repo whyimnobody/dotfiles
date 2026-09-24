@@ -38,16 +38,12 @@ ensure_hyprpm_plugin Hyprspace
 # Wallpapers
 git -C "$repo_root" submodule update --init --recursive wallpapers
 
-# sddm looking spicy
-rice_root="$repo_root/../rice"
-if [[ -d "$rice_root/etc/sddm.conf.d" && -d "$rice_root/usr/share/sddm/themes/sakura" ]]; then
-	sudo rsync -a --delete --relative \
-		"$rice_root/./etc/sddm.conf.d/" \
-		"$rice_root/./usr/share/sddm/themes/sakura/" \
-		/
-else
-	printf 'Skipping SDDM theme: %s is unavailable\n' "$rice_root" >&2
-fi
+# Keep the animated Sakura background, but own the Caelestia-styled QML theme
+# in this repository so package updates cannot overwrite the greeter design.
+sddm_theme_source="$repo_root/nice/sddm/themes/sakura-caelestia"
+sddm_theme_target=/usr/share/sddm/themes/sakura-caelestia
+sudo install -d "$sddm_theme_target"
+sudo rsync -a --delete "$sddm_theme_source/" "$sddm_theme_target/"
 
 # Keep the SDDM system configuration versioned with the nice desktop package.
 sudo install -Dm644 "$repo_root/nice/.config/sddm/theme.conf" \
