@@ -8,7 +8,7 @@ mkdir -p "$screenshot_dir"
 annotate() {
 	local output="${1:-}"
 	if [[ -n "$output" ]]; then
-		hyprctl dispatch focusmonitor "$output" >/dev/null
+		hyprctl eval "hl.dsp.focus({ monitor = \"$output\" })" >/dev/null
 	fi
 	satty --filename -
 }

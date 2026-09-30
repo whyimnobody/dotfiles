@@ -16,12 +16,47 @@ umask 077
 mkdir -p "$HOME/.ssh"
 chmod 700 "$HOME/.ssh"
 
+probe_seconds=2
+poll_seconds=5
+
 switch_socket() {
 	local target="$1"
 
 	rm -f "$temporary_link"
 	ln -s "$target" "$temporary_link"
 	mv -Tf "$temporary_link" "$stable_socket"
+}
+
+current_target() {
+	if [[ -L "$stable_socket" ]]; then
+		readlink "$stable_socket"
+	fi
+}
+
+# ssh-add exits 0 when the agent has keys and 1 when it answers with none.
+# A hang or a refused connection is a dead peer, which is what a sleeping Mac
+# leaves behind: the socket inode stays, and clients block on it.
+agent_answers() {
+	local status
+
+	SSH_AUTH_SOCK="$forwarded_socket" timeout "$probe_seconds" ssh-add -l >/dev/null 2>&1
+	status=$?
+	[[ "$status" -eq 0 || "$status" -eq 1 ]]
+}
+
+# Take the stable path only from the local agent or from a socket this bridge
+# already owns. A newer bridge's target is left alone.
+follow_agent() {
+	local current
+
+	current="$(current_target || true)"
+	if agent_answers; then
+		if [[ "$current" == "$local_socket" || "$current" == "$forwarded_socket" ]]; then
+			[[ "$current" == "$forwarded_socket" ]] || switch_socket "$forwarded_socket"
+		fi
+	elif [[ "$current" == "$forwarded_socket" ]]; then
+		switch_socket "$local_socket"
+	fi
 }
 
 cleanup() {
@@ -36,8 +71,12 @@ trap 'exit 0' HUP INT TERM
 switch_socket "$forwarded_socket"
 echo "1p-bridge-ready"
 
-# The socket disappears when OpenSSH tears down agent forwarding. Polling it also
-# gives the helper a bounded cleanup delay if the connection ends ungracefully.
+# The socket inode survives a sleeping Mac, and clients hang on it instead of
+# failing. Probe the forwarded agent and point the stable path at the local
+# agent while the peer is quiet. A later answer points it back here, unless a
+# newer bridge already owns the path. The loop ends once OpenSSH removes the
+# socket, and the exit trap restores the local agent if this bridge still owns it.
 while [[ -S "$forwarded_socket" ]]; do
-	sleep 10
+	follow_agent || true
+	sleep "$poll_seconds"
 done

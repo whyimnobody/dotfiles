@@ -57,7 +57,7 @@ bind(main_mod .. " + ALT + C", hl.dsp.window.center())
 bind(main_mod .. " + ALT + P", hl.dsp.window.pin())
 bind(main_mod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 bind(main_mod .. " + ALT + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
-bind(main_mod .. " + SHIFT + SPACE", hl.dsp.window.float())
+bind(main_mod .. " + SHIFT + SPACE", hl.dsp.exec_cmd("1password --quick-access"))
 bind(main_mod .. " + ALT + Q", hl.dsp.window.close())
 bind(main_mod .. " + TAB", hl.dsp.window.cycle_next(), { repeating = true })
 
@@ -75,7 +75,7 @@ bind(main_mod .. " + CTRL + ALT + ESCAPE", hl.dsp.workspace.toggle_special("sysm
 -- CLI; until then these commands simply fail harmlessly when invoked.
 bind(main_mod .. " + ALT + V", hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard"))
 bind("CTRL + SHIFT + ALT + V", hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard -d"))
-bind(main_mod .. " + PERIOD", hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"))
+bind(main_mod .. " + PERIOD", hl.dsp.global("caelestia:emoji"))
 
 -- Keep the Caelestia app roles reachable without changing the terminal,
 -- file-manager, browser, and editor choices.

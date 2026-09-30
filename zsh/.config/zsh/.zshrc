@@ -21,11 +21,25 @@ setopt always_to_end
 
 # Path Management
 # Add local/bin to PATH
-export PATH=/usr/local/bin:$PATH
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=/opt/homebrew/sbin:$PATH
+export PATH="/usr/local/bin:$PATH"
+
+# Homebrew
+# Initialize the first installed Homebrew prefix before compinit so its
+# binaries, manpages, and zsh completions are available to the shell.
+for brew_bin in \
+  /home/linuxbrew/.linuxbrew/bin/brew \
+  /opt/homebrew/bin/brew \
+  /usr/local/bin/brew
+do
+  if [[ -x "$brew_bin" ]]; then
+    eval "$($brew_bin shellenv zsh)"
+    break
+  fi
+done
+unset brew_bin
+
 # Add XDG_BIN_HOME to PATH
-export PATH=$PATH:$XDG_BIN_HOME
+export PATH="$PATH:$XDG_BIN_HOME"
 
 # You may need to manually set your language environment
 export LANG=en_GB.UTF-8

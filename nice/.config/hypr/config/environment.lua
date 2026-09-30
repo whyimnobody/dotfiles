@@ -1,4 +1,5 @@
-hl.env("XCURSOR_SIZE", "24")
+hl.env("XCURSOR_SIZE", "32")
+hl.env("XCURSOR_THEME", "Nordzy-catppuccin-mocha-dark")
 hl.env("HYPRCURSOR_THEME", "Nordzy-hyprcursors-catppuccin-mocha-dark")
-hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_SIZE", "32")
 hl.env("CAELESTIA_SCREENSHOTS_DIR", os.getenv("HOME") .. "/Downloads/Screenshots")

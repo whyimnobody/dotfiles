@@ -1,112 +1,107 @@
 {
-    "appearance": {
-        "anim": {
-            "durations": {
-                "scale": 0.85
-            }
-        }
-    },
-    "bar": {
-        "persistent": true,
-        "position": "top",
-		"workspaces": {
-		"activeIndicator": true,
-		"shown": 10,
-		"displayType": "text",
-			"label": "",
-			"occupiedLabel": "",
-			"activeLabel": "",
-			"showWindows": true,
-			"maxWindowIcons": 5,
-			"windowIcons": [
-				{
-					"regex": "^steam(_app_(default|[0-9]+))?$",
-					"icon": "sports_esports"
-				},
-				{
-					"regex": "^1password$",
-					"icon": "key"
-				}
-			]
-		}
-    },
-    "dashboard": {
-        "position": "top"
-    },
-    "general": {
-        "apps": {
-            "explorer": [
-                "ghostty",
-                "-e",
-                "yazi"
-            ],
-            "terminal": [
-                "ghostty"
-            ]
-        },
-        "idle": {
-            "inhibitWhenAudio": true,
-            "lockBeforeSleep": true,
-            "timeouts": [
-                {
-                    "enabled": true,
-                    "idleAction": "lock",
-                    "inhibitWhenAudio": false,
-                    "inhibitWhenCharging": false,
-                    "respectInhibitors": true,
-                    "timeout": 900
-                },
-                {
-                    "enabled": true,
-                    "idleAction": "dpms off",
-                    "inhibitWhenAudio": false,
-                    "inhibitWhenCharging": false,
-                    "respectInhibitors": true,
-                    "returnAction": "dpms on",
-                    "timeout": 1800
-                }
-            ]
-        }
-    },
-    "launcher": {
-        "maxWallpapers": 7
-    },
-    "paths": {
-        "wallpaperDir": "~/.dotfiles/wallpapers"
-    },
-    "services": {
-        "audioIncrement": 0.05
-    },
-    "utilities": {
-        "quickToggles": [
-            {
-                "enabled": true,
-                "id": "wifi"
-            },
-            {
-                "enabled": true,
-                "id": "bluetooth"
-            },
-            {
-                "enabled": true,
-                "id": "mic"
-            },
-            {
-                "enabled": true,
-                "id": "settings"
-            },
-            {
-                "enabled": true,
-                "id": "gameMode"
-            },
-            {
-                "enabled": true,
-                "id": "dnd"
-            },
-            {
-                "enabled": true,
-                "id": "vpn"
-            }
-        ]
+  "appearance": {
+    "anim": {
+      "durations": {
+        "scale": 0.85
+      }
     }
+  },
+  "bar": {
+    "persistent": true,
+    "position": "top",
+    "workspaces": {
+      "activeIndicator": true,
+      "shown": 10,
+      "displayType": "text",
+      "label": "",
+      "occupiedLabel": "",
+      "activeLabel": "",
+      "showWindows": true,
+      "maxWindowIcons": 5
+    },
+    "statusIcons": [
+      { "id": "lockStatus", "enabled": true },
+      { "id": "network", "enabled": true },
+      { "id": "bluetooth", "enabled": true },
+      { "id": "audio", "enabled": true },
+      { "id": "battery", "enabled": true }
+    ]
+  },
+  "dashboard": {
+    "position": "top"
+  },
+  "general": {
+    "apps": {
+      "explorer": ["ghostty", "-e", "yazi"],
+      "terminal": ["ghostty"]
+    },
+    "idle": {
+      "inhibitWhenAudio": true,
+      "lockBeforeSleep": true,
+      "timeouts": [
+        {
+          "enabled": true,
+          "idleAction": "lock",
+          "inhibitWhenAudio": false,
+          "inhibitWhenCharging": false,
+          "respectInhibitors": true,
+          "timeout": 900
+        },
+        {
+          "enabled": true,
+          "idleAction": "dpms off",
+          "inhibitWhenAudio": false,
+          "inhibitWhenCharging": false,
+          "respectInhibitors": true,
+          "returnAction": "dpms on",
+          "timeout": 1800
+        }
+      ]
+    }
+  },
+  "launcher": {
+    "maxWallpapers": 7,
+    "enableDangerousActions": true
+  },
+  "lock": {
+    "useWallpaper": true
+  },
+  "paths": {
+    "wallpaperDir": "~/.dotfiles/wallpapers"
+  },
+  "services": {
+    "audioIncrement": 0.05
+  },
+  "utilities": {
+    "quickToggles": [
+      {
+        "enabled": true,
+        "id": "wifi"
+      },
+      {
+        "enabled": true,
+        "id": "bluetooth"
+      },
+      {
+        "enabled": true,
+        "id": "mic"
+      },
+      {
+        "enabled": true,
+        "id": "settings"
+      },
+      {
+        "enabled": true,
+        "id": "gameMode"
+      },
+      {
+        "enabled": true,
+        "id": "dnd"
+      },
+      {
+        "enabled": true,
+        "id": "vpn"
+      }
+    ]
+  }
 }

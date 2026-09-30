@@ -16,10 +16,13 @@ Mac 1Password agent
 ```
 
 Shells and SSH clients use `~/.ssh/agent.sock`. On Asura, the remote helper
-atomically points that path at the forwarded socket. When the bridge exits, it
-restores the path to Asura's local `~/.1password/agent.sock`. Cleanup checks
-that it still owns the symlink, so an older connection cannot overwrite a newer
-one.
+atomically points that path at the forwarded socket. Every few seconds it asks
+that agent for its keys, with a two-second limit. If the agent does not answer,
+the helper points the path back at Asura's local `~/.1password/agent.sock` and
+keeps watching. A later answer points it at the forwarded socket again. The
+helper only takes the path from the local agent or from a socket it already
+owns, so an older connection cannot overwrite a newer one. When the bridge
+exits, the same ownership check restores the local agent.
 
 The bridge is on demand. Its generated plist lives in
 `~/Library/Application Support/1p-bridge`, not `~/Library/LaunchAgents`, so it

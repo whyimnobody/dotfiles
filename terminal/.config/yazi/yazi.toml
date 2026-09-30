@@ -1,3 +1,38 @@
 [mgr]
 show_hidden = true
 show_symlink = true
+
+[preview]
+# Each monitor is 2560x1440. Below that, the preview pane is the limit.
+max_width = 2560
+max_height = 1440
+
+[plugin]
+prepend_previewers = [
+	{ mime = "video/*", run = "video-preview" },
+	{ mime = "image/gif", run = "video-preview" },
+	{ mime = "text/markdown", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
+	{ url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
+	{ mime = "application/openxmlformats-officedocument.*", run = "office" },
+	{ mime = "application/oasis.opendocument.*", run = "office" },
+	{ mime = "application/ms-*", run = "office" },
+	{ mime = "application/msword", run = "office" },
+	{ url = "*.{doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp}", run = "office" },
+]
+prepend_preloaders = [
+	{ mime = "application/openxmlformats-officedocument.*", run = "office" },
+	{ mime = "application/oasis.opendocument.*", run = "office" },
+	{ mime = "application/ms-*", run = "office" },
+	{ mime = "application/msword", run = "office" },
+	{ url = "*.{doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp}", run = "office" },
+]
+
+[opener]
+imv = [
+	{ run = "imv-dir %s1", desc = "imv", for = "linux", orphan = true },
+]
+
+[open]
+prepend_rules = [
+	{ mime = "image/*", use = [ "imv", "reveal" ] },
+]

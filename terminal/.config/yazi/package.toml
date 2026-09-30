@@ -1,0 +1,12 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:piper"
+rev = "7200d73"
+hash = "d1e0499cae5f3aeb628c267616d4b682"
+
+[[plugin.deps]]
+use = "macydnah/office"
+rev = "41ebef8"
+hash = "5805affd3ae8adcb3c72b6997d21c0a6"
+
+[flavor]
+deps = []

@@ -5,7 +5,7 @@ hl.bind(main_mod .. " + Q", hl.dsp.exec_cmd(programs.terminal))
 hl.bind(main_mod .. " + SHIFT + K", hl.dsp.window.close())
 hl.bind(main_mod .. " + M", hl.dsp.exit())
 hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(programs.file_manager))
-hl.bind(main_mod .. " + V", hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard"))
+hl.bind(main_mod .. " + V", hl.dsp.global("caelestia:clipboard"))
 hl.bind(main_mod .. " + SHIFT + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + SPACE", hl.dsp.global("caelestia:launcher"))
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
@@ -41,6 +41,11 @@ for workspace = 1, 10 do
     hl.bind(main_mod .. " + " .. key, hl.dsp.focus({ workspace = workspace }))
     hl.bind(main_mod .. " + CTRL + " .. key, hl.dsp.window.move({ workspace = workspace }))
 end
+
+hl.bind(main_mod .. " + CTRL + left", hl.dsp.workspace.move({ monitor = "left" }))
+hl.bind(main_mod .. " + CTRL + right", hl.dsp.workspace.move({ monitor = "right" }))
+hl.bind(main_mod .. " + CTRL + SHIFT + left", hl.dsp.workspace.swap_monitors({ monitor1 = "current", monitor2 = "left" }))
+hl.bind(main_mod .. " + CTRL + SHIFT + right", hl.dsp.workspace.swap_monitors({ monitor1 = "current", monitor2 = "right" }))
 
 hl.bind(main_mod .. " + S", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(main_mod .. " + CTRL + S", hl.dsp.window.move({ workspace = "special:magic" }))

@@ -50,6 +50,7 @@ media=(
 	audacity
 	gimp
 	inkscape
+	libreoffice-fresh
 	vlc
 )
 
@@ -59,6 +60,7 @@ dev=(
 	ansible
 	asciinema
 	bat
+	bind
 	bottom
 	croc
 	ctop
@@ -235,6 +237,9 @@ sudo systemctl enable --now "${system_services[@]}"
 
 # Some housekeeping
 source "$HOME/.dotfiles/scripts/common.sh"
+
+info "Install Yazi plugins"
+ya pkg install
 
 # TODO: Sort out GPG on system
 # TODO: Figure out a Maccy like experience

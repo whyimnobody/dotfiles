@@ -63,7 +63,10 @@ sites are not wiped.
   the launcher and runtime. It starts from
   `nice/.config/hypr/config/startup.lua` and owns the bar, launcher,
   notifications, clipboard UI, wallpaper, and idle policy. The shell settings
-  are versioned in `nice/.config/caelestia/shell.json`. Use the checkout's
+  are versioned in `nice/.config/caelestia/shell.json`. Theme application
+  flags live in `nice/.config/caelestia/cli.json` and default every
+  `enable*` key off, so a wallpaper change does not retheme Ghostty, nvim,
+  GTK, Qt, or other apps. Use the checkout's
   `justfile` for the user-local workflow:
   `just --justfile ~/repos/personal/shell/justfile install` builds and installs
   it without `sudo`, while
@@ -71,12 +74,34 @@ sites are not wiped.
   rebases the current downstream branch, validates, and reinstalls. Do not run
   `caelestia install`, which installs the larger Caelestia desktop dots.
   Caelestia reads wallpapers from the `wallpapers` submodule at
-  `~/.dotfiles/wallpapers`.
+  `~/.dotfiles/wallpapers`. The launcher wallpaper picker sets the image
+  on the focused monitor only; other outputs keep their own files.
+- Type `>dict word` in the launcher (or pick Dictionary) for an offline
+  English Wiktionary lookup. Build the database once with
+  `just --justfile ~/repos/personal/shell/justfile dictionary`; it lives at
+  `~/.local/share/caelestia/dictionary/en.sqlite` and is not in git.
+- Type `>clip` in the launcher (or pick Clipboard, or Meta+V) for clipboard
+  history via cliphist, including image thumbnails. The list shows five rows
+  and scrolls. Hypr starts `wl-paste --watch cliphist store` for text and
+  images on login.
+- Type `>keybinds` in the launcher (or pick Keybinds) to search Hyprland
+  bindings from the hyprlua config. Enter runs the selected bind. Shutdown,
+  Reboot, and Logout are also launcher actions (`enableDangerousActions`).
+- AppImages are installed per user and appear in the launcher. Use
+  `./scripts/appimage-install.sh`; see the [AppImage installation runbook](docs/appimages.md)
+  for generic installation, overrides, verification, and uninstall guidance.
 - Known Caelestia rendering issues and local workarounds are tracked in the
   [Caelestia known-issues note](docs/caelestia-known-issues.md).
 - Caelestia's primary shortcuts are Meta+Space for the launcher, Meta+N for
-  the sidebar, Meta+Shift+N for clearing notifications, and Meta+V for the
-  clipboard. Meta+Shift+V still toggles the active window's floating state.
+  the sidebar, Meta+Shift+N for clearing notifications, and Meta+V for
+  clipboard history in the launcher. While `caelestia record` is running, a pill in the center of the top bar shows REC and the elapsed time, with pause and stop. A green dot and an orange dot appear at the left of the top-right status icons while an app is using the camera or the microphone. The taskbar speaker icon sits between
+  bluetooth and battery and changes when output is muted; click it for the
+  full mixer (output, mic, per-app volumes). Super+Ctrl+Left/Right moves the
+  current workspace to that monitor; Super+Ctrl+Shift+Left/Right swaps the two
+  monitors' active workspaces. Meta+Alt+Y toggles the recent-files panel
+  (Downloads and
+  Screenshots); it also opens from the right-edge hover above the utilities
+  corner. Meta+Shift+V still toggles the active window's floating state.
 - Waybar, Eww, SwayNC, Vicinae, Clipse, Hyprpaper, Hyprlock, and Hypridle are
   no longer installed or started. Their old configuration files remain in the
   repository as rollback references while the Caelestia migration settles.
@@ -103,7 +128,7 @@ started.
 Policy (no suspend — SSH, Mosh, Mutagen, and the 1Password bridge must keep
 running while the machine is locked):
 
-- 15 minutes: Caelestia lockscreen
+- 15 minutes: Caelestia lockscreen (per-monitor wallpaper; Super+Alt+L to lock)
 - 30 minutes: monitors off (`dpms off`), restored with `dpms on`
 - never: `systemctl suspend`
 
@@ -168,7 +193,7 @@ manually; do not overwrite the active files blindly. The current machine's
       `firewall-config` is the recommended desktop-friendly option; `ufw` is a
       simpler CLI alternative.
 - [ ] Sort out GPG on system
-- [ ] Figure out a Maccy-like experience on Linux
+- [x] Figure out a Maccy-like experience on Linux
 - [ ] Sort out Bluetooth devices (keyboard and mouse)
 - [ ] Create `~/.config/OpenRGB/profiles/dram.json` and confirm OpenRGB sees the
       Dominator DIMMs. Follow the [OpenRGB DRAM runbook](docs/openrgb-dram.md).
@@ -178,3 +203,8 @@ manually; do not overwrite the active files blindly. The current machine's
       or re-run `scripts/caddy.sh` so `http://jupyter.test` is live.
 - [x] Install Caelestia shell and move bar, launcher, notifications, clipboard,
       wallpaper, and idle handling into QuickShell.
+- [ ] Add a window switcher, using the carousel in
+      [midnight-shell](https://github.com/dim-ghub/midnight-shell) as the
+      reference: open windows as previews you can step through and focus.
+- [x] Add an emoji picker laid out as a category grid, like the macOS emoji
+      picker. Not a scrolling list like midnight-shell's. Super+Period opens it.
